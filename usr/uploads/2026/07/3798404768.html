@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>专升本高等数学 · 线性代数方法全面总结</title>
+
+<!-- MathJax 配置 -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    tags: 'none'
+  },
+  svg: { fontCache: 'global' },
+  startup: {
+    pageReady: () => {
+      return MathJax.startup.defaultPageReady().then(() => {
+        window.__mathjaxReady = true;
+      });
+    }
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'SimSun', serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+  background: #fff;
+  padding: 40px 50px;
+  max-width: 210mm;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #003366;
+  text-align: center;
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #006699;
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.tagline {
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 4px;
+}
+
+.part-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #003366;
+  border-bottom: 2px solid #003366;
+  padding-bottom: 4px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  page-break-before: always;
+}
+.part-title:first-of-type { page-break-before: avoid; }
+
+.section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #006699;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-left: 4px solid #006699;
+  padding-left: 10px;
+}
+
+.method-box {
+  background: #f0f7ff;
+  border: 2px solid #006699;
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+.method-box .method-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 10px;
+}
+.method-box .core-idea {
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 6px;
+}
+.method-box p, .method-box li {
+  margin-bottom: 6px;
+}
+.method-box ul, .method-box ol {
+  margin-left: 2em;
+  margin-bottom: 8px;
+}
+.method-box ul li, .method-box ol li {
+  margin-bottom: 4px;
+}
+
+.example-box {
+  background: #fff5f5;
+  border: 1.5px solid #cc3300;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.example-box .example-title {
+  font-weight: 700;
+  color: #cc3300;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.example-box p { margin-bottom: 6px; }
+
+.tip-box {
+  background: #fffbe6;
+  border: 1.5px solid #996600;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.tip-box .tip-title {
+  font-weight: 700;
+  color: #996600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.key-box {
+  background: #f0fff0;
+  border: 1.5px solid #007844;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.key-box .key-title {
+  font-weight: 700;
+  color: #007844;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+table th {
+  background: #006699;
+  color: white;
+  font-weight: 700;
+  padding: 8px 12px;
+  text-align: left;
+}
+table td {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+}
+table tr:nth-child(even) td { background: #f5f5f5; }
+
+.speed-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+.speed-table th {
+  background: #006699;
+  color: white;
+  font-weight: 700;
+  padding: 10px 12px;
+  text-align: center;
+}
+.speed-table td {
+  padding: 10px 12px;
+  border: 1px solid #aaa;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.formula-block {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.note-text {
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+}
+
+.bold { font-weight: 700; }
+.underline { text-decoration: underline; }
+.highlight { color: #cc3300; font-weight: 700; }
+
+.footer {
+  text-align: center;
+  font-size: 16px;
+  color: #006699;
+  font-weight: 700;
+  margin-top: 60px;
+  padding: 20px;
+  border-top: 2px solid #003366;
+}
+
+@media print {
+  body { padding: 20px 30px; }
+  .part-title { page-break-before: always; }
+  .method-box, .example-box { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<h1>专升本高等数学</h1>
+<div class="subtitle">线性代数方法全面总结</div>
+<div class="tagline">由浅入深 · 逐步扩展 · 逻辑通顺 · 条理清晰</div>
+
+<div class="tip-box">
+<div class="tip-title">📖 使用说明</div>
+<p>本文档系统梳理专升本线性代数的全部核心方法，按照从行列式到二次型的逻辑编排。每个方法配有典型习题与详细解析，建议按顺序学习，循序渐进。</p>
+<p><b>符号约定：</b> $\det(A)$ 或 $|A|$ 表示行列式，$A^T$ 表示转置，$A^*$ 表示伴随矩阵，$A^{-1}$ 表示逆矩阵，$r(A)$ 表示矩阵的秩，$\Leftrightarrow$ 表示"等价"。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第一篇 基础篇——行列式的定义与计算</div>
+
+<div class="section-title">一、行列式的定义与展开</div>
+
+<div class="method-box">
+<div class="method-name">方法一：行列式的定义与按行（列）展开</div>
+<div class="core-idea">核心思想：行列式是一个数，是方阵到数的映射。$n$ 阶行列式可按任意一行（或一列）展开降阶。</div>
+
+<p><b>定义：</b> $n$ 阶行列式</p>
+<div class="formula-block">$$|A| = \begin{vmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{n1} & a_{n2} & \cdots & a_{nn} \end{vmatrix}$$</div>
+<p>是 $n!$ 项的代数和，每项取自不同行不同列的 $n$ 个元素乘积，符号由列标排列的逆序数决定。</p>
+
+<p><b>展开定理（Laplace）：按第 $i$ 行展开</b></p>
+<div class="formula-block">$$|A| = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}$$</div>
+<p>其中 $A_{ij} = (-1)^{i+j}M_{ij}$ 为代数余子式，$M_{ij}$ 为余子式（删去第 $i$ 行第 $j$ 列后的行列式）。</p>
+
+<p><b>要点：</b></p>
+<ul>
+<li>二阶：$\begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc$（主对角线减副对角线）。</li>
+<li>三阶：按沙路法或按行/列展开。</li>
+<li>展开时选零最多的行（列），可大幅简化计算。</li>
+<li>异行（列）代数余子式之和为零：$a_{i1}A_{j1} + \cdots + a_{in}A_{jn} = 0$（$i \neq j$）。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>计算三阶行列式 $\begin{vmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 0 \end{vmatrix}$。</p>
+<p><b>解：</b> 按第三行展开（$a_{33}=0$，只需算两项）：</p>
+<div class="formula-block">$$= 7 \cdot (-1)^{3+1}\begin{vmatrix} 2 & 3 \\ 5 & 6 \end{vmatrix} + 8 \cdot (-1)^{3+2}\begin{vmatrix} 1 & 3 \\ 4 & 6 \end{vmatrix} + 0$$</div>
+<div class="formula-block">$$= 7(12-15) - 8(6-12) = 7 \times (-3) - 8 \times (-6) = -21 + 48 = 27$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $D = \begin{vmatrix} 1 & 1 & 1 \\ 1 & 2 & 3 \\ 1 & 4 & 9 \end{vmatrix}$，求 $D$ 的值，并求 $A_{11} + A_{12} + A_{13}$（第一行代数余子式之和）。</p>
+<p><b>解：</b> 按第一行展开：</p>
+<div class="formula-block">$$D = 1 \times (18-12) - 1 \times (9-3) + 1 \times (4-2) = 6 - 6 + 2 = 2$$</div>
+<p>求 $A_{11} + A_{12} + A_{13}$：将 $D$ 第一行替换为 $(1,1,1)$ 得到的恰好就是 $D$ 本身，所以</p>
+<div class="formula-block">$$A_{11} + A_{12} + A_{13} = 1 \cdot A_{11} + 1 \cdot A_{12} + 1 \cdot A_{13} = D = 2$$</div>
+<p class="note-text"><b>说明：</b> 这是行列式展开定理的逆用——将某行元素全替换为 1，即得该行各代数余子式之和。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">二、行列式的性质与化简</div>
+
+<div class="method-box">
+<div class="method-name">方法二：行列式的性质与化简计算</div>
+<div class="core-idea">核心思想：利用行列式的性质化简，再展开计算，是计算高阶行列式的基本策略。</div>
+
+<p><b>六大基本性质：</b></p>
+<ol>
+<li><b>转置不变：</b> $|A^T| = |A|$，行列互换值不变。</li>
+<li><b>换行变号：</b> 交换两行（列），行列式变号。</li>
+<li><b>提取公因子：</b> 某行有公因子 $k$，可提到行列式外。</li>
+<li><b>可加性：</b> 某行元素均为两数之和，可拆成两个行列式。</li>
+<li><b>倍加不变：</b> 某行乘以 $k$ 加到另一行，行列式值不变。</li>
+<li><b>成比例为零：</b> 两行（列）成比例，行列式为零。</li>
+</ol>
+
+<p><b>常用推论：</b></p>
+<ul>
+<li>$|kA| = k^n|A|$（$n$ 阶矩阵乘以 $k$，行列式变为 $k^n$ 倍）。</li>
+<li>$|AB| = |A||B|$，$|A^{-1}| = |A|^{-1}$。</li>
+<li>$|A^*| = |A|^{n-1}$（$n$ 阶矩阵的伴随矩阵的行列式）。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>计算 $D = \begin{vmatrix} 1 & 2 & 3 & 4 \\ 2 & 3 & 4 & 1 \\ 3 & 4 & 1 & 2 \\ 4 & 1 & 2 & 3 \end{vmatrix}$。</p>
+<p><b>解：</b> 观察每行元素之和均为 $1+2+3+4=10$。</p>
+<p>第2、3、4列加到第1列：</p>
+<div class="formula-block">$$D = \begin{vmatrix} 10 & 2 & 3 & 4 \\ 10 & 3 & 4 & 1 \\ 10 & 4 & 1 & 2 \\ 10 & 1 & 2 & 3 \end{vmatrix} = 10\begin{vmatrix} 1 & 2 & 3 & 4 \\ 1 & 3 & 4 & 1 \\ 1 & 4 & 1 & 2 \\ 1 & 1 & 2 & 3 \end{vmatrix}$$</div>
+<p>各行减第1行：</p>
+<div class="formula-block">$$= 10\begin{vmatrix} 1 & 2 & 3 & 4 \\ 0 & 1 & 1 & -3 \\ 0 & 2 & -2 & -2 \\ 0 & -1 & -1 & -1 \end{vmatrix}$$</div>
+<p>按第1列展开并化简：</p>
+<div class="formula-block">$$= 10\begin{vmatrix} 1 & 1 & -3 \\ 2 & -2 & -2 \\ -1 & -1 & -1 \end{vmatrix} = 10\begin{vmatrix} 1 & 1 & -3 \\ 0 & -4 & 4 \\ 0 & 0 & -4 \end{vmatrix} = 10 \times 1 \times (-4) \times (-4) = 160$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>已知 $|A| = 3$，$A$ 为 4 阶矩阵，求 $|2A^*|$。</p>
+<p><b>解：</b> 由 $|A^*| = |A|^{n-1} = |A|^3 = 27$，再由 $|kA| = k^n|A|$ 得：</p>
+<div class="formula-block">$$|2A^*| = 2^4 \times |A^*| = 16 \times 27 = 432$$</div>
+<p class="note-text"><b>注意：</b> 容易犯的错误是写成 $2|A^*|$，实际上 $|kA| = k^n|A|$，$n$ 是矩阵阶数。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">三、行列式的计算技巧</div>
+
+<div class="method-box">
+<div class="method-name">方法三：降阶法与化三角形法</div>
+<div class="core-idea">核心思想：降阶法通过展开定理逐步降阶；化三角形法通过行（列）变换化为上（下）三角行列式，其值等于主对角线元素之积。</div>
+
+<p><b>化三角形法步骤：</b></p>
+<ol>
+<li>从第1列开始，用倍加变换将主对角线下方元素化为零。</li>
+<li>逐列处理，直到化为上三角。</li>
+<li>结果 $=$ 主对角线元素之积。</li>
+</ol>
+
+<p><b>特殊技巧：</b></p>
+<ul>
+<li><b>箭形行列式：</b> 形如 $\begin{vmatrix} * & * & * & * \\ 0 & * & 0 & 0 \\ 0 & 0 & * & 0 \\ 0 & 0 & 0 & * \end{vmatrix}$，从最后一行开始提取公因子消去第一行。</li>
+<li><b>行和相等：</b> 各行元素之和相同，将各列加到第1列提取公因子。</li>
+<li><b>递推法：</b> 建立 $D_n$ 与 $D_{n-1}$ 的递推关系。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>计算 $D = \begin{vmatrix} 1 & 1 & 1 & 1 \\ 1 & 2 & 0 & 0 \\ 1 & 0 & 3 & 0 \\ 1 & 0 & 0 & 4 \end{vmatrix}$（箭形行列式）。</p>
+<p><b>解：</b> 第2行除以2、第3行除以3、第4行除以4（提取公因子）：</p>
+<div class="formula-block">$$D = 2 \times 3 \times 4 \begin{vmatrix} 1 & 1 & 1 & 1 \\ \frac{1}{2} & 1 & 0 & 0 \\ \frac{1}{3} & 0 & 1 & 0 \\ \frac{1}{4} & 0 & 0 & 1 \end{vmatrix}$$</div>
+<p>第2行乘 $(-1)$ 加到第1行，第3行乘 $(-1)$ 加到第1行，第4行乘 $(-1)$ 加到第1行：</p>
+<div class="formula-block">$$= 24\begin{vmatrix} 1-\frac{1}{2}-\frac{1}{3}-\frac{1}{4} & 0 & 0 & 0 \\ \frac{1}{2} & 1 & 0 & 0 \\ \frac{1}{3} & 0 & 1 & 0 \\ \frac{1}{4} & 0 & 0 & 1 \end{vmatrix} = 24 \times \left(1 - \frac{1}{2} - \frac{1}{3} - \frac{1}{4}\right) = 24 \times \frac{-1}{12} = -2$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>用化三角形法计算 $D = \begin{vmatrix} 2 & 1 & 1 & 1 \\ 1 & 2 & 1 & 1 \\ 1 & 1 & 2 & 1 \\ 1 & 1 & 1 & 2 \end{vmatrix}$。</p>
+<p><b>解：</b> 第2、3、4行减去第1行：</p>
+<div class="formula-block">$$D = \begin{vmatrix} 2 & 1 & 1 & 1 \\ -1 & 1 & 0 & 0 \\ -1 & 0 & 1 & 0 \\ -1 & 0 & 0 & 1 \end{vmatrix}$$</div>
+<p>第2、3、4列加到第1列：</p>
+<div class="formula-block">$$= \begin{vmatrix} 5 & 1 & 1 & 1 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{vmatrix} = 5 \times 1 \times 1 \times 1 = 5$$</div>
+<p class="note-text"><b>说明：</b> 各行和为 $5$，是典型的行和相等型，也可直接将各列加到第1列。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第二篇 克莱默法则篇——行列式解方程组</div>
+
+<div class="section-title">四、克莱默法则</div>
+
+<div class="method-box">
+<div class="method-name">方法四：克莱默法则</div>
+<div class="core-idea">适用条件：当方程个数等于未知数个数且系数行列式不为零时，可用行列式直接给出方程组的唯一解。</div>
+
+<p><b>定理：</b> 设 $n$ 元线性方程组 $Ax = b$，$A$ 为 $n$ 阶方阵。</p>
+<p>若 $|A| \neq 0$，则方程组有唯一解：</p>
+<div class="formula-block">$$x_j = \frac{D_j}{D}, \quad j = 1, 2, \ldots, n$$</div>
+<p>其中 $D = |A|$，$D_j$ 为将 $D$ 的第 $j$ 列替换为常数列 $b$ 后的行列式。</p>
+
+<p><b>推论：</b></p>
+<ul>
+<li>齐次方程组 $Ax = 0$ 有非零解 $\Leftrightarrow |A| = 0$。</li>
+<li>齐次方程组 $Ax = 0$ 只有零解 $\Leftrightarrow |A| \neq 0$。</li>
+</ul>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<ul>
+<li>克莱默法则仅适用于方程个数 $=$ 未知数个数的情形。</li>
+<li>当 $|A| = 0$ 时，法则不适用，需用矩阵秩判断解的情况。</li>
+<li>计算量大，适合低阶（$n \leq 4$）方程组。</li>
+</ul>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>用克莱默法则解方程组 $\begin{cases} x_1 + x_2 + x_3 = 6 \\ 2x_1 - x_2 + 3x_3 = 9 \\ x_1 + 2x_2 - x_3 = 2 \end{cases}$</p>
+<p><b>解：</b> 计算 $D$：</p>
+<div class="formula-block">$$D = \begin{vmatrix} 1 & 1 & 1 \\ 2 & -1 & 3 \\ 1 & 2 & -1 \end{vmatrix} = 1(1-6) - 1(-2-3) + 1(4+1) = -5 + 5 + 5 = 5 \neq 0$$</div>
+<p>计算 $D_1, D_2, D_3$：</p>
+<div class="formula-block">$$D_1 = \begin{vmatrix} 6 & 1 & 1 \\ 9 & -1 & 3 \\ 2 & 2 & -1 \end{vmatrix} = 6(1-6) - 1(-9-6) + 1(18+2) = -30 + 15 + 20 = 5$$</div>
+<div class="formula-block">$$D_2 = \begin{vmatrix} 1 & 6 & 1 \\ 2 & 9 & 3 \\ 1 & 2 & -1 \end{vmatrix} = 1(-9-6) - 6(-2-3) + 1(4-9) = -15 + 30 - 5 = 10$$</div>
+<div class="formula-block">$$D_3 = \begin{vmatrix} 1 & 1 & 6 \\ 2 & -1 & 9 \\ 1 & 2 & 2 \end{vmatrix} = 1(-2-18) - 1(4-9) + 6(4+1) = -20 + 5 + 30 = 15$$</div>
+<p>故 $x_1 = \dfrac{D_1}{D} = 1$，$x_2 = \dfrac{D_2}{D} = 2$，$x_3 = \dfrac{D_3}{D} = 3$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>$\lambda$ 为何值时，齐次方程组 $\begin{cases} x_1 + x_2 + \lambda x_3 = 0 \\ -x_1 + \lambda x_2 + x_3 = 0 \\ \lambda x_1 + x_2 - x_3 = 0 \end{cases}$ 有非零解？</p>
+<p><b>解：</b> 有非零解 $\Leftrightarrow D = 0$：</p>
+<div class="formula-block">$$D = \begin{vmatrix} 1 & 1 & \lambda \\ -1 & \lambda & 1 \\ \lambda & 1 & -1 \end{vmatrix} = -2\lambda^3 + \lambda - 1$$</div>
+<p>令 $D = 0$，即 $2\lambda^3 - \lambda + 1 = 0$，验证 $\lambda = -1$：$2(-1)-(-1)+1 = -2+1+1 = 0$。</p>
+<p>故当 $\lambda = -1$ 时方程组有非零解。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第三篇 矩阵篇——矩阵运算与逆矩阵</div>
+
+<div class="section-title">五、矩阵乘法</div>
+
+<div class="method-box">
+<div class="method-name">方法五：矩阵乘法</div>
+<div class="core-idea">核心思想：矩阵乘法是"行乘列"的运算，$A_{m \times s}$ 乘 $B_{s \times n}$ 得 $C_{m \times n}$，其中 $c_{ij} = \sum_{k=1}^{s} a_{ik}b_{kj}$。</div>
+
+<p><b>要点：</b></p>
+<ul>
+<li><b>前提：</b> $A$ 的列数 $= B$ 的行数，否则不能乘。</li>
+<li><b>不满足交换律：</b> $AB \neq BA$（一般情况）。</li>
+<li><b>满足结合律：</b> $(AB)C = A(BC)$。</li>
+<li><b>满足分配律：</b> $A(B+C) = AB + AC$。</li>
+<li><b>转置律：</b> $(AB)^T = B^T A^T$。</li>
+<li>$AB = 0 \not\Rightarrow A = 0$ 或 $B = 0$（与数的运算不同）。</li>
+<li>$AB = AC$ 且 $A \neq 0 \not\Rightarrow B = C$（消去律不成立）。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>设 $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$，$B = \begin{pmatrix} 0 & 1 \\ -1 & 2 \end{pmatrix}$，求 $AB$ 和 $BA$。</p>
+<p><b>解：</b></p>
+<div class="formula-block">$$AB = \begin{pmatrix} 1 \times 0 + 2 \times (-1) & 1 \times 1 + 2 \times 2 \\ 3 \times 0 + 4 \times (-1) & 3 \times 1 + 4 \times 2 \end{pmatrix} = \begin{pmatrix} -2 & 5 \\ -4 & 11 \end{pmatrix}$$</div>
+<div class="formula-block">$$BA = \begin{pmatrix} 0 \times 1 + 1 \times 3 & 0 \times 2 + 1 \times 4 \\ (-1) \times 1 + 2 \times 3 & (-1) \times 2 + 2 \times 4 \end{pmatrix} = \begin{pmatrix} 3 & 4 \\ 5 & 6 \end{pmatrix}$$</div>
+<p>$AB \neq BA$，验证了矩阵乘法不满足交换律。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $A = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$，求 $A^n$。</p>
+<p><b>解：</b> 计算前几项找规律：</p>
+<div class="formula-block">$$A^2 = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 2 \\ 2 & 2 \end{pmatrix} = 2A$$</div>
+<div class="formula-block">$$A^3 = A^2 \cdot A = 2A \cdot A = 2A^2 = 2 \times 2A = 4A = 2^2 A$$</div>
+<p>由递推 $A^n = 2^{n-1} A$，故</p>
+<div class="formula-block">$$A^n = 2^{n-1}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">六、逆矩阵——伴随矩阵法</div>
+
+<div class="method-box">
+<div class="method-name">方法六：伴随矩阵法求逆矩阵</div>
+<div class="core-idea">适用条件：利用伴随矩阵 $A^*$ 求逆，适合低阶矩阵（$n \leq 3$）。</div>
+
+<p><b>定义：</b> 若 $AB = BA = I$，则 $B$ 称为 $A$ 的逆矩阵，记 $B = A^{-1}$。</p>
+
+<p><b>可逆条件：</b> $A$ 可逆 $\Leftrightarrow |A| \neq 0$。</p>
+
+<p><b>伴随矩阵法：</b></p>
+<div class="formula-block">$$A^{-1} = \frac{1}{|A|} A^* = \frac{1}{|A|}\begin{pmatrix} A_{11} & A_{21} & \cdots & A_{n1} \\ A_{12} & A_{22} & \cdots & A_{n2} \\ \vdots & \vdots & \ddots & \vdots \\ A_{1n} & A_{2n} & \cdots & A_{nn} \end{pmatrix}$$</div>
+
+<p><b>注意：</b> 伴随矩阵是代数余子式的<b>转置</b>排列，即第 $i$ 行第 $j$ 列元素是 $A_{ji}$（不是 $A_{ij}$）。</p>
+
+<p><b>重要公式：</b></p>
+<ul>
+<li>$AA^* = A^*A = |A|I$</li>
+<li>$(A^*)^{-1} = \dfrac{A}{|A|}$（$|A| \neq 0$ 时）</li>
+<li>$(A^{-1})^* = (A^*)^{-1}$</li>
+<li>$(AB)^{-1} = B^{-1}A^{-1}$</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $A = \begin{pmatrix} 1 & 0 & 1 \\ 2 & 1 & 0 \\ -3 & 2 & -5 \end{pmatrix}$ 的逆矩阵。</p>
+<p><b>解：</b> 先求 $|A|$（按第1行展开）：</p>
+<div class="formula-block">$$|A| = 1(-5-0) - 0 + 1(4+3) = -5 + 7 = 2 \neq 0$$</div>
+<p>求各代数余子式：</p>
+<div class="formula-block">$$A_{11} = (-1)^2\begin{vmatrix} 1 & 0 \\ 2 & -5 \end{vmatrix} = -5, \quad A_{12} = (-1)^3\begin{vmatrix} 2 & 0 \\ -3 & -5 \end{vmatrix} = 10$$</div>
+<div class="formula-block">$$A_{13} = (-1)^4\begin{vmatrix} 2 & 1 \\ -3 & 2 \end{vmatrix} = 7, \quad A_{21} = (-1)^3\begin{vmatrix} 0 & 1 \\ 2 & -5 \end{vmatrix} = 2$$</div>
+<div class="formula-block">$$A_{22} = (-1)^4\begin{vmatrix} 1 & 1 \\ -3 & -5 \end{vmatrix} = -2, \quad A_{23} = (-1)^5\begin{vmatrix} 1 & 0 \\ -3 & 2 \end{vmatrix} = -2$$</div>
+<div class="formula-block">$$A_{31} = (-1)^4\begin{vmatrix} 0 & 1 \\ 1 & 0 \end{vmatrix} = -1, \quad A_{32} = (-1)^5\begin{vmatrix} 1 & 1 \\ 2 & 0 \end{vmatrix} = 2$$</div>
+<div class="formula-block">$$A_{33} = (-1)^6\begin{vmatrix} 1 & 0 \\ 2 & 1 \end{vmatrix} = 1$$</div>
+<p>（注意转置排列）</p>
+<div class="formula-block">$$A^{-1} = \frac{1}{2}\begin{pmatrix} -5 & 2 & -1 \\ 10 & -2 & 2 \\ 7 & -2 & 1 \end{pmatrix} = \begin{pmatrix} -5/2 & 1 & -1/2 \\ 5 & -1 & 1 \\ 7/2 & -1 & 1/2 \end{pmatrix}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $A$ 为 3 阶矩阵，$|A| = \frac{1}{2}$，求 $|(2A)^{-1} - 2A^*|$。</p>
+<p><b>解：</b> 利用 $A^* = |A|A^{-1} = \frac{1}{2}A^{-1}$，即 $A^{-1} = 2A^*$。</p>
+<div class="formula-block">$$(2A)^{-1} = \frac{1}{2}A^{-1} = \frac{1}{2} \times 2A^* = A^*$$</div>
+<div class="formula-block">$$(2A)^{-1} - 2A^* = A^* - 2A^* = -A^*$$</div>
+<div class="formula-block">$$|(2A)^{-1} - 2A^*| = |-A^*| = (-1)^3|A^*| = -|A|^{n-1} = -\left(\frac{1}{2}\right)^2 = -\frac{1}{4}$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">七、逆矩阵——初等变换法</div>
+
+<div class="method-box">
+<div class="method-name">方法七：初等变换法求逆矩阵</div>
+<div class="core-idea">核心思想：对 $(A | I)$ 施行初等行变换，将 $A$ 化为单位阵 $I$ 时，右侧 $I$ 即变为 $A^{-1}$。</div>
+
+<p><b>操作步骤：</b></p>
+<ol>
+<li>构造分块矩阵 $(A \mid I)$。</li>
+<li>对<b>整个分块矩阵</b>施行初等<b>行</b>变换。</li>
+<li>将左侧化为 $I$，右侧即为 $A^{-1}$。</li>
+<li>若左侧出现全零行，则 $A$ 不可逆。</li>
+</ol>
+
+<div class="key-box">
+<div class="key-title">✅ 关键准则</div>
+<p><b>只能用行变换，不能用列变换。</b> 因为行变换等价于左乘初等矩阵，而 $A^{-1}$ 也是左乘 $A$。</p>
+</div>
+
+<p><b>拓展：</b> 初等变换法还可用于解矩阵方程 $AX = B$：对 $(A | B)$ 做行变换，将 $A \to I$，则 $B \to X = A^{-1}B$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>用初等变换法求 $A = \begin{pmatrix} 1 & 2 & 3 \\ 2 & 2 & 1 \\ 3 & 4 & 3 \end{pmatrix}$ 的逆矩阵。</p>
+<p><b>解：</b></p>
+<div class="formula-block">$$(A \mid I) = \left(\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\ 2 & 2 & 1 & 0 & 1 & 0 \\ 3 & 4 & 3 & 0 & 0 & 1 \end{array}\right)$$</div>
+<p>$r_2 - 2r_1$，$r_3 - 3r_1$：</p>
+<div class="formula-block">$$\to \left(\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\ 0 & -2 & -5 & -2 & 1 & 0 \\ 0 & -2 & -6 & -3 & 0 & 1 \end{array}\right)$$</div>
+<p>$r_3 - r_2$：</p>
+<div class="formula-block">$$\to \left(\begin{array}{ccc|ccc} 1 & 2 & 3 & 1 & 0 & 0 \\ 0 & -2 & -5 & -2 & 1 & 0 \\ 0 & 0 & -1 & -1 & -1 & 1 \end{array}\right)$$</div>
+<p>$r_2 - 5r_3$，$r_1 + 3r_3$：</p>
+<div class="formula-block">$$\to \left(\begin{array}{ccc|ccc} 1 & 2 & 0 & -2 & -3 & 3 \\ 0 & -2 & 0 & 3 & 6 & -5 \\ 0 & 0 & -1 & -1 & -1 & 1 \end{array}\right)$$</div>
+<p>$r_1 + r_2$，$r_2 \times (-\frac{1}{2})$，$r_3 \times (-1)$：</p>
+<div class="formula-block">$$\to \left(\begin{array}{ccc|ccc} 1 & 0 & 0 & 1 & 3 & -2 \\ 0 & 1 & 0 & -3/2 & -3 & 5/2 \\ 0 & 0 & 1 & 1 & 1 & -1 \end{array}\right)$$</div>
+<div class="formula-block">$$A^{-1} = \begin{pmatrix} 1 & 3 & -2 \\ -3/2 & -3 & 5/2 \\ 1 & 1 & -1 \end{pmatrix}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>解矩阵方程 $AX = B$，其中 $A = \begin{pmatrix} 1 & 2 \\ 1 & 3 \end{pmatrix}$，$B = \begin{pmatrix} 3 & 1 \\ 4 & 2 \end{pmatrix}$。</p>
+<p><b>解：</b> 对 $(A | B)$ 做初等行变换：</p>
+<div class="formula-block">$$\left(\begin{array}{cc|cc} 1 & 2 & 3 & 1 \\ 1 & 3 & 4 & 2 \end{array}\right) \xrightarrow{r_2 - r_1} \left(\begin{array}{cc|cc} 1 & 2 & 3 & 1 \\ 0 & 1 & 1 & 1 \end{array}\right) \xrightarrow{r_1 - 2r_2} \left(\begin{array}{cc|cc} 1 & 0 & 1 & -1 \\ 0 & 1 & 1 & 1 \end{array}\right)$$</div>
+<div class="formula-block">$$X = A^{-1}B = \begin{pmatrix} 1 & -1 \\ 1 & 1 \end{pmatrix}$$</div>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第四篇 秩篇——矩阵的秩</div>
+
+<div class="section-title">八、矩阵的秩</div>
+
+<div class="method-box">
+<div class="method-name">方法八：初等行变换求秩</div>
+<div class="core-idea">核心思想：矩阵的秩等于其行阶梯形中非零行的个数，初等变换不改变矩阵的秩。</div>
+
+<p><b>定义：</b> 矩阵 $A$ 中不为零的最高阶子式的阶数，称为 $A$ 的秩，记 $r(A)$。</p>
+
+<p><b>求秩步骤：</b></p>
+<ol>
+<li>对 $A$ 施行初等行变换，化为行阶梯形。</li>
+<li>数非零行数，即为 $r(A)$。</li>
+</ol>
+
+<p><b>关键性质：</b></p>
+<ul>
+<li>初等变换（行或列）不改变秩。</li>
+<li>$r(A) = r(A^T)$。</li>
+<li>$A$ 为 $m \times n$ 矩阵，则 $0 \leq r(A) \leq \min(m, n)$。</li>
+<li>$r(A) = n \Leftrightarrow |A| \neq 0$（$A$ 为 $n$ 阶方阵时）。</li>
+<li>可逆矩阵（满秩方阵）的秩 $= n$。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $A = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 2 & 3 & 4 & 5 \\ 3 & 4 & 5 & 6 \\ 4 & 5 & 6 & 7 \end{pmatrix}$ 的秩。</p>
+<p><b>解：</b> 逐行消元：</p>
+<p>$r_2 - 2r_1$，$r_3 - 3r_1$，$r_4 - 4r_1$：</p>
+<div class="formula-block">$$\to \begin{pmatrix} 1 & 2 & 3 & 4 \\ 0 & -1 & -2 & -3 \\ 0 & -2 & -4 & -6 \\ 0 & -3 & -6 & -9 \end{pmatrix}$$</div>
+<p>$r_3 - 2r_2$，$r_4 - 3r_2$：</p>
+<div class="formula-block">$$\to \begin{pmatrix} 1 & 2 & 3 & 4 \\ 0 & -1 & -2 & -3 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{pmatrix}$$</div>
+<p>非零行数为 $2$，故 $r(A) = 2$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $A = \begin{pmatrix} 1 & 2 & 1 \\ 2 & a & 3 \\ 1 & 0 & -1 \end{pmatrix}$，问 $a$ 为何值时 $r(A) = 2$？</p>
+<p><b>解：</b> $A$ 为 3 阶方阵，$r(A) = 2 \Leftrightarrow |A| = 0$ 且存在 2 阶非零子式。</p>
+<div class="formula-block">$$|A| = \begin{vmatrix} 1 & 2 & 1 \\ 2 & a & 3 \\ 1 & 0 & -1 \end{vmatrix} = 1(-a-0) - 2(-2-3) + 1(0-a) = -a + 10 - a = -2a + 10$$</div>
+<p>令 $|A| = 0$ 得 $a = 5$。</p>
+<p>验证 $a = 5$ 时，$\begin{vmatrix} 1 & 2 \\ 2 & 5 \end{vmatrix} = 5 - 4 = 1 \neq 0$，存在 2 阶非零子式，故 $r(A) = 2$。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">九、秩的重要公式</div>
+
+<div class="method-box">
+<div class="method-name">方法九：秩的重要公式与应用</div>
+<div class="core-idea">核心思想：利用秩的公式解决综合问题，尤其是与方程组解的结构相关的判定。</div>
+
+<p><b>重要公式：</b></p>
+<ol>
+<li>$r(A^T) = r(A)$</li>
+<li>$r(AB) \leq \min\{r(A), r(B)\}$</li>
+<li>$r(A + B) \leq r(A) + r(B)$</li>
+<li>若 $A$ 可逆，则 $r(AB) = r(B)$</li>
+<li>$r\begin{pmatrix} A & 0 \\ 0 & B \end{pmatrix} = r(A) + r(B)$</li>
+<li>若 $AB = 0$，则 $r(A) + r(B) \leq n$（$A$ 为 $m \times n$，$B$ 为 $n \times s$）</li>
+</ol>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>公式 6 非常重要：$AB = 0 \Rightarrow r(A) + r(B) \leq n$。这意味着 $B$ 的列向量都是 $Ax = 0$ 的解，而 $Ax = 0$ 的解空间维数为 $n - r(A)$，所以 $r(B) \leq n - r(A)$。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>设 $A$ 为 $n$ 阶矩阵，$A^2 = A$，证明 $r(A) + r(A - I) = n$。</p>
+<p><b>解：</b> 由 $A^2 = A$ 得 $A(A - I) = 0$，故 $r(A) + r(A - I) \leq n$。</p>
+<p>又 $A + (I - A) = I$，由秩的加法公式：</p>
+<div class="formula-block">$$n = r(I) = r(A + (I-A)) \leq r(A) + r(I - A) = r(A) + r(A - I)$$</div>
+<p>两边不等号夹逼，故 $r(A) + r(A - I) = n$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $A$ 为 $3 \times 4$ 矩阵，$r(A) = 2$，$B$ 为 $4 \times 3$ 矩阵且 $r(B) = 3$，求 $r(AB)$ 的范围。</p>
+<p><b>解：</b> 由 $r(AB) \leq \min\{r(A), r(B)\} = \min\{2, 3\} = 2$。</p>
+<p>又 $AB$ 为 $3 \times 3$ 矩阵，$r(AB) \geq 0$。</p>
+<p>但由 $B$ 满秩（$r(B) = 3$），$B$ 的列空间维数为 3，$A$ 将其映射到 3 维空间但秩只有 2，一般 $r(AB) = 2$。</p>
+<p>故 $r(AB) \leq 2$，一般情况 $r(AB) = 2$。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第五篇 方程组篇——线性方程组</div>
+
+<div class="section-title">十、齐次线性方程组</div>
+
+<div class="method-box">
+<div class="method-name">方法十：齐次方程组 $Ax = 0$ 的解法</div>
+<div class="core-idea">核心思想：齐次方程组恒有零解，关键是判断是否有非零解，并求基础解系。</div>
+
+<p><b>解的判定：</b></p>
+<ul>
+<li>$r(A) = n$（$n$ 为未知数个数）$\Rightarrow$ 只有零解。</li>
+<li>$r(A) \lt n$ $\Rightarrow$ 有无穷多解（非零解），基础解系含 $n - r(A)$ 个向量。</li>
+</ul>
+
+<p><b>求基础解系步骤：</b></p>
+<ol>
+<li>对 $A$ 做初等行变换，化为行最简形。</li>
+<li>确定自由变量（非主元列对应的变量）。</li>
+<li>令自由变量依次取 $(1,0,\ldots)$，$(0,1,\ldots)$ 等，回代求出基础解系 $\xi_1, \xi_2, \ldots, \xi_{n-r}$。</li>
+<li>通解 $x = c_1\xi_1 + c_2\xi_2 + \cdots + c_{n-r}\xi_{n-r}$。</li>
+</ol>
+
+<div class="key-box">
+<div class="key-title">✅ 关键准则</div>
+<p>基础解系所含向量个数 $= n - r(A)$。这是解空间的维数，也是自由变量的个数。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求齐次方程组 $\begin{cases} x_1 + x_2 - x_3 - x_4 = 0 \\ 2x_1 - 5x_2 + 3x_3 + 2x_4 = 0 \\ 7x_1 - 7x_2 + 3x_3 + x_4 = 0 \end{cases}$ 的基础解系和通解。</p>
+<p><b>解：</b> 对系数矩阵做行变换：</p>
+<div class="formula-block">$$A = \begin{pmatrix} 1 & 1 & -1 & -1 \\ 2 & -5 & 3 & 2 \\ 7 & -7 & 3 & 1 \end{pmatrix} \to \begin{pmatrix} 1 & 1 & -1 & -1 \\ 0 & -7 & 5 & 4 \\ 0 & -14 & 10 & 8 \end{pmatrix} \to \begin{pmatrix} 1 & 0 & -2/7 & -3/7 \\ 0 & 1 & -5/7 & -4/7 \\ 0 & 0 & 0 & 0 \end{pmatrix}$$</div>
+<p>$r(A) = 2$，自由变量为 $x_3, x_4$。令 $(x_3, x_4) = (7, 0)$ 得 $\xi_1 = (2, 5, 7, 0)^T$；令 $(x_3, x_4) = (0, 7)$ 得 $\xi_2 = (3, 4, 0, 7)^T$。</p>
+<p>通解：$x = c_1(2, 5, 7, 0)^T + c_2(3, 4, 0, 7)^T$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $A$ 为 $m \times n$ 矩阵，$r(A) = r$，问 $Ax = 0$ 的解空间维数是多少？若 $m \lt n$，证明 $Ax = 0$ 必有非零解。</p>
+<p><b>解：</b> 解空间维数 $= n - r(A) = n - r$。</p>
+<p>当 $m \lt n$ 时，$r(A) \leq \min(m, n) = m \lt n$，故 $n - r(A) \geq n - m \gt 0$，解空间维数 $\gt 0$，必有非零解。</p>
+<p class="note-text"><b>说明：</b> 方程个数少于未知数个数时，齐次方程组必有非零解。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十一、非齐次线性方程组</div>
+
+<div class="method-box">
+<div class="method-name">方法十一：非齐次方程组 $Ax = b$ 的解的结构</div>
+<div class="core-idea">核心思想：非齐次方程组的通解 $=$ 特解 $+$ 对应齐次方程组的通解。</div>
+
+<p><b>解的判定：</b></p>
+<ul>
+<li>$r(A) = r(A|b) = n$ $\Rightarrow$ 唯一解。</li>
+<li>$r(A) = r(A|b) \lt n$ $\Rightarrow$ 无穷多解。</li>
+<li>$r(A) \neq r(A|b)$ $\Rightarrow$ 无解。</li>
+</ul>
+
+<p><b>解的结构：</b> 若 $\eta^*$ 为 $Ax = b$ 的特解，$\xi_1, \ldots, \xi_{n-r}$ 为 $Ax = 0$ 的基础解系，则通解为：</p>
+<div class="formula-block">$$x = \eta^* + c_1\xi_1 + c_2\xi_2 + \cdots + c_{n-r}\xi_{n-r}$$</div>
+
+<p><b>求解步骤：</b></p>
+<ol>
+<li>对增广矩阵 $(A|b)$ 做初等行变换，化为行最简形。</li>
+<li>判断 $r(A)$ 与 $r(A|b)$ 是否相等，确定解的情况。</li>
+<li>若有解，先读出特解 $\eta^*$，再求基础解系。</li>
+<li>写出通解。</li>
+</ol>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求解 $\begin{cases} x_1 - x_2 - x_3 + x_4 = 0 \\ x_1 - x_2 + x_3 - 3x_4 = 1 \\ x_1 - x_2 - 2x_3 + 3x_4 = -1/2 \end{cases}$</p>
+<p><b>解：</b> 对增广矩阵做行变换：</p>
+<div class="formula-block">$$(A|b) = \begin{pmatrix} 1 & -1 & -1 & 1 & 0 \\ 1 & -1 & 1 & -3 & 1 \\ 1 & -1 & -2 & 3 & -1/2 \end{pmatrix} \to \begin{pmatrix} 1 & -1 & 0 & -1 & 1/2 \\ 0 & 0 & 1 & -2 & 1/2 \\ 0 & 0 & 0 & 0 & 0 \end{pmatrix}$$</div>
+<p>$r(A) = r(A|b) = 2 \lt 4$，有无穷多解。自由变量为 $x_2, x_4$。</p>
+<p>行最简形对应方程：$x_1 = \frac{1}{2} + x_2 + x_4$，$x_3 = \frac{1}{2} + 2x_4$。</p>
+<p>令 $x_2 = x_4 = 0$ 得特解 $\eta^* = (\frac{1}{2}, 0, \frac{1}{2}, 0)^T$。</p>
+<p>对应齐次方程组：$x_1 = x_2 + x_4$，$x_3 = 2x_4$。令 $(x_2, x_4) = (1, 0)$ 得 $\xi_1 = (1, 1, 0, 0)^T$；令 $(x_2, x_4) = (0, 1)$ 得 $\xi_2 = (1, 0, 2, 1)^T$。</p>
+<p>通解：$x = \eta^* + c_1\xi_1 + c_2\xi_2$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $\alpha_1, \alpha_2, \alpha_3$ 是 $Ax = b$ 的三个解，$A$ 为 $3 \times 4$ 矩阵，$r(A) = 3$，$\alpha_1 = (1,2,3,4)^T$，$\alpha_2 + \alpha_3 = (0,1,2,3)^T$，求通解。</p>
+<p><b>解：</b> $n - r(A) = 4 - 3 = 1$，基础解系含 1 个向量。</p>
+<p>由解的性质：$\alpha_2 - \alpha_1$ 和 $\alpha_3 - \alpha_1$ 都是 $Ax = 0$ 的解，它们的和也是：</p>
+<div class="formula-block">$$(\alpha_2 - \alpha_1) + (\alpha_3 - \alpha_1) = \alpha_2 + \alpha_3 - 2\alpha_1 = (0,1,2,3)^T - (2,4,6,8)^T = (-2,-3,-4,-5)^T$$</div>
+<p>取基础解系 $\xi = (-2,-3,-4,-5)^T$（非零，可验证 $A\xi = 0$）。</p>
+<p>通解：$x = (1,2,3,4)^T + c(-2,-3,-4,-5)^T$。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第六篇 向量篇——向量组与线性相关性</div>
+
+<div class="section-title">十二、线性相关性</div>
+
+<div class="method-box">
+<div class="method-name">方法十二：线性相关性的判定</div>
+<div class="core-idea">核心思想：通过定义法或矩阵秩法判定向量组的线性相关性。</div>
+
+<p><b>定义：</b> 设 $\alpha_1, \alpha_2, \ldots, \alpha_m$ 为 $n$ 维向量组，若存在不全为零的 $k_1, k_2, \ldots, k_m$ 使 $k_1\alpha_1 + k_2\alpha_2 + \cdots + k_m\alpha_m = 0$，则称该组<b>线性相关</b>；否则<b>线性无关</b>。</p>
+
+<p><b>判定方法：</b></p>
+<ol>
+<li><b>定义法：</b> 设 $k_1\alpha_1 + \cdots + k_m\alpha_m = 0$，解方程组，若只有零解则无关，有非零解则相关。</li>
+<li><b>秩法：</b> 令 $A = (\alpha_1, \alpha_2, \ldots, \alpha_m)$，若 $r(A) = m$ 则无关，$r(A) \lt m$ 则相关。</li>
+<li><b>行列式法：</b> $m$ 个 $m$ 维向量，$|A| \neq 0$ 无关，$|A| = 0$ 相关。</li>
+</ol>
+
+<p><b>常用结论：</b></p>
+<ul>
+<li>单个非零向量线性无关。</li>
+<li>含零向量的向量组必线性相关。</li>
+<li>两个向量线性相关 $\Leftrightarrow$ 成比例。</li>
+<li>$n+1$ 个 $n$ 维向量必线性相关。</li>
+<li>部分组相关 $\Rightarrow$ 全组相关；全组无关 $\Rightarrow$ 部分组无关。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>判断向量组 $\alpha_1 = (1, 1, 1)^T$，$\alpha_2 = (1, 2, 3)^T$，$\alpha_3 = (1, 3, 6)^T$ 的线性相关性。</p>
+<p><b>解：</b> 三个 3 维向量，用行列式法：</p>
+<div class="formula-block">$$|A| = \begin{vmatrix} 1 & 1 & 1 \\ 1 & 2 & 3 \\ 1 & 3 & 6 \end{vmatrix} = 1(12-9) - 1(6-3) + 1(3-2) = 3 - 3 + 1 = 1 \neq 0$$</div>
+<p>$|A| \neq 0$，故 $\alpha_1, \alpha_2, \alpha_3$ 线性无关。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $\alpha_1, \alpha_2, \alpha_3$ 线性无关，证明 $\beta_1 = \alpha_1 + \alpha_2$，$\beta_2 = \alpha_2 + \alpha_3$，$\beta_3 = \alpha_3 + \alpha_1$ 也线性无关。</p>
+<p><b>解：</b> 设 $k_1\beta_1 + k_2\beta_2 + k_3\beta_3 = 0$，即</p>
+<div class="formula-block">$$k_1(\alpha_1+\alpha_2) + k_2(\alpha_2+\alpha_3) + k_3(\alpha_3+\alpha_1) = 0$$</div>
+<div class="formula-block">$$(k_1+k_3)\alpha_1 + (k_1+k_2)\alpha_2 + (k_2+k_3)\alpha_3 = 0$$</div>
+<p>由 $\alpha_1, \alpha_2, \alpha_3$ 线性无关，得方程组 $\begin{cases} k_1 + k_3 = 0 \\ k_1 + k_2 = 0 \\ k_2 + k_3 = 0 \end{cases}$</p>
+<p>系数行列式 $\begin{vmatrix} 1 & 0 & 1 \\ 1 & 1 & 0 \\ 0 & 1 & 1 \end{vmatrix} = 1(1-0) - 0 + 1(1-0) = 2 \neq 0$，只有零解 $k_1 = k_2 = k_3 = 0$。</p>
+<p>故 $\beta_1, \beta_2, \beta_3$ 线性无关。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十三、极大线性无关组</div>
+
+<div class="method-box">
+<div class="method-name">方法十三：求极大线性无关组与秩</div>
+<div class="core-idea">核心思想：通过初等行变换将向量组拼成的矩阵化为行阶梯形，主元所在列对应的原向量即为极大线性无关组。</div>
+
+<p><b>定义：</b> 向量组的极大线性无关组中所含向量的个数，称为该向量组的秩。</p>
+
+<p><b>求极大无关组步骤：</b></p>
+<ol>
+<li>将向量作为<b>列向量</b>拼成矩阵 $A = (\alpha_1, \alpha_2, \ldots, \alpha_m)$。</li>
+<li>对 $A$ 做<b>初等行变换</b>（不能用列变换！），化为行最简形。</li>
+<li>主元所在列对应的<b>原向量</b>即为极大无关组。</li>
+<li>其余向量可由主元列的线性组合表示，系数从行最简形中直接读出。</li>
+</ol>
+
+<div class="key-box">
+<div class="key-title">✅ 关键准则</div>
+<p><b>初等行变换不改变列向量间的线性关系。</b> 这就是为什么只能用行变换、把向量按列排列的原因。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\alpha_1 = (1,1,1)^T$，$\alpha_2 = (1,2,3)^T$，$\alpha_3 = (2,3,4)^T$，$\alpha_4 = (3,5,7)^T$ 的极大无关组，并将其余向量用极大无关组表示。</p>
+<p><b>解：</b> 构造矩阵并做行变换：</p>
+<div class="formula-block">$$A = \begin{pmatrix} 1 & 1 & 2 & 3 \\ 1 & 2 & 3 & 5 \\ 1 & 3 & 4 & 7 \end{pmatrix} \to \begin{pmatrix} 1 & 0 & 1 & 1 \\ 0 & 1 & 1 & 2 \\ 0 & 0 & 0 & 0 \end{pmatrix}$$</div>
+<p>主元在第1、2列，故极大无关组为 $\alpha_1, \alpha_2$。</p>
+<p>由行最简形：$\alpha_3 = \alpha_1 + \alpha_2$，$\alpha_4 = \alpha_1 + 2\alpha_2$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $\alpha_1 = (1,2,1)^T$，$\alpha_2 = (2,3,a)^T$，$\alpha_3 = (1,a+2,1)^T$，问 $a$ 为何值时 $\alpha_1, \alpha_2, \alpha_3$ 线性相关？此时求极大无关组。</p>
+<p><b>解：</b></p>
+<div class="formula-block">$$|A| = \begin{vmatrix} 1 & 2 & 1 \\ 2 & 3 & a+2 \\ 1 & a & 1 \end{vmatrix} = -a^2 + 2a - 2$$</div>
+<p>令 $|A| = 0$：$a^2 - 2a + 2 = 0$，判别式 $\Delta = 4 - 8 = -4 \lt 0$，无实数解。</p>
+<p>故对任意实数 $a$，$\alpha_1, \alpha_2, \alpha_3$ 线性无关，极大无关组就是它本身。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第七篇 特征值篇——特征值与特征向量</div>
+
+<div class="section-title">十四、特征值与特征向量</div>
+
+<div class="method-box">
+<div class="method-name">方法十四：特征值与特征向量的求法</div>
+<div class="core-idea">核心思想：通过求解特征方程 $|\lambda I - A| = 0$ 得特征值，再解齐次方程组 $(\lambda I - A)x = 0$ 得特征向量。</div>
+
+<p><b>定义：</b> 若 $Ax = \lambda x$（$x \neq 0$），则 $\lambda$ 称为 $A$ 的特征值，$x$ 称为对应于 $\lambda$ 的特征向量。</p>
+
+<p><b>求法步骤：</b></p>
+<ol>
+<li>写出特征方程 $|\lambda I - A| = 0$。</li>
+<li>解方程得特征值 $\lambda_1, \lambda_2, \ldots, \lambda_n$。</li>
+<li>对每个 $\lambda_i$，解 $(\lambda_i I - A)x = 0$ 得基础解系，即为特征向量。</li>
+</ol>
+
+<p><b>重要性质：</b></p>
+<ul>
+<li>$\sum \lambda_i = \text{tr}(A) = a_{11} + a_{22} + \cdots + a_{nn}$（特征值之和 $=$ 迹）。</li>
+<li>$\prod \lambda_i = |A|$（特征值之积 $=$ 行列式）。</li>
+<li>$A$ 可逆 $\Leftrightarrow$ 所有特征值非零。</li>
+<li>若 $\lambda$ 是 $A$ 的特征值，则 $\lambda^k$ 是 $A^k$ 的特征值，$\frac{1}{\lambda}$ 是 $A^{-1}$ 的特征值。</li>
+<li>不同特征值对应的特征向量线性无关。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $A = \begin{pmatrix} 2 & -1 & 0 \\ -1 & 2 & 0 \\ 0 & 0 & 3 \end{pmatrix}$ 的特征值与特征向量。</p>
+<p><b>解：</b> 特征方程：</p>
+<div class="formula-block">$$|\lambda I - A| = \begin{vmatrix} \lambda-2 & 1 & 0 \\ 1 & \lambda-2 & 0 \\ 0 & 0 & \lambda-3 \end{vmatrix} = [(\lambda-2)^2 - 1](\lambda-3) = (\lambda-1)(\lambda-3)^2 = 0$$</div>
+<p>特征值：$\lambda_1 = 1$，$\lambda_2 = \lambda_3 = 3$。</p>
+<p>$\lambda_1 = 1$：解 $(I - A)x = 0$，即 $\begin{pmatrix} -1 & 1 & 0 \\ 1 & -1 & 0 \\ 0 & 0 & -2 \end{pmatrix}x = 0$，得 $x_1 = x_2$，$x_3 = 0$。特征向量 $p_1 = (1, 1, 0)^T$。</p>
+<p>$\lambda_2 = 3$：解 $(3I - A)x = 0$，即 $\begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}x = 0$，得 $x_1 + x_2 = 0$，$x_3$ 自由。特征向量 $p_2 = (1, -1, 0)^T$，$p_3 = (0, 0, 1)^T$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $A$ 的特征值为 $1, 2, 3$，求 $A^2 + A + I$ 的特征值及 $|A^2 + A + I|$。</p>
+<p><b>解：</b> 若 $\lambda$ 是 $A$ 的特征值，则 $\lambda^2 + \lambda + 1$ 是 $A^2 + A + I$ 的特征值。</p>
+<p>$A^2 + A + I$ 的特征值为：$1+1+1=3$，$4+2+1=7$，$9+3+1=13$。</p>
+<div class="formula-block">$$|A^2 + A + I| = 3 \times 7 \times 13 = 273$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十五、矩阵相似对角化</div>
+
+<div class="method-box">
+<div class="method-name">方法十五：矩阵相似对角化的条件与步骤</div>
+<div class="core-idea">核心思想：若存在可逆矩阵 $P$ 使 $P^{-1}AP = \Lambda$（对角阵），则 $A$ 可对角化，$\Lambda$ 的对角元素为 $A$ 的特征值。</div>
+
+<p><b>可对角化条件：</b></p>
+<ul>
+<li>$A$ 可对角化 $\Leftrightarrow$ $A$ 有 $n$ 个线性无关的特征向量。</li>
+<li>$A$ 可对角化 $\Leftrightarrow$ 每个 $k$ 重特征值对应 $k$ 个线性无关的特征向量（即几何重数 $=$ 代数重数）。</li>
+<li>$A$ 有 $n$ 个不同的特征值 $\Rightarrow$ $A$ 可对角化（充分条件）。</li>
+<li>实对称矩阵一定可对角化，且可用正交矩阵对角化。</li>
+</ul>
+
+<p><b>对角化步骤：</b></p>
+<ol>
+<li>求 $A$ 的全部特征值 $\lambda_1, \ldots, \lambda_n$。</li>
+<li>对每个特征值求特征向量。</li>
+<li>检查是否得到 $n$ 个线性无关的特征向量。</li>
+<li>令 $P = (p_1, p_2, \ldots, p_n)$，则 $P^{-1}AP = \text{diag}(\lambda_1, \lambda_2, \ldots, \lambda_n)$。</li>
+</ol>
+
+<p><b>对角化的应用：</b> 若 $A = P\Lambda P^{-1}$，则 $A^k = P\Lambda^k P^{-1}$，便于计算矩阵的高次幂。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>判断 $A = \begin{pmatrix} 1 & 2 \\ 2 & 1 \end{pmatrix}$ 是否可对角化？若可，求 $P$ 和 $\Lambda$，并计算 $A^{10}$。</p>
+<p><b>解：</b> 特征方程：$|\lambda I - A| = (\lambda-1)^2 - 4 = (\lambda-3)(\lambda+1) = 0$。</p>
+<p>$\lambda_1 = 3$：$(3I-A)x = 0$ 得 $x_1 = x_2$，$p_1 = (1,1)^T$。</p>
+<p>$\lambda_2 = -1$：$(-I-A)x = 0$ 得 $x_1 = -x_2$，$p_2 = (1,-1)^T$。</p>
+<p>两个不同特征值，可对角化。$P = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$，$P^{-1} = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$，$\Lambda = \begin{pmatrix} 3 & 0 \\ 0 & -1 \end{pmatrix}$。</p>
+<div class="formula-block">$$A^{10} = P\Lambda^{10}P^{-1} = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}\begin{pmatrix} 3^{10} & 0 \\ 0 & 1 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$$</div>
+<div class="formula-block">$$= \frac{1}{2}\begin{pmatrix} 3^{10}+1 & 3^{10}-1 \\ 3^{10}-1 & 3^{10}+1 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 59050 & 59048 \\ 59048 & 59050 \end{pmatrix}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>判断 $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ 是否可对角化。</p>
+<p><b>解：</b> 特征方程：$|\lambda I - A| = (\lambda-1)^2 = 0$，$\lambda = 1$（二重）。</p>
+<p>解 $(I - A)x = 0$：$\begin{pmatrix} 0 & -1 \\ 0 & 0 \end{pmatrix}x = 0$，得 $x_2 = 0$，$x_1$ 自由。只有一个线性无关的特征向量 $(1, 0)^T$。</p>
+<p>二重特征值只对应 1 个特征向量（几何重数 $1 \lt$ 代数重数 $2$），故 $A$ <b>不可对角化</b>。</p>
+<p class="note-text"><b>说明：</b> 这是典型的"若尔当块"，是最简单的不可对角化矩阵。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第八篇 二次型篇——二次型与正定性</div>
+
+<div class="section-title">十六、二次型及其标准形</div>
+
+<div class="method-box">
+<div class="method-name">方法十六：正交变换法化二次型为标准形</div>
+<div class="core-idea">核心思想：通过正交变换 $x = Qy$ 将二次型 $f = x^TAx$ 化为标准形 $\lambda_1 y_1^2 + \lambda_2 y_2^2 + \cdots + \lambda_n y_n^2$，其中 $\lambda_i$ 为 $A$ 的特征值。</div>
+
+<p><b>矩阵表示：</b> 二次型 $f(x_1, x_2, \ldots, x_n) = x^TAx$，$A$ 为对称矩阵。</p>
+
+<p><b>正交变换法步骤：</b></p>
+<ol>
+<li>写出二次型的矩阵 $A$（对角线为平方项系数，非对角线为交叉项系数的一半）。</li>
+<li>求 $A$ 的特征值 $\lambda_1, \lambda_2, \ldots, \lambda_n$。</li>
+<li>求对应的特征向量，并<b>正交化、单位化</b>（Schmidt 正交化）。</li>
+<li>构造正交矩阵 $Q = (q_1, q_2, \ldots, q_n)$。</li>
+<li>令 $x = Qy$，则 $f = \lambda_1 y_1^2 + \lambda_2 y_2^2 + \cdots + \lambda_n y_n^2$。</li>
+</ol>
+
+<div class="key-box">
+<div class="key-title">✅ 关键准则</div>
+<p>正交变换法得到的标准形系数<b>就是</b>特征值。不同方法化标准形，系数可能不同，但<b>正负惯性指数</b>（正系数个数和负系数个数）不变，这叫<b>惯性定理</b>。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>用正交变换将二次型 $f = 2x_1^2 + 5x_2^2 + 5x_3^2 + 4x_1x_2 - 4x_1x_3 - 8x_2x_3$ 化为标准形。</p>
+<p><b>解：</b> 二次型矩阵 $A = \begin{pmatrix} 2 & 2 & -2 \\ 2 & 5 & -4 \\ -2 & -4 & 5 \end{pmatrix}$</p>
+<p>特征方程：</p>
+<div class="formula-block">$$|\lambda I - A| = \begin{vmatrix} \lambda-2 & -2 & 2 \\ -2 & \lambda-5 & 4 \\ 2 & 4 & \lambda-5 \end{vmatrix} = (\lambda-1)^2(\lambda-10) = 0$$</div>
+<p>$\lambda_1 = \lambda_2 = 1$，$\lambda_3 = 10$。</p>
+<p>$\lambda = 1$：解 $(I - A)x = 0$ 得基础解系 $\xi_1 = (2,0,1)^T$，$\xi_2 = (-2,1,0)^T$。Schmidt 正交化并单位化：$q_1 = \frac{1}{\sqrt{5}}(2,0,1)^T$，$q_2 = \frac{1}{3\sqrt{5}}(-2,5,4)^T$。</p>
+<p>$\lambda = 10$：解 $(10I - A)x = 0$ 得 $\xi_3 = (1,2,-2)^T$，单位化 $q_3 = \frac{1}{3}(1,2,-2)^T$。</p>
+<p>正交变换 $x = Qy$，标准形：$f = y_1^2 + y_2^2 + 10y_3^2$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>用正交变换将 $f = x_1^2 + x_2^2 + x_3^2 - 2x_1x_2$ 化为标准形。</p>
+<p><b>解：</b> $A = \begin{pmatrix} 1 & -1 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$</p>
+<div class="formula-block">$$|\lambda I - A| = \begin{vmatrix} \lambda-1 & 1 & 0 \\ 1 & \lambda-1 & 0 \\ 0 & 0 & \lambda-1 \end{vmatrix} = (\lambda-1)[(\lambda-1)^2-1] = \lambda(\lambda-1)(\lambda-2)$$</div>
+<p>$\lambda_1 = 0$，$\lambda_2 = 1$，$\lambda_3 = 2$。</p>
+<p>标准形：$f = 0 \cdot y_1^2 + y_2^2 + 2y_3^2 = y_2^2 + 2y_3^2$。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十七、配方法化标准形</div>
+
+<div class="method-box">
+<div class="method-name">方法十七：配方法化二次型为标准形</div>
+<div class="core-idea">核心思想：通过配方消去交叉项，逐步将二次型化为平方项之和。</div>
+
+<p><b>配方法步骤：</b></p>
+<ol>
+<li>若有平方项，先集中含 $x_1$ 的项配方，再依次处理 $x_2, x_3, \ldots$。</li>
+<li>若无平方项（只有交叉项），先做变换如 $x_1 = y_1 + y_2$，$x_2 = y_1 - y_2$ 产生平方项。</li>
+<li>每次配方后引入新变量，最终得标准形。</li>
+</ol>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>配方法得到的标准形系数<b>不是</b>特征值，与正交变换法结果可能不同。但正负惯性指数相同（惯性定理）。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>用配方法化 $f = x_1^2 + 2x_2^2 + 3x_3^2 + 2x_1x_2 + 2x_2x_3$ 为标准形，并写出变换。</p>
+<p><b>解：</b></p>
+<p>集中 $x_1$ 配方：$f = (x_1 + x_2)^2 + x_2^2 + 3x_3^2 + 2x_2x_3$</p>
+<p>再对 $x_2$ 配方：$= (x_1 + x_2)^2 + (x_2 + x_3)^2 + 2x_3^2$</p>
+<p>令 $\begin{cases} y_1 = x_1 + x_2 \\ y_2 = x_2 + x_3 \\ y_3 = x_3 \end{cases}$</p>
+<p>标准形：$f = y_1^2 + y_2^2 + 2y_3^2$。</p>
+<p class="note-text">惯性指数：正惯性指数 $p = 3$，负惯性指数 $q = 0$，$f$ 正定。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>用配方法化 $f = 2x_1x_2 + 2x_1x_3 - 2x_2x_3$ 为标准形。</p>
+<p><b>解：</b> 无平方项，先做变换产生平方项。令 $\begin{cases} x_1 = y_1 + y_2 \\ x_2 = y_1 - y_2 \\ x_3 = y_3 \end{cases}$</p>
+<div class="formula-block">$$f = 2y_1^2 - 2y_2^2 + 4y_2y_3$$</div>
+<p>对 $y_2$ 配方：$= 2y_1^2 - 2(y_2 - y_3)^2 + 2y_3^2$</p>
+<p>令 $z_1 = y_1$，$z_2 = y_2 - y_3$，$z_3 = y_3$，标准形：$f = 2z_1^2 - 2z_2^2 + 2z_3^2$。</p>
+<p class="note-text">惯性指数：$p = 2$，$q = 1$，不确定。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十八、正定二次型</div>
+
+<div class="method-box">
+<div class="method-name">方法十八：正定性的判定</div>
+<div class="core-idea">核心思想：通过多种等价条件判定二次型（实对称矩阵）的正定性。</div>
+
+<p><b>定义：</b> 若对任意 $x \neq 0$，$f = x^TAx \gt 0$，则 $f$ 正定，$A$ 正定。</p>
+
+<p><b>判定方法（等价条件）：</b></p>
+<ol>
+<li><b>特征值法：</b> $A$ 的所有特征值 $\gt 0$ $\Leftrightarrow$ 正定。</li>
+<li><b>顺序主子式法：</b> $A$ 的所有顺序主子式 $\gt 0$ $\Leftrightarrow$ 正定。</li>
+<li><b>惯性指数法：</b> 正惯性指数 $p = n$ $\Leftrightarrow$ 正定。</li>
+<li><b>合同法：</b> $A$ 合同于单位矩阵 $I$ $\Leftrightarrow$ 正定。</li>
+</ol>
+
+<p><b>顺序主子式：</b></p>
+<div class="formula-block">$$\Delta_1 = a_{11}, \quad \Delta_2 = \begin{vmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{vmatrix}, \quad \ldots, \quad \Delta_n = |A|$$</div>
+<p>正定 $\Leftrightarrow \Delta_k \gt 0$（$k = 1, 2, \ldots, n$）。</p>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p><b>顺序主子式</b>不是所有 $k$ 阶主子式，而是左上角的 $k$ 阶主子式。顺序主子式只需检查 $n$ 个，不是 $\binom{n}{k}$ 个。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>判断 $f = 2x_1^2 + 5x_2^2 + 5x_3^2 + 4x_1x_2 - 4x_1x_3 - 8x_2x_3$ 是否正定。</p>
+<p><b>解：</b> $A = \begin{pmatrix} 2 & 2 & -2 \\ 2 & 5 & -4 \\ -2 & -4 & 5 \end{pmatrix}$</p>
+<p>用顺序主子式法：</p>
+<div class="formula-block">$$\Delta_1 = 2 \gt 0$$</div>
+<div class="formula-block">$$\Delta_2 = \begin{vmatrix} 2 & 2 \\ 2 & 5 \end{vmatrix} = 10 - 4 = 6 \gt 0$$</div>
+<div class="formula-block">$$\Delta_3 = |A| = 2(25-16) - 2(10-8) + (-2)(-8+10) = 18 - 4 - 4 = 10 \gt 0$$</div>
+<p>所有顺序主子式 $\gt 0$，故 $f$ 正定。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>$t$ 满足什么条件时，$f = x_1^2 + x_2^2 + 5x_3^2 + 2tx_1x_2 - 2x_1x_3 + 4x_2x_3$ 正定？</p>
+<p><b>解：</b> $A = \begin{pmatrix} 1 & t & -1 \\ t & 1 & 2 \\ -1 & 2 & 5 \end{pmatrix}$</p>
+<p>顺序主子式：</p>
+<div class="formula-block">$$\Delta_1 = 1 \gt 0 \quad \text{（恒成立）}$$</div>
+<div class="formula-block">$$\Delta_2 = \begin{vmatrix} 1 & t \\ t & 1 \end{vmatrix} = 1 - t^2 \gt 0 \Rightarrow -1 \lt t \lt 1$$</div>
+<div class="formula-block">$$\Delta_3 = |A| = -5t^2 - 4t \gt 0 \Rightarrow -\frac{4}{5} \lt t \lt 0$$</div>
+<p>取交集：$-\dfrac{4}{5} \lt t \lt 0$。</p>
+<p>故当 $-\dfrac{4}{5} \lt t \lt 0$ 时，$f$ 正定。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第九篇 综合策略篇——方法选择与速查</div>
+
+<div class="section-title">方法选择决策流程</div>
+
+<div class="tip-box">
+<div class="tip-title">📋 线性代数解题决策指南</div>
+<p><b>行列式计算：</b> 低阶直接展开 $\to$ 高阶先化简（行和相等/箭形/递推）$\to$ 化三角形或降阶。</p>
+<p><b>求逆矩阵：</b> 2阶用公式 $\to$ 3阶用伴随矩阵法或初等变换法 $\to$ 4阶及以上用初等变换法。</p>
+<p><b>判断线性相关性：</b> 向量个数 $=$ 维数用行列式 $\to$ 不等用秩 $\to$ 抽象向量用定义。</p>
+<p><b>解线性方程组：</b> 始终用初等行变换化增广矩阵 $\to$ 判断 $r(A)$ 与 $r(A|b)$ $\to$ 写通解。</p>
+<p><b>特征值问题：</b> $|\lambda I - A| = 0 \to$ 解特征向量 $\to$ 判对角化 $\to$ 对称矩阵用正交阵。</p>
+<p><b>二次型问题：</b> 写矩阵 $A$ $\to$ 求特征值（正交变换）或配方 $\to$ 判正定用顺序主子式。</p>
+</div>
+
+<div class="section-title">常用公式速查表</div>
+
+<table class="speed-table">
+<tr><th>公式</th><th>说明</th></tr>
+<tr><td>$|kA| = k^n|A|$</td><td>$n$ 阶矩阵乘以 $k$，行列式乘以 $k^n$</td></tr>
+<tr><td>$|AB| = |A||B|$</td><td>行列式的乘法</td></tr>
+<tr><td>$|A^*| = |A|^{n-1}$</td><td>伴随矩阵的行列式</td></tr>
+<tr><td>$A^{-1} = \dfrac{1}{|A|}A^*$</td><td>伴随矩阵法求逆</td></tr>
+<tr><td>$AA^* = |A|I$</td><td>伴随矩阵基本关系</td></tr>
+<tr><td>$r(AB) \leq \min\{r(A), r(B)\}$</td><td>秩的乘法不等式</td></tr>
+<tr><td>$AB = 0 \Rightarrow r(A)+r(B) \leq n$</td><td>秩的重要约束</td></tr>
+<tr><td>$\sum \lambda_i = \text{tr}(A)$</td><td>特征值之和等于迹</td></tr>
+<tr><td>$\prod \lambda_i = |A|$</td><td>特征值之积等于行列式</td></tr>
+<tr><td>$A \sim \Lambda \Rightarrow A^k = P\Lambda^kP^{-1}$</td><td>对角化计算高次幂</td></tr>
+</table>
+
+<div class="section-title">综合练习</div>
+
+<div class="example-box">
+<div class="example-title">综合题 1</div>
+<p>设 $A = \begin{pmatrix} 1 & 1 & 0 \\ 1 & 0 & -1 \\ 0 & -1 & 1 \end{pmatrix}$，求：（1）特征值；（2）判断 $A$ 是否可对角化；（3）判断 $A$ 是否正定。</p>
+<p><b>解：</b></p>
+<p>（1）特征方程：</p>
+<div class="formula-block">$$|\lambda I - A| = \begin{vmatrix} \lambda-1 & -1 & 0 \\ -1 & \lambda & 1 \\ 0 & 1 & \lambda-1 \end{vmatrix} = (\lambda-1)(\lambda^2-\lambda-1) - (\lambda-1) = (\lambda-1)(\lambda-2)(\lambda+1)$$</div>
+<p>特征值：$\lambda_1 = 1$，$\lambda_2 = 2$，$\lambda_3 = -1$。</p>
+<p>（2）三个不同特征值 $\Rightarrow$ $A$ 可对角化。</p>
+<p>（3）特征值有负值 $-1 \lt 0$，故 $A$ 不正定（也不负定，为不定矩阵）。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">综合题 2</div>
+<p>设 $\alpha_1 = (1, 0, 2)^T$，$\alpha_2 = (1, 1, a)^T$，$\alpha_3 = (a, 1, 4)^T$，问 $a$ 为何值时 $\alpha_1, \alpha_2, \alpha_3$ 线性相关？并求极大无关组。</p>
+<p><b>解：</b> 三维向量三个，线性相关 $\Leftrightarrow |A| = 0$：</p>
+<div class="formula-block">$$|A| = \begin{vmatrix} 1 & 1 & a \\ 0 & 1 & 1 \\ 2 & a & 4 \end{vmatrix} = 1(4-a) - 1(0-2) + a(0-2) = 4-a+2-2a = 6-3a$$</div>
+<p>$|A| = 0 \Rightarrow a = 2$。</p>
+<p>当 $a = 2$ 时：$A = \begin{pmatrix} 1 & 1 & 2 \\ 0 & 1 & 1 \\ 2 & 2 & 4 \end{pmatrix} \to \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 0 \end{pmatrix}$</p>
+<p>极大无关组为 $\alpha_1, \alpha_2$，且 $\alpha_3 = \alpha_1 + \alpha_2$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">综合题 3</div>
+<p>设矩阵 $A$ 满足 $A^2 - 3A + 2I = 0$，证明：（1）$A$ 可逆；（2）$A$ 的特征值只能是 $1$ 或 $2$。</p>
+<p><b>证明：</b></p>
+<p>（1）由 $A^2 - 3A + 2I = 0$ 得 $A(A - 3I) = -2I$，即 $A \cdot \frac{3I - A}{2} = I$。</p>
+<p>故 $A^{-1} = \frac{3I - A}{2}$，$A$ 可逆。</p>
+<p>（2）设 $\lambda$ 是 $A$ 的特征值，$Ax = \lambda x$（$x \neq 0$），则 $A^2x = \lambda^2 x$。</p>
+<p>由 $A^2 - 3A + 2I = 0$ 得 $(A^2 - 3A + 2I)x = 0$，即 $(\lambda^2 - 3\lambda + 2)x = 0$。</p>
+<p>$x \neq 0$，故 $\lambda^2 - 3\lambda + 2 = 0$，解得 $\lambda = 1$ 或 $\lambda = 2$。</p>
+</div>
+
+<div class="footer">
+线性代数方法总结 · 完<br>
+<span style="font-size: 13px; font-weight: 400; color: #996600;">核心原则：理解概念是基础，掌握方法路径是关键，大量练习是保障</span><br>
+<span style="font-size: 13px; font-weight: 600; color: #007844;">行列式 $\to$ 矩阵 $\to$ 秩 $\to$ 方程组 $\to$ 向量 $\to$ 特征值 $\to$ 二次型</span>
+</div>
+
+</body>
+</html>

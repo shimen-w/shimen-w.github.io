@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>专升本高等数学 · 求极限方法全面总结</title>
+
+<!-- MathJax 配置 -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    tags: 'none'
+  },
+  svg: { fontCache: 'global' },
+  startup: {
+    pageReady: () => {
+      return MathJax.startup.defaultPageReady().then(() => {
+        window.__mathjaxReady = true;
+      });
+    }
+  }
+};
+</script>
+<script src="/vendor/mathjax/tex-svg.js" async></script>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'SimSun', serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+  background: #fff;
+  padding: 40px 50px;
+  max-width: 210mm;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #003366;
+  text-align: center;
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #006699;
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.tagline {
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 4px;
+}
+
+.part-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #003366;
+  border-bottom: 2px solid #003366;
+  padding-bottom: 4px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  page-break-before: always;
+}
+.part-title:first-of-type { page-break-before: avoid; }
+
+.section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #006699;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-left: 4px solid #006699;
+  padding-left: 10px;
+}
+
+.method-box {
+  background: #f0f7ff;
+  border: 2px solid #006699;
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+.method-box .method-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 10px;
+}
+.method-box .core-idea {
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 6px;
+}
+.method-box p, .method-box li {
+  margin-bottom: 6px;
+}
+.method-box ul, .method-box ol {
+  margin-left: 2em;
+  margin-bottom: 8px;
+}
+.method-box ul li, .method-box ol li {
+  margin-bottom: 4px;
+}
+
+.example-box {
+  background: #fff5f5;
+  border: 1.5px solid #cc3300;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.example-box .example-title {
+  font-weight: 700;
+  color: #cc3300;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.example-box p { margin-bottom: 6px; }
+
+.tip-box {
+  background: #fffbe6;
+  border: 1.5px solid #996600;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.tip-box .tip-title {
+  font-weight: 700;
+  color: #996600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.key-box {
+  background: #f0fff0;
+  border: 1.5px solid #007844;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.key-box .key-title {
+  font-weight: 700;
+  color: #007844;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+table th {
+  background: #006699;
+  color: white;
+  font-weight: 700;
+  padding: 8px 12px;
+  text-align: left;
+}
+table td {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+}
+table tr:nth-child(even) td { background: #f5f5f5; }
+
+.speed-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+.speed-table th {
+  background: #006699;
+  color: white;
+  font-weight: 700;
+  padding: 10px 12px;
+  text-align: center;
+}
+.speed-table td {
+  padding: 10px 12px;
+  border: 1px solid #aaa;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.formula-block {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.note-text {
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+}
+
+.bold { font-weight: 700; }
+.underline { text-decoration: underline; }
+.highlight { color: #cc3300; font-weight: 700; }
+
+.footer {
+  text-align: center;
+  font-size: 16px;
+  color: #006699;
+  font-weight: 700;
+  margin-top: 60px;
+  padding: 20px;
+  border-top: 2px solid #003366;
+}
+
+@media print {
+  body { padding: 20px 30px; }
+  .part-title { page-break-before: always; }
+  .method-box, .example-box { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<h1>专升本高等数学</h1>
+<div class="subtitle">求极限方法全面总结</div>
+<div class="tagline">由浅入深 · 逐步扩展 · 逻辑通顺 · 条理清晰</div>
+
+<div class="tip-box">
+<div class="tip-title">📖 使用说明</div>
+<p>本文档系统梳理专升本高数中求极限的全部核心方法，按照从基础到进阶的逻辑编排。每个方法配有典型习题与详细解析，建议按顺序学习，循序渐进。</p>
+<p><b>符号约定：</b> $\Rightarrow$ 表示"推出"，$\Leftrightarrow$ 表示"等价"，$\to$ 表示"趋于"，$\infty$ 表示无穷大，$\varepsilon$ 表示任意小的正数。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第一篇 基础篇——极限的直觉与直接方法</div>
+
+<div class="section-title">一、极限的基本概念</div>
+
+<div class="method-box">
+<div class="method-name">方法一：极限的直观理解与定义</div>
+<div class="core-idea">核心思想：极限描述的是当自变量按某种趋势变化时，函数值是否趋于一个确定的数，而与函数在该点是否有定义无关。</div>
+
+<p><b>精确定义（$\varepsilon$-$\delta$ 语言）：</b></p>
+<div class="formula-block">$\displaystyle\lim_{x \to x_0} f(x) = A$ 的含义是：对任意 $\varepsilon > 0$，存在 $\delta > 0$，使得当 $0 < |x - x_0| < \delta$ 时，$|f(x) - A| < \varepsilon$ 恒成立。</div>
+
+<p><b>要点：</b></p>
+<ul>
+<li>$x \to x_0$ 时 $x \neq x_0$，即极限与函数在 $x_0$ 处的值无关。</li>
+<li>左极限 $\lim_{x \to x_0^-} f(x)$ 与右极限 $\lim_{x \to x_0^+} f(x)$ 必须相等且等于 $A$，才有 $\lim_{x \to x_0} f(x) = A$。</li>
+<li>数列极限 $\lim_{n \to \infty} a_n = A$：对任意 $\varepsilon > 0$，存在 $N$，当 $n > N$ 时 $|a_n - A| < \varepsilon$。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>讨论函数 $f(x) = \dfrac{x^2 - 1}{x - 1}$ 在 $x = 1$ 处的极限。</p>
+<p><b>解：</b> 虽然 $f(1)$ 无定义，但</p>
+<div class="formula-block">$$\lim_{x \to 1} \frac{x^2-1}{x-1} = \lim_{x \to 1} \frac{(x-1)(x+1)}{x-1} = \lim_{x \to 1}(x+1) = 2$$</div>
+<p><b>说明：</b> 极限存在与否取决于 $x$ 趋于 $1$ 时的行为，不取决于 $x=1$ 处是否有定义。这是理解极限的第一步——<b>极限是趋势，不是取值</b>。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $f(x) = \begin{cases} x+1, & x < 1 \\ 3, & x = 1 \\ x^2+1, & x > 1 \end{cases}$，求 $\lim_{x \to 1} f(x)$。</p>
+<p><b>解：</b></p>
+<div class="formula-block">$$\lim_{x \to 1^-} f(x) = \lim_{x \to 1^-} (x+1) = 2, \quad \lim_{x \to 1^+} f(x) = \lim_{x \to 1^+} (x^2+1) = 2$$</div>
+<p>左极限 = 右极限 = 2，故 $\lim_{x \to 1} f(x) = 2$。</p>
+<p class="note-text"><b>注意：</b> $f(1) = 3 \neq 2$，再次说明极限值与函数值无关。但此函数在 $x=1$ 处<b>不连续</b>。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">二、直接代入法</div>
+
+<div class="method-box">
+<div class="method-name">方法二：直接代入法</div>
+<div class="core-idea">适用条件：函数在极限点处连续，即 $f(x)$ 在 $x_0$ 处有定义且 $\lim_{x \to x_0} f(x) = f(x_0)$。</div>
+
+<p><b>核心原理：</b> 初等函数在其定义域内连续，因此在定义域内求极限，<b>直接代入即可</b>。</p>
+
+<p><b>操作步骤：</b></p>
+<ol>
+<li>将 $x$ 的趋势值直接代入表达式。</li>
+<li>若结果为确定值（非 $0/0$、$\infty/\infty$ 等不定型），则即为极限。</li>
+<li>若出现不定型，转用其他方法。</li>
+</ol>
+
+<p><b>何时能用：</b></p>
+<ul>
+<li>多项式函数：$\lim_{x \to a} P(x) = P(a)$，永远可直接代入。</li>
+<li>有理函数（分母不为零时）：$\lim_{x \to a} \dfrac{P(x)}{Q(x)} = \dfrac{P(a)}{Q(a)}$，前提 $Q(a) \neq 0$。</li>
+<li>复合初等函数在定义域内：直接代入。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 2} \dfrac{x^2 + 3x - 1}{x + 4}$。</p>
+<p><b>解：</b> 分母 $x+4$ 在 $x=2$ 时为 $6 \neq 0$，直接代入：</p>
+<div class="formula-block">$$\lim_{x \to 2} \frac{x^2 + 3x - 1}{x + 4} = \frac{4 + 6 - 1}{6} = \frac{9}{6} = \frac{3}{2}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to 0} \dfrac{\sqrt{x^2 + 9} - 3}{x^2}$。</p>
+<p><b>解：</b> 直接代入得 $\dfrac{3-3}{0} = \dfrac{0}{0}$，为不定型，直接代入法失效。需转用其他方法（见后文"有理化法"）。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">三、极限的四则运算</div>
+
+<div class="method-box">
+<div class="method-name">方法三：极限的四则运算</div>
+<div class="core-idea">前提条件：各部分极限均存在。</div>
+
+<p><b>基本法则：</b> 设 $\lim f(x) = A$，$\lim g(x) = B$，则：</p>
+<div class="formula-block">
+$$\lim [f(x) + g(x)] = A + B$$
+$$\lim [f(x) - g(x)] = A - B$$
+$$\lim [f(x) \cdot g(x)] = A \cdot B$$
+$$\lim \frac{f(x)}{g(x)} = \frac{A}{B} \quad (B \neq 0)$$
+</div>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<ul>
+<li>$\lim [f(x) + g(x)]$ 存在 <b>不能</b>推出 $\lim f(x)$ 和 $\lim g(x)$ 分别存在。</li>
+<li>反例：$\lim_{x \to 0} \left(\dfrac{1}{x} - \dfrac{1}{x}\right) = 0$，但 $\lim_{x \to 0} \dfrac{1}{x}$ 不存在。</li>
+<li>分母极限为零时，除法法则不能直接使用。</li>
+</ul>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 1} \left(3x^2 - 2x + \dfrac{x+1}{x^2+2}\right)$。</p>
+<p><b>解：</b> 各部分极限均存在：</p>
+<div class="formula-block">$$\lim_{x \to 1} 3x^2 = 3, \quad \lim_{x \to 1} 2x = 2, \quad \lim_{x \to 1} \frac{x+1}{x^2+2} = \frac{2}{3}$$</div>
+<div class="formula-block">$$\text{原极限} = 3 - 2 + \frac{2}{3} = \frac{5}{3}$$</div>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第二篇 消去篇——化不定型为确定型</div>
+
+<div class="section-title">四、约分化简法（消去零因子）</div>
+
+<div class="method-box">
+<div class="method-name">方法四：约分化简法——处理 $0/0$ 型有理函数</div>
+<div class="core-idea">适用场景：$\lim_{x \to x_0} \dfrac{P(x)}{Q(x)}$，其中 $P(x_0) = 0$，$Q(x_0) = 0$（即 $0/0$ 型有理函数极限）。</div>
+
+<p><b>核心思想：</b> $P(x_0) = 0$ 说明 $x_0$ 是 $P(x)$ 的根，从而 $(x - x_0)$ 是 $P(x)$ 的因式。同理 $(x - x_0)$ 是 $Q(x)$ 的因式。约去公共的零因子后，分母不再为零，即可直接代入。</p>
+
+<p><b>操作步骤：</b></p>
+<ol>
+<li>确认是 $0/0$ 型：代入验证分子分母同时为零。</li>
+<li>分解因式：将分子分母分解出 $(x - x_0)$ 因子。</li>
+<li>约分：消去公共因子 $(x - x_0)$。</li>
+<li>直接代入求值。</li>
+</ol>
+
+<p><b>因式分解技巧：</b></p>
+<ul>
+<li>提取公因式：$x^2 - a^2 = (x-a)(x+a)$。</li>
+<li>十字相乘：$x^2 + (a+b)x + ab = (x+a)(x+b)$。</li>
+<li>代数恒等式：$x^3 - a^3 = (x-a)(x^2+ax+a^2)$。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 3} \dfrac{x^2 - 9}{x - 3}$。</p>
+<p><b>解：</b> 代入得 $0/0$ 型。分解因式：</p>
+<div class="formula-block">$$\lim_{x \to 3} \frac{(x-3)(x+3)}{x-3} = \lim_{x \to 3} (x+3) = 6$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to -2} \dfrac{x^3 + 8}{x^2 + 3x + 2}$。</p>
+<p><b>解：</b> 代入得 $0/0$ 型。</p>
+<div class="formula-block">$$x^3 + 8 = (x+2)(x^2 - 2x + 4), \quad x^2 + 3x + 2 = (x+1)(x+2)$$</div>
+<div class="formula-block">$$\text{原极限} = \lim_{x \to -2} \frac{(x+2)(x^2-2x+4)}{(x+1)(x+2)} = \lim_{x \to -2} \frac{x^2-2x+4}{x+1} = \frac{12}{-1} = -12$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">五、有理化法</div>
+
+<div class="method-box">
+<div class="method-name">方法五：有理化法——处理含根号的 $0/0$ 型与 $\infty-\infty$ 型</div>
+<div class="core-idea">适用场景：极限表达式中含有根号，导致 $0/0$ 或 $\infty-\infty$ 不定型。</div>
+
+<p><b>核心思想：</b> 通过乘以共轭表达式，消除根号，化简后再求极限。</p>
+
+<p><b>形式 A——分子有理化</b>（$\dfrac{\sqrt{f(x)}-\sqrt{g(x)}}{h(x)}$ 型，$0/0$ 型）：</p>
+<div class="formula-block">$$\frac{\sqrt{f}-\sqrt{g}}{h} = \frac{(\sqrt{f}-\sqrt{g})(\sqrt{f}+\sqrt{g})}{h(\sqrt{f}+\sqrt{g})} = \frac{f-g}{h(\sqrt{f}+\sqrt{g})}$$</div>
+
+<p><b>形式 B——$\infty-\infty$ 型</b>（$\sqrt{f(x)}-\sqrt{g(x)}$ 型，各趋于 $\infty$）：</p>
+<div class="formula-block">$$\sqrt{f}-\sqrt{g} = \frac{f-g}{\sqrt{f}+\sqrt{g}}$$</div>
+<p>分子增长慢于分母，结果趋于 $0$ 或有限值。</p>
+
+<p><b>立方根有理化：</b> 利用 $(a-b)(a^2+ab+b^2) = a^3-b^3$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 0} \dfrac{\sqrt{x^2+9}-3}{x^2}$。</p>
+<p><b>解：</b> 分子有理化：</p>
+<div class="formula-block">$$\frac{\sqrt{x^2+9}-3}{x^2} = \frac{(x^2+9)-9}{x^2(\sqrt{x^2+9}+3)} = \frac{x^2}{x^2(\sqrt{x^2+9}+3)} = \frac{1}{\sqrt{x^2+9}+3}$$</div>
+<p>代入 $x=0$：$\dfrac{1}{3+3} = \dfrac{1}{6}$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to +\infty} \left(\sqrt{x^2+x}-x\right)$。</p>
+<p><b>解：</b> $\infty-\infty$ 型，有理化：</p>
+<div class="formula-block">$$\sqrt{x^2+x}-x = \frac{x}{\sqrt{x^2+x}+x}$$</div>
+<p>分子分母同除以 $x$：</p>
+<div class="formula-block">$$= \frac{1}{\sqrt{1+\frac{1}{x}}+1} \xrightarrow{x \to +\infty} \frac{1}{1+1} = \frac{1}{2}$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">六、分离常数法与提取主部法</div>
+
+<div class="method-box">
+<div class="method-name">方法六：分离常数法与提取主部法——处理 $\infty/\infty$ 型</div>
+<div class="core-idea">适用场景：$x \to \infty$ 时的 $\infty/\infty$ 型有理函数极限。</div>
+
+<p><b>方法 A——分离常数法：</b> 分子分母同除以 $x$ 的最高次幂。</p>
+<div class="formula-block">$$\lim_{x \to \infty}\frac{ax^2+bx+c}{dx^2+ex+f} = \lim_{x \to \infty}\frac{a+\frac{b}{x}+\frac{c}{x^2}}{d+\frac{e}{x}+\frac{f}{x^2}} = \frac{a}{d}$$</div>
+
+<p><b>方法 B——提取主部法：</b> 直接看最高次项的比值。</p>
+
+<p><b>重要结论：</b> 设 $P(x)$ 为 $m$ 次多项式，$Q(x)$ 为 $n$ 次多项式：</p>
+<div class="formula-block">$$\lim_{x \to \infty}\frac{P(x)}{Q(x)} = \begin{cases} 0, & m < n \\ \text{最高次项系数之比}, & m = n \\ \infty, & m > n \end{cases}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to \infty} \dfrac{3x^3-2x+1}{5x^3+4x^2-7}$。</p>
+<p><b>解：</b> 同次（$m=n=3$），结果为最高次项系数之比：$\dfrac{3}{5}$。</p>
+<p><b>验证：</b> 同除以 $x^3$：</p>
+<div class="formula-block">$$\lim_{x \to \infty}\frac{3-\frac{2}{x^2}+\frac{1}{x^3}}{5+\frac{4}{x}-\frac{7}{x^3}} = \frac{3}{5}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to \infty} \dfrac{2x^2+3x}{x^3-1}$。</p>
+<p><b>解：</b> $m=2 < n=3$，故极限为 $0$。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第三篇 重要极限篇——两个基本极限及其推广</div>
+
+<div class="section-title">七、第一重要极限</div>
+
+<div class="method-box">
+<div class="method-name">方法七：第一重要极限 $\lim_{x \to 0}\dfrac{\sin x}{x}=1$ 及其推广</div>
+<div class="core-idea">标准形式与推广</div>
+
+<p><b>标准形式：</b></p>
+<div class="formula-block">$$\lim_{x \to 0}\frac{\sin x}{x} = 1$$</div>
+
+<p><b>推广形式：</b> 若 $\lim \alpha(x) = 0$，则</p>
+<div class="formula-block">$$\lim \frac{\sin\alpha(x)}{\alpha(x)} = 1$$</div>
+
+<p><b>本质：</b> $\sin\alpha$ 与 $\alpha$ 在 $\alpha \to 0$ 时是等价无穷小：$\sin\alpha \sim \alpha$。</p>
+
+<p><b>使用要点：</b></p>
+<ul>
+<li>必须满足 $\alpha(x) \to 0$ 的条件，且 $\sin$ 的内部与分母<b>完全一致</b>。</li>
+<li>若不一致，需调整使其一致。</li>
+<li>变量可以是 $x$、$n$、$x^2$、$3x$ 等任何趋于零的表达式。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 0} \dfrac{\sin 5x}{3x}$。</p>
+<p><b>解：</b> 凑标准形式：</p>
+<div class="formula-block">$$\lim_{x \to 0}\frac{\sin 5x}{3x} = \lim_{x \to 0}\frac{\sin 5x}{5x}\cdot\frac{5x}{3x} = 1\cdot\frac{5}{3} = \frac{5}{3}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to 0} \dfrac{1-\cos x}{x^2}$。</p>
+<p><b>解：</b> 利用半角公式 $1-\cos x = 2\sin^2\dfrac{x}{2}$：</p>
+<div class="formula-block">$$\lim_{x \to 0}\frac{2\sin^2\frac{x}{2}}{x^2} = 2\cdot\lim_{x \to 0}\left(\frac{\sin\frac{x}{2}}{\frac{x}{2}}\right)^2\cdot\frac{1}{4} = 2\cdot 1\cdot\frac{1}{4} = \frac{1}{2}$$</div>
+<p class="note-text"><b>推论：</b> $\lim_{x \to 0}\dfrac{1-\cos x}{x^2} = \dfrac{1}{2}$ 是常用结论，可直接使用。由此可得 $1-\cos x \sim \dfrac{x^2}{2}$（$x \to 0$）。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">八、第二重要极限</div>
+
+<div class="method-box">
+<div class="method-name">方法八：第二重要极限 $\lim_{x \to \infty}\left(1+\dfrac{1}{x}\right)^x=e$ 及其推广</div>
+
+<p><b>标准形式：</b></p>
+<div class="formula-block">$$\lim_{x \to \infty}\left(1+\frac{1}{x}\right)^x = e, \quad \lim_{x \to 0}(1+x)^{\frac{1}{x}} = e$$</div>
+
+<p><b>推广形式：</b> 若 $\lim \alpha(x) = 0$，则</p>
+<div class="formula-block">$$\lim (1+\alpha(x))^{\frac{1}{\alpha(x)}} = e$$</div>
+
+<p><b>本质：</b> 这是一类 $1^\infty$ 型极限，形式为"$(1+\text{无穷小})^{\text{无穷大的倒数}}$"。</p>
+
+<p><b>使用要点：</b></p>
+<ul>
+<li>必须是 $1^\infty$ 型才适用（底趋于 $1$，指数趋于 $\infty$）。</li>
+<li>底中的无穷小与指数中的无穷大必须<b>严格互为倒数</b>。</li>
+<li>若不严格互为倒数，需凑配使其满足。</li>
+</ul>
+
+<p><b>凑配技巧：</b> 设底为 $1+u(x)$，指数为 $v(x)$，则：</p>
+<div class="formula-block">$$(1+u)^v = \left[(1+u)^{\frac{1}{u}}\right]^{uv}$$</div>
+<p>若 $\lim u = 0$，$\lim uv = c$，则极限为 $e^c$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to \infty} \left(1+\dfrac{3}{x}\right)^x$。</p>
+<p><b>解：</b> 凑配：底中无穷小 $\dfrac{3}{x}$，指数为 $x = \dfrac{1}{3/x}\cdot 3$：</p>
+<div class="formula-block">$$\lim_{x \to \infty}\left(1+\frac{3}{x}\right)^x = \lim_{x \to \infty}\left[\left(1+\frac{3}{x}\right)^{\frac{x}{3}}\right]^3 = e^3$$</div>
+<p class="note-text"><b>快捷公式：</b> $\lim\left(1+\dfrac{a}{x}\right)^{bx} = e^{ab}$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to 0} (1+2x)^{\dfrac{3}{x}}$。</p>
+<p><b>解：</b> 底中无穷小 $2x$，指数 $\dfrac{3}{x}$，乘积 $2x\cdot\dfrac{3}{x}=6$：</p>
+<div class="formula-block">$$\lim_{x \to 0}(1+2x)^{\frac{3}{x}} = e^6$$</div>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第四篇 等价无穷小篇——用等价替换简化极限</div>
+
+<div class="section-title">九、等价无穷小替换</div>
+
+<div class="method-box">
+<div class="method-name">方法九：等价无穷小替换</div>
+<div class="core-idea">核心原理：若 $\alpha(x) \sim \beta(x)$（即 $\lim\dfrac{\alpha}{\beta}=1$），则在极限的乘除因子中可以用 $\beta$ 替换 $\alpha$。</div>
+
+<p><b>常用等价无穷小表</b>（$x \to 0$ 时）：</p>
+<table>
+<tr><th>等价关系</th><th>说明</th></tr>
+<tr><td>$\sin x \sim x$</td><td>第一重要极限的直接推论</td></tr>
+<tr><td>$\tan x \sim x$</td><td>$\tan x = \dfrac{\sin x}{\cos x} \sim \dfrac{x}{1}=x$</td></tr>
+<tr><td>$\arcsin x \sim x$</td><td>反函数等价</td></tr>
+<tr><td>$\arctan x \sim x$</td><td>反函数等价</td></tr>
+<tr><td>$1-\cos x \sim \dfrac{x^2}{2}$</td><td>半角公式推导</td></tr>
+<tr><td>$e^x-1 \sim x$</td><td>换元 $e^x-1=t$</td></tr>
+<tr><td>$\ln(1+x) \sim x$</td><td>第二重要极限的推论</td></tr>
+<tr><td>$a^x-1 \sim x\ln a$</td><td>$a^x = e^{x\ln a}$</td></tr>
+<tr><td>$(1+x)^a-1 \sim ax$</td><td>广义等价</td></tr>
+<tr><td>$\sqrt[n]{1+x}-1 \sim \dfrac{x}{n}$</td><td>上述 $a=\dfrac{1}{n}$ 的特例</td></tr>
+</table>
+
+<p><b>推广：</b> 若 $\alpha(x) \to 0$，则上述所有公式中 $x$ 均可替换为 $\alpha(x)$。例如 $\sin\alpha \sim \alpha$，$e^\alpha-1 \sim \alpha$ 等。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 0} \dfrac{\sin 3x}{e^{2x}-1}$。</p>
+<p><b>解：</b> $x \to 0$ 时：$\sin 3x \sim 3x$，$e^{2x}-1 \sim 2x$：</p>
+<div class="formula-block">$$\lim_{x \to 0}\frac{\sin 3x}{e^{2x}-1} = \lim_{x \to 0}\frac{3x}{2x} = \frac{3}{2}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to 0} \dfrac{\tan x-\sin x}{x^3}$。</p>
+<p><b>解：</b> 注意：此处 $\tan x-\sin x$ 是<b>差</b>，不能分别替换！</p>
+<p><b>正确做法：</b> 先化简再替换：</p>
+<div class="formula-block">$$\tan x-\sin x = \sin x\left(\frac{1}{\cos x}-1\right) = \sin x\cdot\frac{1-\cos x}{\cos x}$$</div>
+<p>替换：$\sin x \sim x$，$1-\cos x \sim \dfrac{x^2}{2}$，$\cos x \to 1$：</p>
+<div class="formula-block">$$\lim_{x \to 0}\frac{x\cdot\frac{x^2}{2}}{x^3\cdot 1} = \frac{1}{2}$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十、等价无穷小的加减陷阱</div>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 关键规则：加减中不能随意等价替换</div>
+<p><b>规则：</b> 等价无穷小替换<b>只适用于乘除因子</b>，不适用于加减项！</p>
+<p><b>原因：</b> 设 $A \sim a$，$B \sim b$，则 $\lim\dfrac{A}{a}=1$，$\lim\dfrac{B}{b}=1$，但 $\lim\dfrac{A+B}{a+b}$ 一般不等于 $1$，因为等价无穷小替换只保持<b>一阶精度</b>，加减可能暴露更高阶的误差。</p>
+<p><b>例：</b> $x \to 0$ 时 $\sin x \sim x$，$\tan x \sim x$，但 $\lim_{x \to 0}\dfrac{\tan x-\sin x}{x-x} = \lim\dfrac{\tan x-\sin x}{0}$（无意义！）</p>
+<p><b>正确做法：</b></p>
+<ol>
+<li>将加减项提取公因式，转化为乘除形式后再替换。</li>
+<li>或使用泰勒展开（见进阶篇），保留足够精度。</li>
+</ol>
+</div>
+
+<div class="key-box">
+<div class="key-title">✅ 加减替换的精确准则</div>
+<p>设 $\alpha = o(\beta)$（即 $\alpha$ 是 $\beta$ 的高阶无穷小），则 $\alpha+\beta \sim \beta$（低阶支配）。</p>
+<p><b>即：</b> 加减中只有当<b>一方是另一方的高阶无穷小</b>时，才可以忽略高阶项。若两方同阶，则不能分别替换。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第五篇 洛必达篇——最强大的不定型求解工具</div>
+
+<div class="section-title">十一、洛必达法则</div>
+
+<div class="method-box">
+<div class="method-name">方法十：洛必达法则</div>
+<div class="core-idea">适用条件</div>
+<ol>
+<li>$\lim\dfrac{f(x)}{g(x)}$ 为 $0/0$ 或 $\infty/\infty$ 不定型。</li>
+<li>$f$ 与 $g$ 在极限点附近可导，且 $g'(x) \neq 0$。</li>
+<li>$\lim\dfrac{f'(x)}{g'(x)}$ 存在（或为 $\infty$）。</li>
+</ol>
+
+<p><b>法则：</b></p>
+<div class="formula-block">$$\lim\frac{f(x)}{g(x)} = \lim\frac{f'(x)}{g'(x)}$$</div>
+
+<p><b>可连续使用：</b> 若 $\dfrac{f'}{g'}$ 仍为不定型，可继续对分子分母求导，直至得出确定值或确认极限不存在。</p>
+
+<p><b>其他不定型的转化：</b></p>
+<ul>
+<li>$0\cdot\infty$ 型：化为 $\dfrac{0}{0}$ 或 $\dfrac{\infty}{\infty}$。</li>
+<li>$\infty-\infty$ 型：通分或有理化化为 $0/0$ 或 $\infty/\infty$。</li>
+<li>$1^\infty$、$0^0$、$\infty^0$ 型：取对数化为 $0\cdot\infty$ 型，再转化。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 0} \dfrac{e^x-e^{-x}}{\sin x}$。</p>
+<p><b>解：</b> $0/0$ 型，洛必达：</p>
+<div class="formula-block">$$\lim_{x \to 0}\frac{e^x-e^{-x}}{\sin x} = \lim_{x \to 0}\frac{e^x+e^{-x}}{\cos x} = \frac{1+1}{1} = 2$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to 0} \dfrac{x-\sin x}{x^3}$。</p>
+<p><b>解：</b> $0/0$ 型，连续使用洛必达三次：</p>
+<p>第一次：$\lim_{x \to 0}\dfrac{1-\cos x}{3x^2}$</p>
+<p>第二次：$\lim_{x \to 0}\dfrac{\sin x}{6x} = \dfrac{1}{6}$</p>
+<p><b>结果：</b> $\dfrac{1}{6}$。</p>
+<p class="note-text"><b>说明：</b> 此题也可用等价无穷小：$1-\cos x \sim \dfrac{x^2}{2}$，一步得 $\dfrac{x^2/2}{3x^2}=\dfrac{1}{6}$。选择合适方法可简化计算。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十二、洛必达法则的注意事项</div>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 洛必达法则的三大陷阱</div>
+<p><b>陷阱一：非不定型不能使用</b></p>
+<p>若极限不是 $0/0$ 或 $\infty/\infty$，洛必达法则<b>不适用</b>，使用会得出错误结果。</p>
+<p>反例：$\lim_{x \to 1}\dfrac{x}{x+1}=\dfrac{1}{2}$（非不定型），若强行洛必达得 $\dfrac{1}{1}=1$，错！</p>
+
+<p style="margin-top:12px"><b>陷阱二：洛必达可能失效</b></p>
+<p>$\lim\dfrac{f'}{g'}$ 不存在时，不能断言原极限不存在，需换用其他方法。</p>
+<p>反例：$\lim_{x \to \infty}\dfrac{x+\sin x}{x}$。洛必达得 $\lim(1+\cos x)$，不存在！但原极限 $= \lim\left(1+\dfrac{\sin x}{x}\right)=1$。</p>
+
+<p style="margin-top:12px"><b>陷阱三：洛必达导致循环</b></p>
+<p>某些题反复洛必达会循环回到原式。</p>
+<p><b>对策：</b> 遇循环应换方法（提取主部等）。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第六篇 夹逼定理篇——通过放缩确定极限</div>
+
+<div class="section-title">十三、夹逼定理</div>
+
+<div class="method-box">
+<div class="method-name">方法十一：夹逼定理（Squeezing Theorem）</div>
+<p><b>定理内容：</b> 若在极限点的某邻域内：</p>
+<div class="formula-block">$$g(x) \leq f(x) \leq h(x)$$</div>
+<p>且 $\lim g(x) = \lim h(x) = A$，则 $\lim f(x) = A$。</p>
+
+<p><b>适用场景：</b></p>
+<ul>
+<li>含有振荡项的极限（如含 $\sin$、$\cos$ 的无穷振荡）。</li>
+<li>求数列极限时，难以直接计算但可放缩。</li>
+<li>分子分母结构复杂但有明显的放大缩小关系。</li>
+</ul>
+
+<p><b>放缩技巧：</b></p>
+<ol>
+<li>利用 $|\sin x| \leq 1$，$|\cos x| \leq 1$ 消除振荡项。</li>
+<li>利用不等式：$\dfrac{n}{n+1} < \dfrac{n}{n+k} < \dfrac{n}{n}$ 等。</li>
+<li>对 $n$ 项求和：放缩每项后求和，令上下界趋于同一值。</li>
+</ol>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 0} x^2\sin\dfrac{1}{x}$。</p>
+<p><b>解：</b> 因为 $-1 \leq \sin\dfrac{1}{x} \leq 1$（$x \neq 0$ 时），所以：</p>
+<div class="formula-block">$$-x^2 \leq x^2\sin\frac{1}{x} \leq x^2$$</div>
+<p>而 $\lim_{x \to 0}(-x^2)=0$，$\lim_{x \to 0} x^2=0$。</p>
+<p>由夹逼定理，$\lim_{x \to 0} x^2\sin\dfrac{1}{x}=0$。</p>
+<p class="note-text"><b>说明：</b> 此题不能直接代入（$\sin\dfrac{1}{x}$ 振荡无极限），也不能洛必达（$\sin\dfrac{1}{x}$ 在 $0$ 附近不可导），夹逼定理是唯一出路。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{n \to \infty} \dfrac{1}{n}\left(\sin\dfrac{\pi}{n}+\sin\dfrac{2\pi}{n}+\cdots+\sin\dfrac{n\pi}{n}\right)$。</p>
+<p><b>解：</b> 利用定积分定义（见进阶篇），实际上：</p>
+<div class="formula-block">$$\lim_{n \to \infty}\frac{1}{n}\sum_{k=1}^{n}\sin\frac{k\pi}{n} = \int_0^1\sin(\pi x)\,dx = \frac{2}{\pi}$$</div>
+<p class="note-text"><b>说明：</b> 夹逼定理与定积分定义法常结合使用。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第七篇 连续性篇——最省力的极限求法</div>
+
+<div class="section-title">十四、利用连续性求极限</div>
+
+<div class="method-box">
+<div class="method-name">方法十二：利用函数连续性求极限</div>
+<div class="core-idea">核心原理：若 $f(x)$ 在 $x_0$ 处连续，则 $\lim_{x \to x_0}f(x) = f(x_0)$，即极限 = 函数值，直接代入即可。</div>
+
+<p><b>初等函数连续性定理：</b> 初等函数在其<b>定义域</b>内处处连续。</p>
+
+<p><b>复合函数连续性：</b> 若 $u=g(x)$ 在 $x_0$ 处连续（$g(x_0)=u_0$），$f(u)$ 在 $u_0$ 处连续，则：</p>
+<div class="formula-block">$$\lim_{x \to x_0}f(g(x)) = f\left(\lim_{x \to x_0}g(x)\right) = f(g(x_0))$$</div>
+
+<p><b>关键应用：</b> 极限号可以<b>移入</b>连续函数内部！这是求解复杂极限的重要工具。</p>
+<div class="formula-block">$$\lim_{x \to x_0}f(g(x)) = f\left(\lim_{x \to x_0}g(x)\right)$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 0} e^{\sin x}$。</p>
+<p><b>解：</b> $\sin x$ 在 $x=0$ 连续，$e^u$ 在 $u=0$ 连续，故：</p>
+<div class="formula-block">$$\lim_{x \to 0}e^{\sin x} = e^{\lim_{x \to 0}\sin x} = e^0 = 1$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to 0}\ln(1+x^2)$。</p>
+<p><b>解：</b> $1+x^2$ 在 $x=0$ 连续（值为 $1$），$\ln u$ 在 $u=1$ 连续：</p>
+<div class="formula-block">$$\lim_{x \to 0}\ln(1+x^2) = \ln\left(\lim_{x \to 0}(1+x^2)\right) = \ln 1 = 0$$</div>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第八篇 进阶篇——系统复习的深度方法</div>
+
+<div class="section-title">十五、泰勒展开法</div>
+
+<div class="method-box">
+<div class="method-name">方法十三：泰勒展开法——精确处理加减中的等价替换</div>
+<div class="core-idea">核心思想：等价无穷小替换只保留一阶精度，加减时可能出错。泰勒展开保留足够高阶的精度，是等价无穷小的"精确版"。</div>
+
+<p><b>常用泰勒展开</b>（$x \to 0$，皮亚诺余项形式）：</p>
+<table>
+<tr><th>函数</th><th>泰勒展开</th></tr>
+<tr><td>$e^x$</td><td>$1+x+\dfrac{x^2}{2}+o(x^2)$</td></tr>
+<tr><td>$\sin x$</td><td>$x-\dfrac{x^3}{6}+o(x^3)$</td></tr>
+<tr><td>$\cos x$</td><td>$1-\dfrac{x^2}{2}+\dfrac{x^4}{24}+o(x^4)$</td></tr>
+<tr><td>$\ln(1+x)$</td><td>$x-\dfrac{x^2}{2}+o(x^2)$</td></tr>
+<tr><td>$\tan x$</td><td>$x+\dfrac{x^3}{3}+o(x^3)$</td></tr>
+<tr><td>$\arcsin x$</td><td>$x+\dfrac{x^3}{6}+o(x^3)$</td></tr>
+<tr><td>$\arctan x$</td><td>$x-\dfrac{x^3}{3}+o(x^3)$</td></tr>
+<tr><td>$(1+x)^a$</td><td>$1+ax+\dfrac{a(a-1)}{2}x^2+o(x^2)$</td></tr>
+<tr><td>$\dfrac{1}{1-x}$</td><td>$1+x+x^2+o(x^2)$</td></tr>
+</table>
+
+<p><b>使用原则：</b></p>
+<ol>
+<li>展开到<b>同阶</b>：所有函数展开到第一个非零项出现的阶数。</li>
+<li>若加减后低阶项消去，需继续展开到下一阶。</li>
+<li>用 $o(x^k)$ 表示余项，无需写出更高阶的具体值。</li>
+</ol>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 0} \dfrac{e^x-1-x}{x^2}$。</p>
+<p><b>解：</b> 泰勒展开 $e^x = 1+x+\dfrac{x^2}{2}+o(x^2)$：</p>
+<div class="formula-block">$$e^x-1-x = \frac{x^2}{2}+o(x^2)$$</div>
+<div class="formula-block">$$\lim_{x \to 0}\frac{\frac{x^2}{2}+o(x^2)}{x^2} = \frac{1}{2}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to 0} \dfrac{\tan x-\sin x}{x^3}$。</p>
+<p><b>解：</b> 展开到三阶：</p>
+<div class="formula-block">$$\tan x = x+\frac{x^3}{3}+o(x^3), \quad \sin x = x-\frac{x^3}{6}+o(x^3)$$</div>
+<div class="formula-block">$$\tan x-\sin x = \frac{x^3}{3}+\frac{x^3}{6}+o(x^3) = \frac{x^3}{2}+o(x^3)$$</div>
+<div class="formula-block">$$\lim_{x \to 0}\frac{\frac{x^3}{2}}{x^3} = \frac{1}{2}$$</div>
+<p class="note-text"><b>对比：</b> 之前用等价无穷小+提取公因式也得到 $\dfrac{1}{2}$，但泰勒展开更系统、更直接，尤其对复杂加减情形优势明显。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十六、幂指函数极限与取对数法</div>
+
+<div class="method-box">
+<div class="method-name">方法十四：幂指函数极限——取对数法处理 $1^\infty$、$0^0$、$\infty^0$ 型</div>
+<div class="core-idea">适用场景：极限形式为 $\lim f(x)^{g(x)}$，即幂指函数，出现 $1^\infty$、$0^0$、$\infty^0$ 型。</div>
+
+<p><b>核心方法：</b> 取对数转化为乘积型极限。</p>
+<p>设 $y = f(x)^{g(x)}$，则 $\ln y = g(x)\cdot\ln f(x)$。</p>
+<div class="formula-block">$$\lim\ln y = \lim[g(x)\cdot\ln f(x)]$$</div>
+<p>若此极限为 $c$，则 $\lim y = e^c$。</p>
+
+<p><b>$1^\infty$ 型的快捷公式：</b></p>
+<p>若 $\lim f(x) = 1$，$\lim g(x) = \infty$，则：</p>
+<div class="formula-block">$$\lim f(x)^{g(x)} = e^{\lim g(x)[f(x)-1]}$$</div>
+<p>此公式源自 $f^g = (1+(f-1))^g$，由第二重要极限推广得出。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 0}\left(\dfrac{\sin x}{x}\right)^{\dfrac{1}{x^2}}$。</p>
+<p><b>解：</b> $1^\infty$ 型，使用快捷公式：</p>
+<div class="formula-block">$$\lim_{x \to 0}\left(\frac{\sin x}{x}\right)^{\frac{1}{x^2}} = e^{\lim_{x \to 0}\frac{1}{x^2}\left(\frac{\sin x}{x}-1\right)}$$</div>
+<p>计算指数部分：$\lim_{x \to 0}\dfrac{\sin x-x}{x^3}$</p>
+<p>泰勒：$\sin x = x-\dfrac{x^3}{6}+o(x^3)$，故 $\sin x-x \sim -\dfrac{x^3}{6}$：</p>
+<div class="formula-block">$$\frac{-\frac{x^3}{6}}{x^3} = -\frac{1}{6}$$</div>
+<div class="formula-block">$$\text{原极限} = e^{-1/6}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to 0^+} x^{\sin x}$。</p>
+<p><b>解：</b> $0^0$ 型，取对数：</p>
+<div class="formula-block">$$\ln y = \sin x\cdot\ln x$$</div>
+<p>$x \to 0^+$ 时 $\sin x \to 0$，$\ln x \to -\infty$，为 $0\cdot(-\infty)$ 型。</p>
+<p>化为 $0/0$ 型后洛必达：</p>
+<div class="formula-block">$$\lim_{x \to 0^+}\frac{\ln x}{1/\sin x} = \lim_{x \to 0^+}\frac{\ln x}{1/x} \quad (\sin x \sim x)$$</div>
+<div class="formula-block">$$\text{洛必达：} \lim_{x \to 0^+}\frac{1/x}{-1/x^2} = \lim_{x \to 0^+}(-x) = 0$$</div>
+<div class="formula-block">$$\text{原极限} = e^0 = 1$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十七、利用定积分定义求数列极限</div>
+
+<div class="method-box">
+<div class="method-name">方法十五：利用定积分定义求数列极限</div>
+<p><b>核心原理：</b> 定积分的黎曼和定义：</p>
+<div class="formula-block">$$\int_a^b f(x)\,dx = \lim_{n \to \infty}\sum_{k=1}^{n}f\left(a+\frac{k(b-a)}{n}\right)\cdot\frac{b-a}{n}$$</div>
+
+<p><b>识别模式：</b> 当极限呈现 $\dfrac{1}{n}\sum_{k=1}^{n}f\left(\dfrac{k}{n}\right)$ 的形式时，即为 $\int_0^1 f(x)\,dx$。</p>
+
+<p><b>一般公式：</b></p>
+<div class="formula-block">$$\lim_{n \to \infty}\frac{b-a}{n}\sum_{k=1}^{n}f\left(a+k\cdot\frac{b-a}{n}\right) = \int_a^b f(x)\,dx$$</div>
+
+<p><b>使用步骤：</b></p>
+<ol>
+<li>将 $\dfrac{1}{n}$ 看作 $\Delta x$，将 $\dfrac{k}{n}$ 看作分点 $x_k$。</li>
+<li>识别 $f(x)$ 和积分区间 $[a, b]$。</li>
+<li>计算定积分得极限值。</li>
+</ol>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{n \to \infty}\dfrac{1}{n}\left(\sqrt{\dfrac{1}{n}}+\sqrt{\dfrac{2}{n}}+\cdots+\sqrt{\dfrac{n}{n}}\right)$。</p>
+<p><b>解：</b> 识别为黎曼和，$f(x)=\sqrt{x}$，区间 $[0,1]$：</p>
+<div class="formula-block">$$\lim = \int_0^1\sqrt{x}\,dx = \int_0^1 x^{1/2}\,dx = \frac{2}{3}x^{3/2}\Big|_0^1 = \frac{2}{3}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{n \to \infty} n\left(\dfrac{1}{n^2+1^2}+\dfrac{1}{n^2+2^2}+\cdots+\dfrac{1}{n^2+n^2}\right)$。</p>
+<p><b>解：</b> 改写：</p>
+<div class="formula-block">$$n\cdot\sum_{k=1}^{n}\frac{1}{n^2+k^2} = \sum_{k=1}^{n}\frac{1}{1+\left(\frac{k}{n}\right)^2}\cdot\frac{1}{n}$$</div>
+<p>$f(x)=\dfrac{1}{1+x^2}$，区间 $[0,1]$：</p>
+<div class="formula-block">$$\lim = \int_0^1\frac{dx}{1+x^2} = \arctan x\Big|_0^1 = \frac{\pi}{4}$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十八、变限积分求极限</div>
+
+<div class="method-box">
+<div class="method-name">方法十六：变限积分求极限</div>
+<p><b>核心公式：</b> 若 $F(x)=\int_a^x f(t)\,dt$，且 $f$ 连续，则：</p>
+<div class="formula-block">$$F'(x) = f(x)$$</div>
+
+<p><b>应用场景：</b> 极限中含有变上限积分 $\int_0^x f(t)\,dt$，通常出现 $0/0$ 型。</p>
+
+<p><b>方法：</b> 对变限积分使用洛必达法则时，利用上述公式直接求导。</p>
+
+<p><b>推广：</b></p>
+<div class="formula-block">$$\frac{d}{dx}\int_{\alpha(x)}^{\beta(x)}f(t)\,dt = f(\beta(x))\cdot\beta'(x) - f(\alpha(x))\cdot\alpha'(x)$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\lim_{x \to 0}\dfrac{\int_0^x\sin t\,dt}{x^2}$。</p>
+<p><b>解：</b> $0/0$ 型，洛必达。分子求导：$\dfrac{d}{dx}\int_0^x\sin t\,dt = \sin x$：</p>
+<div class="formula-block">$$\lim_{x \to 0}\frac{\sin x}{2x} = \frac{1}{2}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\lim_{x \to 0}\dfrac{\int_0^x e^{t^2}\,dt - x}{x^3}$。</p>
+<p><b>解：</b> $0/0$ 型，连续洛必达：</p>
+<p>第一次：$\dfrac{e^{x^2}-1}{3x^2}$，仍为 $0/0$ 型。</p>
+<p>第二次：$\dfrac{2xe^{x^2}}{6x} = \dfrac{e^{x^2}}{3}\to\dfrac{1}{3}$。</p>
+<p><b>结果：</b> $\dfrac{1}{3}$。</p>
+
+<p><b>验证：</b> 用泰勒展开 $e^{t^2}=1+t^2+o(t^2)$：</p>
+<div class="formula-block">$$\int_0^x e^{t^2}\,dt = x+\frac{x^3}{3}+o(x^3)$$</div>
+<div class="formula-block">$$\frac{x+\frac{x^3}{3}-x+o(x^3)}{x^3} = \frac{1}{3}$$</div>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第九篇 综合策略篇——方法选择与实战思路</div>
+
+<div class="section-title">十九、极限求解方法选择指南</div>
+
+<div class="key-box">
+<div class="key-title">✅ 方法选择决策流程</div>
+<p>拿到一道极限题，按以下顺序思考：</p>
+<ol>
+<li><b>第一步：直接代入</b>——代入看看是不是确定值。如果是，直接出答案；如果不是，进入下一步。</li>
+<li><b>第二步：识别不定型</b>——判断是 $0/0$、$\infty/\infty$、$\infty-\infty$、$0\cdot\infty$、$1^\infty$、$0^0$、$\infty^0$ 中的哪一类。</li>
+<li><b>第三步：根据不定型选方法</b>
+<ul>
+<li>$0/0$ 型有理函数 → <b>约分</b>或<b>有理化</b></li>
+<li>$0/0$ 型含三角/指数 → <b>等价无穷小</b>替换</li>
+<li>$\infty/\infty$ 型有理函数 → <b>分离常数/提取主部</b></li>
+<li>$\infty-\infty$ 型 → <b>通分/有理化</b>化为 $0/0$ 或 $\infty/\infty$</li>
+<li>$1^\infty$ 型 → <b>第二重要极限</b>或<b>取对数快捷公式</b></li>
+<li>$0\cdot\infty$ 型 → 化为 $0/0$ 或 $\infty/\infty$ 后用<b>洛必达</b></li>
+<li>以上均不便 → <b>洛必达法则</b>（万能但可能繁琐）</li>
+<li>含振荡项 → <b>夹逼定理</b></li>
+<li>加减中等价替换有风险 → <b>泰勒展开</b></li>
+<li>$n$ 项求和 → <b>定积分定义</b></li>
+<li>含变限积分 → <b>洛必达</b>+变限求导公式</li>
+</ul>
+</li>
+<li><b>第四步：验证</b>——洛必达是否满足条件？等价替换是否仅在乘除中？</li>
+<li><b>第五步：灵活组合</b>——一道题往往需要<b>多种方法组合</b>使用。</li>
+</ol>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">二十、综合习题</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 1</div>
+<p>求 $\lim_{x \to 0}\dfrac{e^x\sin x - x(1+x)}{x^3}$。</p>
+<p><b>解：</b> 泰勒展开法（加减复杂，等价无穷小不便）：</p>
+<div class="formula-block">$$e^x = 1+x+\frac{x^2}{2}+o(x^2), \quad \sin x = x-\frac{x^3}{6}+o(x^3)$$</div>
+<div class="formula-block">$$e^x\sin x = \left(1+x+\frac{x^2}{2}\right)\left(x-\frac{x^3}{6}\right)+o(x^3) = x+x^2+\frac{x^3}{3}+o(x^3)$$</div>
+<div class="formula-block">$$e^x\sin x - x(1+x) = \frac{x^3}{3}+o(x^3)$$</div>
+<div class="formula-block">$$\lim_{x \to 0}\frac{\frac{x^3}{3}}{x^3} = \frac{1}{3}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 2</div>
+<p>求 $\lim_{n \to \infty}\left(\dfrac{n+1}{n-1}\right)^n$。</p>
+<p><b>解：</b> $1^\infty$ 型，快捷公式：</p>
+<div class="formula-block">$$\left(\frac{n+1}{n-1}\right)^n = \left(1+\frac{2}{n-1}\right)^n$$</div>
+<div class="formula-block">$$\lim n\cdot\frac{2}{n-1} = \lim\frac{2n}{n-1} = 2$$</div>
+<div class="formula-block">$$\text{原极限} = e^2$$</div>
+<p class="note-text"><b>另解：</b> $\left(\dfrac{1+\frac{1}{n}}{1-\frac{1}{n}}\right)^n = \dfrac{\left(1+\frac{1}{n}\right)^n}{\left(1-\frac{1}{n}\right)^n} = \dfrac{e}{e^{-1}} = e^2$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 3</div>
+<p>求 $\lim_{x \to 0}\dfrac{\int_0^x\ln(1+t)\,dt}{\int_0^x\arctan t\,dt}$。</p>
+<p><b>解：</b> $0/0$ 型，洛必达：</p>
+<div class="formula-block">$$\lim_{x \to 0}\frac{\ln(1+x)}{\arctan x} = \lim_{x \to 0}\frac{x}{x} = 1$$</div>
+<p>（等价无穷小：$\ln(1+x) \sim x$，$\arctan x \sim x$）</p>
+<p><b>结果：</b> $1$。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">二十一、专升本常见题型速查表</div>
+
+<div class="key-box">
+<div class="key-title">专升本极限题常见题型与方法速查</div>
+<table class="speed-table">
+<tr><th>题型特征</th><th>首选方法</th><th>备用方法</th></tr>
+<tr><td>有理函数 $0/0$ 型</td><td>约分化简</td><td>洛必达</td></tr>
+<tr><td>含根号 $0/0$ 型</td><td>有理化</td><td>洛必达</td></tr>
+<tr><td>含 $\sin$/$\tan$ 等的 $0/0$ 型</td><td>等价无穷小</td><td>第一重要极限</td></tr>
+<tr><td>$1^\infty$ 型</td><td>第二重要极限/取对数法</td><td>洛必达</td></tr>
+<tr><td>$\infty/\infty$ 型有理函数</td><td>提取主部/分离常数</td><td>洛必达</td></tr>
+<tr><td>$\infty-\infty$ 型</td><td>通分或有理化</td><td>洛必达</td></tr>
+<tr><td>含振荡项（$\sin\frac{1}{x}$等）</td><td>夹逼定理</td><td>—</td></tr>
+<tr><td>幂指函数 $0^0$/$\infty^0$</td><td>取对数法</td><td>洛必达</td></tr>
+<tr><td>$n$ 项求和数列极限</td><td>定积分定义</td><td>夹逼定理</td></tr>
+<tr><td>含变限积分</td><td>洛必达+求导公式</td><td>泰勒展开</td></tr>
+<tr><td>加减中替换风险</td><td>泰勒展开</td><td>洛必达</td></tr>
+</table>
+</div>
+
+<div class="footer">
+极限求解的核心原则：先识别型，再选方法，最后验证。
+</div>
+
+</body>
+</html>

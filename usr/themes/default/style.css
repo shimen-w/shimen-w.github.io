@@ -1,0 +1,104 @@
+/* 全局基础设置 */
+body {
+    font-family: "Noto Sans SC", Georgia, "Times New Roman", serif;
+    line-height: 1.75;
+    color: #333;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* 页面容器宽度与居中 */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* 站点标题与描述 */
+.site-title {
+    color: #2c5aa0;
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 1.5rem 0 0.5rem;
+}
+.site-desc {
+    color: #666;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* 导航栏 */
+.nav {
+    border-bottom: 1px solid #e9ecef;
+    margin-bottom: 2rem;
+}
+.nav a {
+    color: #2c5aa0;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+}
+.nav a:hover {
+    background-color: #e9ecef;
+}
+
+/* 文章列表与内容 */
+.post {
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.post-title {
+    color: #2c5aa0;
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+.post-meta {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 1rem;
+}
+.post-content {
+    color: #333;
+}
+
+/* 链接样式 */
+a {
+    color: #2c5aa0;
+    text-decoration: none;
+    border-bottom: 1px solid #cce0f5;
+}
+a:hover {
+    border-bottom-color: #2c5aa0;
+}
+
+/* PDF 链接加图标 */
+a[href$=".pdf"]::before {
+    content: "📄 ";
+}
+
+/* 侧边栏 */
+.sidebar {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.sidebar h3 {
+    color: #2c5aa0;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 0.5rem;
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    color: #666;
+    padding: 2rem 0;
+    border-top: 1px solid #e9ecef;
+}

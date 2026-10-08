@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>专升本高等数学 · 导数应用方法全面总结</title>
+
+<!-- MathJax 配置 -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    tags: 'none'
+  },
+  svg: { fontCache: 'global' },
+  startup: {
+    pageReady: () => {
+      return MathJax.startup.defaultPageReady().then(() => {
+        window.__mathjaxReady = true;
+      });
+    }
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'SimSun', serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+  background: #fff;
+  padding: 40px 50px;
+  max-width: 210mm;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #003366;
+  text-align: center;
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #006699;
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.tagline {
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 4px;
+}
+
+.part-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #003366;
+  border-bottom: 2px solid #003366;
+  padding-bottom: 4px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  page-break-before: always;
+}
+.part-title:first-of-type { page-break-before: avoid; }
+
+.section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #006699;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-left: 4px solid #006699;
+  padding-left: 10px;
+}
+
+.method-box {
+  background: #f0f7ff;
+  border: 2px solid #006699;
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+.method-box .method-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 10px;
+}
+.method-box .core-idea {
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 6px;
+}
+.method-box p, .method-box li {
+  margin-bottom: 6px;
+}
+.method-box ul, .method-box ol {
+  margin-left: 2em;
+  margin-bottom: 8px;
+}
+.method-box ul li, .method-box ol li {
+  margin-bottom: 4px;
+}
+
+.example-box {
+  background: #fff5f5;
+  border: 1.5px solid #cc3300;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.example-box .example-title {
+  font-weight: 700;
+  color: #cc3300;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.example-box p { margin-bottom: 6px; }
+
+.tip-box {
+  background: #fffbe6;
+  border: 1.5px solid #996600;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.tip-box .tip-title {
+  font-weight: 700;
+  color: #996600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.key-box {
+  background: #f0fff0;
+  border: 1.5px solid #007844;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.key-box .key-title {
+  font-weight: 700;
+  color: #007844;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+table th {
+  background: #006699;
+  color: white;
+  font-weight: 700;
+  padding: 8px 12px;
+  text-align: left;
+}
+table td {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+}
+table tr:nth-child(even) td { background: #f5f5f5; }
+
+.speed-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+.speed-table th {
+  background: #006699;
+  color: white;
+  font-weight: 700;
+  padding: 10px 12px;
+  text-align: center;
+}
+.speed-table td {
+  padding: 10px 12px;
+  border: 1px solid #aaa;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.formula-block {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.note-text {
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+}
+
+.bold { font-weight: 700; }
+.underline { text-decoration: underline; }
+.highlight { color: #cc3300; font-weight: 700; }
+
+.footer {
+  text-align: center;
+  font-size: 16px;
+  color: #006699;
+  font-weight: 700;
+  margin-top: 60px;
+  padding: 20px;
+  border-top: 2px solid #003366;
+}
+
+@media print {
+  body { padding: 20px 30px; }
+  .part-title { page-break-before: always; }
+  .method-box, .example-box { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<h1>专升本高等数学</h1>
+<div class="subtitle">导数应用方法全面总结</div>
+<div class="tagline">由浅入深 · 逐步扩展 · 逻辑通顺 · 条理清晰</div>
+
+<div class="tip-box">
+<div class="tip-title">📖 使用说明</div>
+<p>本文档系统梳理专升本高数中导数应用的全部核心方法，按照从基础回顾到综合实战的逻辑编排。每个方法配有典型习题与详细解析，建议按顺序学习，循序渐进。</p>
+<p><b>核心脉络：</b> 导数概念与计算 → 微分中值定理 → 单调性/极值/最值 → 凹凸性/拐点 → 渐近线 → 函数作图 → 方程根/不等式证明 → 综合实战。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第一篇 基础回顾——导数概念与计算</div>
+
+<div class="section-title">一、导数定义与增量比极限</div>
+
+<div class="method-box">
+<div class="method-name">方法一：导数定义法——增量比取极限</div>
+<div class="core-idea">核心思想：导数描述函数在某点处的瞬时变化率，即自变量的增量趋近于零时，函数增量与自变量增量之比的极限。</div>
+
+<p><b>精确定义：</b></p>
+<div class="formula-block">$$f'(x_0)=\lim_{\Delta x \to 0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$$</div>
+
+<p>等价形式（代换 $\Delta x = h$）：</p>
+<div class="formula-block">$$f'(x_0)=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}$$</div>
+
+<p><b>单侧导数：</b></p>
+<ul>
+<li>左导数 $f'_-(x_0)$：$\Delta x \to 0^-$ 时上述极限的左极限。</li>
+<li>右导数 $f'_+(x_0)$：$\Delta x \to 0^+$ 时上述极限的右极限。</li>
+<li>函数在 $x_0$ 处可导的充要条件：$f'_-(x_0)=f'_+(x_0)$。</li>
+</ul>
+
+<p><b>可导与连续的关系：</b></p>
+<ul>
+<li>可导 $\Rightarrow$ 连续，但连续 $\nRightarrow$ 可导。</li>
+<li>反例：$f(x)=|x|$ 在 $x=0$ 处连续但不可导（左右导数不等）。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>设 $f(x)$ 在 $x=0$ 处可导，且 $f(0)=0$，$f'(0)=2$，求 $\displaystyle\lim_{x\to 0}\frac{f(2x)}{x}$。</p>
+<p><b>解：</b></p>
+<div class="formula-block">$$\lim_{x\to 0}\frac{f(2x)}{x}
+=\lim_{x\to 0}\frac{f(2x)-f(0)}{2x}\cdot 2
+= f'(0)\cdot 2 = 4$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>用导数定义求 $f(x)=\ln x$ 在 $x=1$ 处的导数。</p>
+<p><b>解：</b></p>
+<div class="formula-block">$$f'(1)=\lim_{h\to 0}\frac{\ln(1+h)-\ln 1}{h}
+= \lim_{h\to 0}\frac{\ln(1+h)}{h}
+= 1$$</div>
+<p class="note-text">（利用了第一重要极限 $\displaystyle\lim_{u\to 0}\frac{\ln(1+u)}{u}=1$）</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">二、基本求导法则速查</div>
+
+<div class="method-box">
+<div class="method-name">方法二：基本求导公式与四则运算法则</div>
+<div class="core-idea">核心思想：掌握16个基本求导公式和四则运算法则，是所有导数应用的前提。复合函数求导使用链式法则。</div>
+
+<p><b>16个基本求导公式速查：</b></p>
+<table>
+<tr><th>$f(x)$</th><th>$f'(x)$</th><th>$f(x)$</th><th>$f'(x)$</th></tr>
+<tr><td>$C$（常数）</td><td>$0$</td><td>$x^n$</td><td>$nx^{n-1}$</td></tr>
+<tr><td>$\sin x$</td><td>$\cos x$</td><td>$\cos x$</td><td>$-\sin x$</td></tr>
+<tr><td>$\tan x$</td><td>$\sec^2 x$</td><td>$\cot x$</td><td>$-\csc^2 x$</td></tr>
+<tr><td>$\sec x$</td><td>$\sec x\tan x$</td><td>$\csc x$</td><td>$-\csc x\cot x$</td></tr>
+<tr><td>$e^x$</td><td>$e^x$</td><td>$a^x$</td><td>$a^x\ln a$</td></tr>
+<tr><td>$\ln x$</td><td>$\frac{1}{x}$</td><td>$\log_a x$</td><td>$\frac{1}{x\ln a}$</td></tr>
+<tr><td>$\arcsin x$</td><td>$\frac{1}{\sqrt{1-x^2}}$</td><td>$\arccos x$</td><td>$-\frac{1}{\sqrt{1-x^2}}$</td></tr>
+<tr><td>$\arctan x$</td><td>$\frac{1}{1+x^2}$</td><td>$\operatorname{arccot} x$</td><td>$-\frac{1}{1+x^2}$</td></tr>
+</table>
+
+<p><b>求导运算法则：</b></p>
+<div class="formula-block">
+$$[u(x)\pm v(x)]'=u'(x)\pm v'(x)$$
+$$[u(x)v(x)]' = u'(x)v(x)+u(x)v'(x)$$
+$$\left[\frac{u(x)}{v(x)}\right]' = \frac{u'v-uv'}{v^2}\quad (v\neq 0)$$
+$$\frac{dy}{dx}=\frac{dy}{du}\cdot\frac{du}{dx}\quad(\text{链式法则——复合函数求导})$$
+</div>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>复合函数求导最容易漏掉内层函数的导数！例如：</p>
+<p>$\dfrac{d}{dx}\sin(x^2) = \cos(x^2)\cdot \color{red}{2x}$，红字部分（内层导数）是高频失分点。</p>
+<p>同理：$\dfrac{d}{dx}e^{\sin x} = e^{\sin x}\cdot\color{red}{\cos x}$，$\dfrac{d}{dx}\ln(x^2+1) = \dfrac{\color{red}{2x}}{x^2+1}$。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $f(x)=e^{\sin x}\cdot \ln(x^2+1)$ 的导数。</p>
+<p><b>解：</b> 乘法法则 + 链式法则：</p>
+<div class="formula-block">
+$$f'(x) = [e^{\sin x}]'\cdot \ln(x^2+1) + e^{\sin x}\cdot [\ln(x^2+1)]'$$
+$$= e^{\sin x}\cdot\cos x\cdot \ln(x^2+1) + e^{\sin x}\cdot \frac{2x}{x^2+1}$$
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $y=\arcsin(\sqrt{x})$ 的导数。</p>
+<p><b>解：</b> 链式法则：</p>
+<div class="formula-block">$$y' = \frac{1}{\sqrt{1-(\sqrt{x})^2}}\cdot \frac{1}{2\sqrt{x}}
+= \frac{1}{2\sqrt{x(1-x)}}$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">三、切线方程与法线方程</div>
+
+<div class="method-box">
+<div class="method-name">方法三：切线方程与法线方程——导数的几何意义</div>
+<div class="core-idea">核心思想：$f'(x_0)$ 等于曲线 $y=f(x)$ 在点 $(x_0,f(x_0))$ 处的切线斜率。法线斜率为切线斜率的负倒数。</div>
+
+<p><b>基本公式：</b></p>
+<ul>
+<li>切线方程：$y - f(x_0) = f'(x_0)(x - x_0)$</li>
+<li>法线方程：$y - f(x_0) = -\dfrac{1}{f'(x_0)}(x - x_0)$（当 $f'(x_0)\neq 0$）</li>
+<li>若 $f'(x_0)=0$，切线水平：$y=f(x_0)$；法线垂直：$x=x_0$。</li>
+</ul>
+
+<p><b>解题三步走：</b> (1) 确认切点坐标；(2) 求导数确定斜率；(3) 代入点斜式写出方程。</p>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>切勿忘记先写出<b>切点坐标</b>！当题干只给 $x_0$ 时，必须先求 $y_0=f(x_0)$，再求 $f'(x_0)$。缺少此步是高频扣分点。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求曲线 $y=x^3-3x$ 在点 $(2,2)$ 处的切线方程和法线方程。</p>
+<p><b>解：</b></p>
+<div class="formula-block">
+$$y' = 3x^2-3,\quad y'(2)=3\times 4-3=9$$
+$$\text{切线：}y-2=9(x-2)\;\Longrightarrow\; y=9x-16$$
+$$\text{法线：}y-2=-\frac{1}{9}(x-2)\;\Longrightarrow\; y=-\frac{1}{9}x+\frac{20}{9}$$
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>曲线 $y=e^x$ 上哪一点的切线与直线 $y=2x$ 平行？</p>
+<p><b>解：</b> 设切点为 $(x_0,e^{x_0})$。$y'=e^x$，切线斜率为 $e^{x_0}$。</p>
+<p>要求 $e^{x_0}=2$，故 $x_0=\ln 2$，切点为 $(\ln 2,\, 2)$。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第二篇 微分中值定理——连接函数与导数的桥梁</div>
+
+<div class="section-title">四、罗尔定理</div>
+
+<div class="method-box">
+<div class="method-name">方法四：罗尔定理（Rolle）——两端相等必有水平切线</div>
+<div class="core-idea">核心思想：若函数在闭区间连续、开区间可导、且两端点函数值相等，则区间内至少存在一点其切线水平（导数为零）。</div>
+
+<p><b>定理条件（三个条件缺一不可）：</b></p>
+<ol>
+<li>$f(x)$ 在闭区间 $[a,b]$ 上<b>连续</b>；</li>
+<li>$f(x)$ 在开区间 $(a,b)$ 内<b>可导</b>；</li>
+<li>$f(a)=f(b)$。</li>
+</ol>
+<p>则 $\exists \,\xi\in(a,b)$，使得 $f'(\xi)=0$。</p>
+
+<p><b>几何意义：</b> 若曲线的起点和终点在同一水平线上，则曲线上至少存在一点，其切线平行于 $x$ 轴。</p>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<ul>
+<li>三个条件缺一不可！考试中常考<b>验证条件是否满足</b>。</li>
+<li>$f(x)=|x|$ 在 $[-1,1]$ 上：满足连续和 $f(-1)=f(1)$，但 $x=0$ 处不可导 → 罗尔定理<b>不适用</b>。</li>
+</ul>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>验证罗尔定理对 $f(x)=x^2-2x$ 在区间 $[0,2]$ 上是否成立，并求 $\xi$。</p>
+<p><b>解：</b></p>
+<ol>
+<li>连续：多项式函数处处连续 ✓</li>
+<li>可导：$f'(x)=2x-2$，处处可导 ✓</li>
+<li>$f(0)=0$，$f(2)=4-4=0$ ✓</li>
+</ol>
+<p>解 $f'(\xi)=2\xi-2=0$，得 $\xi=1\in(0,2)$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $f(x)=x(x-1)(x-2)$，不用求出 $f'(x)$，说明 $f'(x)=0$ 在 $(0,2)$ 内根的个数。</p>
+<p><b>解：</b> $f(0)=f(1)=f(2)=0$。在 $[0,1]$ 和 $[1,2]$ 上分别使用罗尔定理，各有至少一个根。由于 $f'(x)$ 是二次多项式，最多两个根，故<b>恰好有两个</b>根分别在 $(0,1)$ 和 $(1,2)$ 内。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">五、拉格朗日中值定理</div>
+
+<div class="method-box">
+<div class="method-name">方法五：拉格朗日中值定理——任意两点间必有平行于弦的切线</div>
+<div class="core-idea">核心思想：去掉罗尔定理中 $f(a)=f(b)$ 的限制，结论变为：区间内至少存在一点，其切线平行于连接两端点的弦。</div>
+
+<p><b>定理内容：</b> 若 $f(x)$ 在 $[a,b]$ 上连续、$(a,b)$ 内可导，则</p>
+<div class="formula-block">$$\exists \,\xi\in(a,b)，\text{使得 } f'(\xi)=\frac{f(b)-f(a)}{b-a}$$</div>
+
+<p><b>等价公式：</b></p>
+<div class="formula-block">$$f(b)-f(a) = f'(\xi)(b-a),\quad \xi \in (a,b)$$
+$$f(x+\Delta x)-f(x) = f'(x+\theta\Delta x)\cdot\Delta x,\quad 0\lt \theta\lt 1$$</div>
+
+<p><b>三大应用方向：</b></p>
+<ol>
+<li><b>证明恒等式或不等式</b>：利用 $f'(\xi)$ 的有界性进行放缩。</li>
+<li><b>函数恒为常数</b>：若 $f'(x)\equiv 0$，则 $f(x)\equiv C$。</li>
+<li><b>函数的单调性判定</b>：$f'(x)>0 \Rightarrow$ 严格递增（详见第三篇）。</li>
+</ol>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>拉格朗日中值定理只能保证<b>存在</b>某个 $\xi$，不能确定 $\xi$ 的具体取值（除非题目特殊）。不要试图"解出"$\xi$ 的精确表达式，只需论证其存在性。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>证明：当 $x>0$ 时，$\displaystyle\frac{x}{1+x} \lt  \ln(1+x) \lt  x$。</p>
+<p><b>解：</b> 设 $f(t)=\ln(1+t)$ 在 $[0,x]$ 上应用拉格朗日定理：</p>
+<div class="formula-block">$$\frac{\ln(1+x)-\ln 1}{x-0} = f'(\xi) = \frac{1}{1+\xi},\quad \xi\in(0,x)$$</div>
+<p>即 $\ln(1+x)=\dfrac{x}{1+\xi}$。由 $0\lt \xi\lt x$ 得 $\dfrac{1}{1+x}\lt \dfrac{1}{1+\xi}\lt 1$，两边乘 $x>0$ 得：</p>
+<div class="formula-block">$$\frac{x}{1+x} \lt  \frac{x}{1+\xi} \lt  x$$</div>
+<p>又 $\dfrac{x}{1+\xi}=\ln(1+x)$，故 $\dfrac{x}{1+x} \lt  \ln(1+x) \lt  x$，证毕。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>若 $f'(x)\equiv 0$ 在 $(a,b)$ 内恒成立，证明 $f(x)$ 在 $(a,b)$ 内为常数。</p>
+<p><b>解：</b> $\forall x_1,x_2\in(a,b)$（$x_1\lt  x_2$），在 $[x_1,x_2]$ 上用拉格朗日定理：</p>
+<div class="formula-block">$$f(x_2)-f(x_1)=f'(\xi)(x_2-x_1)=0$$</div>
+<p>故 $f(x_1)=f(x_2)$，由任意性知 $f$ 为常数。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第三篇 函数的单调性与极值</div>
+
+<div class="section-title">六、函数单调性判定</div>
+
+<div class="method-box">
+<div class="method-name">方法六：一阶导数符号判定单调性</div>
+<div class="core-idea">核心思想：若 $f'(x)>0$ 在区间 $I$ 上成立，则 $f(x)$ 在 $I$ 上严格递增；若 $f'(x)\lt 0$，则严格递减。</div>
+
+<p><b>判定步骤：</b></p>
+<ol>
+<li><b>步骤1：</b> 求 $f'(x)$。</li>
+<li><b>步骤2：</b> 令 $f'(x)=0$，解出<b>驻点</b>。</li>
+<li><b>步骤3：</b> 同时找出 $f'(x)$ <b>不存在的点</b>（不可导点）。</li>
+<li><b>步骤4：</b> 用上一步得到的点将定义域分成若干区间。</li>
+<li><b>步骤5：</b> 在每个区间内取测试点，判断 $f'(x)$ 的正负。</li>
+</ol>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<ul>
+<li>仅仅 $f'(x_0)=0$ <b>不能</b>保证 $x_0$ 是极值点！例如 $f(x)=x^3$，$f'(0)=0$ 但 $x=0$ 不是极值点。</li>
+<li>$f'(x)$ 不存在的点也可能是单调性改变的点（可能是极值点），务必纳入分区考量。</li>
+</ul>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>讨论 $f(x)=x^3-3x$ 的单调区间。</p>
+<p><b>解：</b> $f'(x)=3x^2-3=3(x+1)(x-1)$，驻点 $x=-1,1$。</p>
+<table>
+<tr><th>区间</th><th>$(-\infty,-1)$</th><th>$(-1,1)$</th><th>$(1,+\infty)$</th></tr>
+<tr><td>$f'(x)$ 符号</td><td>$+$</td><td>$-$</td><td>$+$</td></tr>
+<tr><td>$f(x)$</td><td>递增 ↑</td><td>递减 ↓</td><td>递增 ↑</td></tr>
+</table>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>证明 $f(x)=x-\sin x$ 在 $(0,+\infty)$ 上严格递增。</p>
+<p><b>解：</b> $f'(x)=1-\cos x$。当 $x\in(0,+\infty)$ 且 $x\neq 2k\pi$ 时，$\cos x\lt 1$，故 $f'(x)>0$。在 $x=2k\pi$ 处 $f'(x)=0$，但逐段检验后可知 $f$ 在整个区间上仍严格递增。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">七、极值的第一充分条件</div>
+
+<div class="method-box">
+<div class="method-name">方法七：第一充分条件——一阶导数符号变化法</div>
+<div class="core-idea">核心思想：在驻点（或不可导点）的左右两侧，若 $f'(x)$ 的符号发生改变，则该点必为极值点。这是最常用、最可靠的极值判定方法。</div>
+
+<p><b>判定法则：</b> 设 $x_0$ 为 $f$ 的驻点或不可导点：</p>
+<ul>
+<li>若 $x\lt  x_0$ 时 $f'>0$，$x>x_0$ 时 $f'\lt 0$（<b>由正变负</b>）→ $x_0$ 为<b>极大值点</b>；</li>
+<li>若 $x\lt  x_0$ 时 $f'\lt 0$，$x>x_0$ 时 $f'>0$（<b>由负变正</b>）→ $x_0$ 为<b>极小值点</b>；</li>
+<li>若 $f'$ 符号不变（正正或负负）→ $x_0$ <b>不是</b>极值点。</li>
+</ul>
+
+<p><b>记忆口诀：</b> 左正右负是极大，左负右正是极小，同号非极值。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $f(x)=x^4-2x^2$ 的极值。</p>
+<p><b>解：</b> $f'(x)=4x^3-4x=4x(x-1)(x+1)$，驻点 $x=-1,0,1$。</p>
+<table>
+<tr><th>$x$</th><th>$(-\infty,-1)$</th><th>$(-1,0)$</th><th>$(0,1)$</th><th>$(1,+\infty)$</th></tr>
+<tr><td>$f'(x)$</td><td>$-$</td><td>$+$</td><td>$-$</td><td>$+$</td></tr>
+</table>
+<p>$x=-1$：由负变正 → 极小值点，$f(-1)=-1$；<br>
+$x=0$：由正变负 → 极大值点，$f(0)=0$；<br>
+$x=1$：由负变正 → 极小值点，$f(1)=-1$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $f(x)=|x-2|$ 在 $\mathbb{R}$ 上的极值。</p>
+<p><b>解：</b> $x=2$ 处不可导。当 $x\lt 2$ 时 $f'(x)=-1\lt 0$，当 $x>2$ 时 $f'(x)=1>0$。由负变正，故 $x=2$ 是<b>极小值点</b>，极小值为 $f(2)=0$。</p>
+<p class="note-text">注意：不可导点也可能是极值点！</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">八、极值的第二充分条件</div>
+
+<div class="method-box">
+<div class="method-name">方法八：第二充分条件——二阶导数符号法</div>
+<div class="core-idea">核心思想：当一阶导数不方便判断符号变化时，可用二阶导数来判定：若一阶导为零、二阶导不为零，则极值类型由二阶导的符号决定。</div>
+
+<p><b>判定法则：</b> 设 $f'(x_0)=0$，$f''(x_0)$ 存在：</p>
+<ul>
+<li>若 $f''(x_0)>0$ → $x_0$ 为<b>极小值点</b>；</li>
+<li>若 $f''(x_0)\lt 0$ → $x_0$ 为<b>极大值点</b>；</li>
+<li>若 $f''(x_0)=0$ → <b>无法判定</b>，需回到第一充分条件。</li>
+</ul>
+
+<p><b>记忆口诀：</b> 二阶正——开口向上（极小）；二阶负——开口向下（极大）；二阶零——此路不通。</p>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>当 $f''(x_0)=0$ 时，第二充分条件<b>失效</b>！此时只能用第一充分条件判断。例如 $f(x)=x^4$ 在 $x=0$ 处：$f'(0)=f''(0)=0$，但 $x=0$ 是极小值点（需通过一阶符号变化判定）。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $f(x)=x^3-3x^2-9x+5$ 的极值（用第二充分条件）。</p>
+<p><b>解：</b></p>
+<div class="formula-block">
+$$f'(x) = 3x^2-6x-9 = 3(x+1)(x-3),\quad \text{驻点 } x=-1,3$$
+$$f''(x) = 6x-6$$
+</div>
+<p>$f''(-1)=-12\lt 0 \Rightarrow x=-1$ 是极大值点，$f(-1)=10$；<br>
+$f''(3)=12>0 \Rightarrow x=3$ 是极小值点，$f(3)=-22$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>判断 $f(x)=x+\frac{1}{x}$（$x>0$）的极值。</p>
+<p><b>解：</b> $f'(x)=1-\frac{1}{x^2}$，驻点 $x=1$（$x>0$）。$f''(x)=\frac{2}{x^3}$，$f''(1)=2>0$，故 $x=1$ 是极小值点，极小值 $f(1)=2$。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第四篇 最大值与最小值——从局部到全局</div>
+
+<div class="section-title">九、闭区间上连续函数的最值</div>
+
+<div class="method-box">
+<div class="method-name">方法九：闭区间最值——三点比较法</div>
+<div class="core-idea">核心思想：闭区间上的连续函数必有最大值和最小值。最值只可能出现在三类点：(1) 驻点；(2) 不可导点；(3) 区间端点。</div>
+
+<p><b>求解步骤：</b></p>
+<ol>
+<li><b>步骤1：</b> 求出 $(a,b)$ 内的所有驻点和不可导点。</li>
+<li><b>步骤2：</b> 计算这些点以及端点 $a$、$b$ 处的函数值。</li>
+<li><b>步骤3：</b> 比较所有函数值：最大者为最大值，最小者为最小值。</li>
+</ol>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>最容易忽略的是<b>区间端点</b>！驻点处取得极大值，不代表它就是整个区间上的最大值——端点值可能更大。务必把端点值代入比较。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $f(x)=x^3-3x+2$ 在 $[-2,2]$ 上的最大值和最小值。</p>
+<p><b>解：</b> $f'(x)=3x^2-3=3(x-1)(x+1)$，驻点 $x=-1,1$。</p>
+<table>
+<tr><th>$x$</th><th>$-2$</th><th>$-1$</th><th>$1$</th><th>$2$</th></tr>
+<tr><td>$f(x)$</td><td>$0$</td><td>$4$</td><td>$0$</td><td>$4$</td></tr>
+</table>
+<p>最大值 $4$（$x=-1$ 和 $x=2$），最小值 $0$（$x=-2$ 和 $x=1$）。</p>
+<p class="note-text">注意：最大值出现在驻点（$-1$）和端点（$2$）两处，若忘记算端点则会遗漏 $x=2$ 处的最大值。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $f(x)=x+\sqrt{1-x}$ 在 $[0,1]$ 上的最值。</p>
+<p><b>解：</b> $f'(x)=1-\dfrac{1}{2\sqrt{1-x}}$。令 $f'(x)=0$ 得 $\sqrt{1-x}=\dfrac{1}{2}$，即 $x=\dfrac{3}{4}$。</p>
+<p>计算：$f(0)=1$，$f(\frac{3}{4})=\frac{3}{4}+\frac{1}{2}=\frac{5}{4}$，$f(1)=1$。</p>
+<p>最大值 $\frac{5}{4}$（$x=\frac{3}{4}$），最小值 $1$（$x=0$ 和 $x=1$）。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十、实际应用中的最值问题</div>
+
+<div class="method-box">
+<div class="method-name">方法十：实际最值建模——从题意到函数</div>
+<div class="core-idea">核心思想：将实际问题转化为数学模型：确定目标函数和约束条件 → 建立一元函数 → 用导数求最值。</div>
+
+<p><b>四步解题策略：</b></p>
+<ol>
+<li><b>审题：</b> 理解问题，明确目标量和变量。</li>
+<li><b>建模：</b> 写出目标函数 $y=f(x)$，如有约束则消元化为一元函数。</li>
+<li><b>求导：</b> 求驻点，判定极值类型。</li>
+<li><b>验证：</b> 根据实际意义确认是否为最值（通常驻点唯一时即为所求）。</li>
+</ol>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<ul>
+<li>必须考虑<b>实际定义域</b>（长度不能为负、面积不能超限等）。</li>
+<li>驻点唯一且实际问题存在最值 → 该驻点即为所求（无需二阶导验证）。</li>
+</ul>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>要做一个容积为 $V$ 的无盖圆柱形容器，底面半径 $r$ 和高 $h$ 各为多少时用料最省？</p>
+<p><b>解：</b> $V=\pi r^2 h$，故 $h=\dfrac{V}{\pi r^2}$。表面积：</p>
+<div class="formula-block">$$S=\pi r^2+2\pi rh=\pi r^2+\frac{2V}{r}$$</div>
+<div class="formula-block">$$S'(r)=2\pi r-\frac{2V}{r^2}=0 \Rightarrow r^3=\frac{V}{\pi},\quad r=\sqrt[3]{\frac{V}{\pi}}$$</div>
+<p>此时 $h=\dfrac{V}{\pi r^2}=r$。结论：$r=h=\sqrt[3]{\dfrac{V}{\pi}}$ 时用料最省。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>从边长为 $a$ 的正方形铁皮四个角各剪去一个小正方形，折成无盖盒子。剪去的小正方形边长为多少时，盒子容积最大？</p>
+<p><b>解：</b> 设剪去边长为 $x$，盒子边长 $a-2x$，容积 $V=x(a-2x)^2$（$0\lt  x\lt \frac{a}{2}$）。</p>
+<div class="formula-block">$$V'(x)=(a-2x)^2-4x(a-2x)=(a-2x)(a-6x)=0$$</div>
+<p>得 $x=\frac{a}{2}$（实际定义域外，舍）或 $x=\frac{a}{6}$。$x=\frac{a}{6}$ 为唯一驻点，故为最大值点。最大容积 $V_{\max}=\frac{2a^3}{27}$。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第五篇 曲线的凹凸性与拐点</div>
+
+<div class="section-title">十一、凹凸性判定</div>
+
+<div class="method-box">
+<div class="method-name">方法十一：二阶导数判定凹凸性</div>
+<div class="core-idea">核心思想：二阶导数 $f''(x)$ 描述了一阶导数 $f'(x)$ 的变化率，即斜率的变化趋势：$f''(x)>0$ 斜率递增（凹/上凹），$f''(x)\lt 0$ 斜率递减（凸/下凹）。</div>
+
+<p><b>判定步骤：</b></p>
+<ol>
+<li><b>步骤1：</b> 求 $f''(x)$。</li>
+<li><b>步骤2：</b> 求 $f''(x)=0$ 的点及 $f''(x)$ 不存在的点。</li>
+<li><b>步骤3：</b> 用这些点将定义域分区。</li>
+<li><b>步骤4：</b> 在各区间取测试点判断 $f''(x)$ 的正负。</li>
+<li>若 $f''(x)>0$ → <b>凹</b>（曲线呈碗形，可盛水）；若 $f''(x)\lt 0$ → <b>凸</b>（曲线呈扣碗形）。</li>
+</ol>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>讨论 $f(x)=x^3-6x^2+9x$ 的凹凸区间。</p>
+<p><b>解：</b> $f'(x)=3x^2-12x+9$，$f''(x)=6x-12=6(x-2)$。</p>
+<ul>
+<li>$x\lt 2$：$f''(x)\lt 0$ → 凸区间 $(-\infty,2)$。</li>
+<li>$x>2$：$f''(x)>0$ → 凹区间 $(2,+\infty)$。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>判断 $f(x)=\ln x$（$x>0$）的凹凸性。</p>
+<p><b>解：</b> $f'(x)=\dfrac{1}{x}$，$f''(x)=-\dfrac{1}{x^2}\lt 0$（$x>0$），故函数在 $(0,+\infty)$ 上<b>恒为凸</b>。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十二、拐点的求法</div>
+
+<div class="method-box">
+<div class="method-name">方法十二：拐点——凹凸性改变之处</div>
+<div class="core-idea">核心思想：拐点是曲线凹凸性发生改变的点，即 $f''(x)$ 的符号改变点。拐点是曲线上的点 $(x_0,f(x_0))$，需同时写出横坐标和纵坐标。</div>
+
+<p><b>判定法则：</b> 设 $f''(x_0)=0$ 或 $f''(x_0)$ 不存在：</p>
+<ul>
+<li>若 $f''(x)$ 在 $x_0$ 左右两侧<b>符号相反</b> → $(x_0,f(x_0))$ 是拐点。</li>
+<li>若 $f''(x)$ 在 $x_0$ 左右两侧<b>符号相同</b> → $(x_0,f(x_0))$ <b>不是</b>拐点。</li>
+</ul>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<ul>
+<li>$f''(x_0)=0$ 是拐点的<b>必要条件</b>，但不是<b>充分条件</b>！</li>
+<li>反例：$f(x)=x^4$，$f''(0)=0$ 但 $(0,0)$ 不是拐点（恒凹，符号未改变）。</li>
+<li>拐点必须写成坐标 $(x_0, f(x_0))$ 形式，只写 $x$ 值是常见扣分点。</li>
+</ul>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $f(x)=x^4-6x^3+12x^2$ 的凹凸区间和拐点。</p>
+<p><b>解：</b></p>
+<div class="formula-block">$$f'(x) = 4x^3-18x^2+24x,\quad f''(x) = 12x^2-36x+24 = 12(x-1)(x-2)$$</div>
+<p>$f''(x)=0$ 得 $x=1,2$。</p>
+<ul>
+<li>$x\lt 1$：$f''>0$（凹）；$1\lt  x\lt  2$：$f''\lt 0$（凸）；$x>2$：$f''>0$（凹）。</li>
+<li>拐点：$(1,7)$ 和 $(2,16)$。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>判断 $y=\sqrt[3]{x}$ 是否有拐点。</p>
+<p><b>解：</b> $y'=\frac{1}{3}x^{-2/3}$，$y''=-\frac{2}{9}x^{-5/3}$。$x=0$ 处 $y''$ 不存在。</p>
+<p>$x\lt 0$ 时 $y''>0$（凹），$x>0$ 时 $y''\lt 0$（凸），符号改变，故 $(0,0)$ 是拐点。</p>
+<p class="note-text">注意：$f''(x_0)$ 不存在也可能是拐点！</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第六篇 渐近线——函数在无穷远与间断处的趋势</div>
+
+<div class="section-title">十三、水平渐近线与垂直渐近线</div>
+
+<div class="method-box">
+<div class="method-name">方法十三：水平渐近线与垂直渐近线的求法</div>
+<div class="core-idea">核心思想：水平渐近线由无穷远处的极限确定；垂直渐近线由函数的无定义点（间断点）处的极限确定。</div>
+
+<p><b>水平渐近线：</b> 若 $\displaystyle\lim_{x\to +\infty}f(x)=A$ 或 $\displaystyle\lim_{x\to -\infty}f(x)=A$（$A$ 为有限常数），则 $y=A$ 是水平渐近线。</p>
+
+<p><b>垂直渐近线：</b> 若 $\displaystyle\lim_{x\to x_0^+}f(x)=\pm\infty$ 或 $\displaystyle\lim_{x\to x_0^-}f(x)=\pm\infty$，则 $x=x_0$ 是垂直渐近线。</p>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>垂直渐近线只能出现在函数的<b>间断点</b>处（分母为零、$\ln 0$、$\tan\frac{\pi}{2}$ 等处）。一个函数可以有多条垂直渐近线，$x\to +\infty$ 和 $x\to -\infty$ 也可能有不同的水平渐近线。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $y=\dfrac{x}{x-1}$ 的渐近线。</p>
+<p><b>解：</b></p>
+<ul>
+<li>水平：$\displaystyle\lim_{x\to\infty}\frac{x}{x-1}=1$，故 $y=1$ 是水平渐近线。</li>
+<li>垂直：$\displaystyle\lim_{x\to 1}\frac{x}{x-1}=\infty$，故 $x=1$ 是垂直渐近线。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $y=\ln x$ 的渐近线。</p>
+<p><b>解：</b></p>
+<ul>
+<li>$\displaystyle\lim_{x\to +\infty}\ln x=+\infty$，无水平渐近线。</li>
+<li>$\displaystyle\lim_{x\to 0^+}\ln x=-\infty$，故 $x=0$ 是垂直渐近线。</li>
+</ul>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十四、斜渐近线</div>
+
+<div class="method-box">
+<div class="method-name">方法十四：斜渐近线的求法</div>
+<div class="core-idea">核心思想：当 $\lim_{x\to\infty}f(x)=\infty$ 不存在水平渐近线时，应进一步检查是否存在斜渐近线 $y=kx+b$。</div>
+
+<p><b>求解公式：</b> 若以下极限存在且 $k\neq 0$：</p>
+<div class="formula-block">$$k = \lim_{x\to\infty}\frac{f(x)}{x},\qquad
+b = \lim_{x\to\infty}[f(x)-kx]$$</div>
+<p>则 $y=kx+b$ 是函数图像的一条斜渐近线。需分别考虑 $x\to +\infty$ 和 $x\to -\infty$。</p>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>若已有水平渐近线（$x\to\infty$ 时 $f(x)$ 趋近常数），则同一方向<b>不存在</b>斜渐近线。先检查水平渐近线——有水平则不需求同方向的斜渐近线。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $y=x+\dfrac{1}{x}$ 的渐近线。</p>
+<p><b>解：</b></p>
+<div class="formula-block">$$k=\lim_{x\to\infty}\frac{x+1/x}{x}=1\quad (x\to\pm\infty\text{ 一致})$$</div>
+<div class="formula-block">$$b=\lim_{x\to\infty}\left[x+\frac{1}{x}-x\right]=\lim_{x\to\infty}\frac{1}{x}=0$$</div>
+<p>斜渐近线：$y=x$。另有垂直渐近线 $x=0$（分母为零点）。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $y=\dfrac{x^2}{x+1}$ 的渐近线。</p>
+<p><b>解：</b></p>
+<div class="formula-block">$$k=\lim_{x\to\infty}\frac{x^2/(x+1)}{x}=\lim_{x\to\infty}\frac{x}{x+1}=1$$</div>
+<div class="formula-block">$$b=\lim_{x\to\infty}\left[\frac{x^2}{x+1}-x\right]=\lim_{x\to\infty}\frac{x^2-x(x+1)}{x+1}=\lim_{x\to\infty}\frac{-x}{x+1}=-1$$</div>
+<p>斜渐近线：$y=x-1$。另有垂直渐近线 $x=-1$。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第七篇 函数作图——综合运用所有工具</div>
+
+<div class="section-title">十五、函数作图标准流程</div>
+
+<div class="method-box">
+<div class="method-name">方法十五：函数作图的七步标准流程</div>
+<div class="core-idea">核心思想：函数作图是导数应用的综合体现。按照"定义域→对称性→单调极值→凹凸拐点→渐近线→关键点→描图"的流程，逐步构建函数图像。</div>
+
+<p><b>标准作图流程：</b></p>
+<ol>
+<li><b>步骤1——确定定义域：</b> 找出分母为零、根号下负数、对数中非正数等限制。</li>
+<li><b>步骤2——检查对称性：</b> 奇偶性、周期性可简化后续工作。</li>
+<li><b>步骤3——求一阶导：</b> 确定单调区间和极值点。</li>
+<li><b>步骤4——求二阶导：</b> 确定凹凸区间和拐点。</li>
+<li><b>步骤5——求渐近线：</b> 水平、垂直、斜渐近线三类逐一检查。</li>
+<li><b>步骤6——计算关键点：</b> 与坐标轴交点、极值点、拐点等。</li>
+<li><b>步骤7——描点连线：</b> 根据上述信息在坐标系中描出关键点并连线。</li>
+</ol>
+
+<div class="key-box">
+<div class="key-title">✅ 速记口诀</div>
+<p>定义域，对称性；一阶求极值，二阶看拐点；渐近线描轮廓，关键点定形态。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>描绘函数 $y=\dfrac{x}{x^2-1}$ 的图像（给出主要特征即可）。</p>
+<p><b>解：</b></p>
+<ol>
+<li>定义域：$x\neq \pm 1$；奇函数：关于原点对称。</li>
+<li>$y'=-\dfrac{x^2+1}{(x^2-1)^2}\lt 0$，恒递减。</li>
+<li>$y''=\dfrac{2x(x^2+3)}{(x^2-1)^3}$，拐点 $(0,0)$。</li>
+<li>渐近线：$\displaystyle\lim_{x\to\infty}y=0$，水平 $y=0$；垂直 $x=\pm 1$。</li>
+</ol>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>分析 $f(x)=e^{-x^2}$ 的图像特征。</p>
+<p><b>解：</b></p>
+<ol>
+<li>定义域 $\mathbb{R}$；偶函数，对称于 $y$ 轴。</li>
+<li>$f'(x)=-2xe^{-x^2}$，驻点 $x=0$。$x\lt 0$ 递增，$x>0$ 递减，$x=0$ 极大值点，$f(0)=1$。</li>
+<li>$f''(x)=2(2x^2-1)e^{-x^2}$，拐点 $x=\pm\frac{1}{\sqrt{2}}$。</li>
+<li>$\displaystyle\lim_{x\to\pm\infty}f(x)=0$，水平渐近线 $y=0$。</li>
+</ol>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第八篇 进阶篇——方程根讨论与不等式证明</div>
+
+<div class="section-title">十六、方程根的讨论</div>
+
+<div class="method-box">
+<div class="method-name">方法十六：利用单调性与零点定理讨论方程根</div>
+<div class="core-idea">核心思想：利用函数的单调性和零点定理，可以确定方程 $f(x)=0$ 的根的个数及所在区间。存在性靠零点定理，唯一性靠单调性。</div>
+
+<p><b>核心工具组合：</b></p>
+<ol>
+<li><b>零点定理（介值定理）：</b> 若 $f$ 在 $[a,b]$ 上连续且 $f(a)f(b)\lt 0$，则 $(a,b)$ 内至少有一个根（<b>保证存在性</b>）。</li>
+<li><b>单调性唯一性：</b> 若 $f$ 在区间上严格单调，则根<b>至多一个</b>（<b>保证唯一性</b>）。</li>
+<li><b>结合使用：</b> 零点定理 + 单调性 → 恰好有一个根。</li>
+</ol>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>仅用零点定理只能确定"至少有一个根"，无法说明根的唯一性。必须结合单调性才能下结论"恰好有一个根"。考试中缺少任何一半都会被扣分。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>证明方程 $x^3-3x+1=0$ 在 $(0,1)$ 内恰有一个实根。</p>
+<p><b>解：</b> 设 $f(x)=x^3-3x+1$。</p>
+<p><b>存在性：</b> $f(0)=1>0$，$f(1)=-1\lt 0$，由零点定理知 $(0,1)$ 内至少有一个根。</p>
+<p><b>唯一性：</b> $f'(x)=3x^2-3=3(x-1)(x+1)$，在 $(0,1)$ 内 $f'(x)\lt 0$，函数严格递减，故根唯一。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>讨论方程 $\ln x = x-2$ 的实根个数。</p>
+<p><b>解：</b> 设 $f(x)=\ln x - x + 2$（$x>0$）。</p>
+<div class="formula-block">$$f'(x)=\frac{1}{x}-1,\quad \text{驻点 } x=1$$</div>
+<p>$0\lt  x\lt 1$ 时 $f'>0$ 递增，$x>1$ 时 $f'\lt 0$ 递减。</p>
+<p>$f(1)=1>0$；$\displaystyle\lim_{x\to 0^+}f(x)=-\infty$；$\displaystyle\lim_{x\to +\infty}f(x)=-\infty$。</p>
+<p>故在 $(0,1)$ 和 $(1,+\infty)$ 各恰有一个根，总共<b>两个实根</b>。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十七、利用单调性证明不等式</div>
+
+<div class="method-box">
+<div class="method-name">方法十七：构造函数法证明不等式</div>
+<div class="core-idea">核心思想：利用一阶导数的符号确定函数的单调性，进而证明函数值的大小关系。核心技巧是构造辅助函数 $F(x)=f(x)-g(x)$，将不等式转化为函数值的比较。</div>
+
+<p><b>证明策略——两类常见题型：</b></p>
+<p><b>类型一：$f(x)>g(x)$ 型</b></p>
+<p>构造 $F(x)=f(x)-g(x)$，证明 $F(x)>0$。求 $F'(x)$，判断单调性；若 $F(a)=0$ 且 $F$ 递增（$x>a$），则 $F(x)>0$ 得证。</p>
+
+<p><b>类型二：$f(x)>A$ 型（$A$ 为常数）</b></p>
+<p>证明 $f$ 的最小值 $>A$。即求 $f$ 在给定区间上的最值。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>证明：当 $x>0$ 时，$e^x > 1+x$。</p>
+<p><b>解：</b> 设 $F(x)=e^x-1-x$，则 $F(0)=0$，$F'(x)=e^x-1>0$（$x>0$）。</p>
+<p>故 $F$ 在 $(0,+\infty)$ 上严格递增，$x>0$ 时 $F(x)>F(0)=0$，即 $e^x>1+x$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>证明：当 $x>0$ 时，$\sin x \lt  x$。</p>
+<p><b>解：</b> 设 $F(x)=x-\sin x$，$F(0)=0$，$F'(x)=1-\cos x \ge 0$。</p>
+<p>$F$ 递增，$x>0$ 时 $F(x)>F(0)=0$，即 $x>\sin x$。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第九篇 综合策略篇——方法选择与实战思路</div>
+
+<div class="section-title">十八、导数应用方法选择指南</div>
+
+<div class="key-box">
+<div class="key-title">✅ 导数应用决策流程</div>
+<p>拿到一道导数应用题，按以下分类快速定位方法：</p>
+<ol>
+<li><b>I. 纯计算类（求导、切线、法线）</b><br>
+→ 直接用定义/公式/链式法则。先写切点坐标！</li>
+<li><b>II. 分析性质类（单调、极值、凹凸、拐点）</b><br>
+→ 一阶导定单调极值（第一充分条件最可靠）→ 二阶导定凹凸拐点。</li>
+<li><b>III. 求最值类</b><br>
+→ 闭区间：比驻点 + 不可导点 + 端点。<br>
+→ 实际应用：建模 → 一元化 → 求导 → 验证。</li>
+<li><b>IV. 渐近线类</b><br>
+→ 先水平 → 后垂直 → 再斜渐近（有水平则同方向不需求斜）。</li>
+<li><b>V. 证明类（不等式、根的存在性）</b><br>
+→ 构造函数 → 用单调性 / 中值定理 / 零点定理。</li>
+<li><b>VI. 函数作图类</b><br>
+→ 以上所有方法的综合运用，按七步流程。</li>
+</ol>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十九、综合习题</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 1</div>
+<p>已知函数 $f(x)=\dfrac{x^2+ax+b}{x-1}$ 在 $x=3$ 处取得极值，且 $\displaystyle\lim_{x\to 1}f(x)=\infty$。</p>
+<p>(1) 求 $a$ 和 $b$ 的值；(2) 判断 $x=3$ 处是极大值还是极小值。</p>
+<p><b>解：</b></p>
+<p>(1) 由 $\displaystyle\lim_{x\to 1}f(x)=\infty$ 知 $x=1$ 处分母为零而分子非零，即 $1+a+b\neq 0$。利用极值条件 $f'(3)=0$ 联立求解得 $a=-5$，$b=4$。</p>
+<p>(2) $f(x)=\dfrac{x^2-5x+4}{x-1}=\dfrac{(x-1)(x-4)}{x-1}=x-4$（$x\neq 1$）。$f'(x)=1>0$，恒递增，故 $x=3$ <b>并非极值点</b>！</p>
+<div class="tip-box">
+<div class="tip-title">⚠ 陷阱启示</div>
+<p>若分子含因子 $(x-1)$，则 $x=1$ 为可去间断点，原函数可约简为一个线性函数 $x-4$（$x\neq 1$），此时 $f'(x)$ 恒为正，任何点都不是极值点。极值条件需要排除可去间断点的干扰！</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 2</div>
+<p>设函数 $f(x)$ 在 $[0,1]$ 上二阶可导，$f(0)=f(1)=0$，且 $\displaystyle\max_{x\in[0,1]}f(x)=2$。证明：存在 $\xi\in(0,1)$，使得 $f''(\xi)\le -8$。</p>
+<p><b>解：</b> 设 $f$ 在 $x_0\in(0,1)$ 处取得最大值 $2$，则 $f(x_0)=2$，$f'(x_0)=0$。</p>
+<p>在 $[0,x_0]$ 上用拉格朗日定理：$f'(\eta_1)=\dfrac{2}{x_0}$，$\eta_1\in(0,x_0)$；</p>
+<p>在 $[x_0,1]$ 上用拉格朗日定理：$f'(\eta_2)=\dfrac{-2}{1-x_0}$，$\eta_2\in(x_0,1)$。</p>
+<p>对 $f'$ 在 $[\eta_1,\eta_2]$ 上用拉格朗日定理：</p>
+<div class="formula-block">$$f''(\xi) = \frac{f'(\eta_2)-f'(\eta_1)}{\eta_2-\eta_1} = \frac{-\frac{2}{1-x_0}-\frac{2}{x_0}}{\eta_2-\eta_1} \le -8$$</div>
+<p>（利用均值不等式 $\frac{1}{x_0}+\frac{1}{1-x_0}\ge 4$，以及 $\eta_2-\eta_1\lt 1$。）</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 3</div>
+<p>求函数 $f(x)=x\ln x$ 的单调区间、极值、凹凸区间、拐点和渐近线，并描述大致图像。</p>
+<p><b>解：</b> 定义域：$(0,+\infty)$。</p>
+<p>$f'(x)=\ln x+1$，驻点 $x=\dfrac{1}{e}$。$0\lt  x\lt \dfrac{1}{e}$ 时递减，$x>\dfrac{1}{e}$ 时递增。极小值 $f(\frac{1}{e})=-\dfrac{1}{e}$。</p>
+<p>$f''(x)=\dfrac{1}{x}>0$，恒凹，无拐点。</p>
+<p>$\displaystyle\lim_{x\to 0^+}x\ln x = 0$（洛必达），$\displaystyle\lim_{x\to +\infty}f(x)=+\infty$，无渐近线。</p>
+<p>图像：从 $(0,0)$ 处出发（$x\to 0^+$），先递减至 $(\frac{1}{e},-\frac{1}{e})$，后递增至 $+\infty$，恒凹呈"微笑"形。</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">二十、专升本常见题型速查表</div>
+
+<div class="key-box">
+<div class="key-title">导数应用题型与方法速查</div>
+<table class="speed-table">
+<tr><th>应用领域</th><th>核心工具</th><th>关键公式/方法</th><th>易错点</th></tr>
+<tr><td>切线/法线</td><td>导数几何意义</td><td>$y-f(x_0)=f'(x_0)(x-x_0)$</td><td>先写切点坐标</td></tr>
+<tr><td>单调区间</td><td>$f'(x)$ 符号</td><td>$f'>0$ 增；$f'\lt 0$ 减</td><td>驻点+不可导点都要找</td></tr>
+<tr><td>极值（第一充分）</td><td>一阶导符号变化</td><td>左正右负极大；左负右正极小</td><td>$f'=0$ 不一定极值</td></tr>
+<tr><td>极值（第二充分）</td><td>二阶导符号</td><td>$f''>0$ 极小；$f''\lt 0$ 极大</td><td>$f''=0$ 时失效</td></tr>
+<tr><td>最值（闭区间）</td><td>三点比较法</td><td>比驻点+不可导点+端点</td><td>别忘记端点</td></tr>
+<tr><td>最值（应用）</td><td>建模+求导</td><td>建立一元目标函数</td><td>注意实际定义域</td></tr>
+<tr><td>凹凸性</td><td>$f''(x)$ 符号</td><td>$f''>0$ 凹；$f''\lt 0$ 凸</td><td>区分凹/凸定义</td></tr>
+<tr><td>拐点</td><td>$f''$ 符号变化</td><td>写 $(x_0,f(x_0))$ 坐标形式</td><td>$f''=0$ 不一定拐点</td></tr>
+<tr><td>水平渐近线</td><td>$\displaystyle\lim_{x\to\infty}f(x)$</td><td>$y=A$（$A$ 有限常数）</td><td>可有多条</td></tr>
+<tr><td>垂直渐近线</td><td>间断点处极限</td><td>$x=x_0$（$\lim f=\infty$）</td><td>只出现在间断点</td></tr>
+<tr><td>斜渐近线</td><td>$k=\lim f/x$，$b=\lim(f-kx)$</td><td>$y=kx+b$</td><td>有水平则不需求斜</td></tr>
+<tr><td>函数作图</td><td>综合以上所有</td><td>7步标准流程</td><td>步骤缺一不可</td></tr>
+<tr><td>方程根讨论</td><td>零点定理+单调性</td><td>存在性+唯一性</td><td>零点定理不保证唯一</td></tr>
+<tr><td>不等式证明</td><td>构造函数+单调性</td><td>$F(x)=f-g$ → 求导判单调</td><td>验证端点 $F(a)=0$</td></tr>
+<tr><td>中值定理</td><td>罗尔/拉格朗日</td><td>三条件 → 结论</td><td>条件缺一不可</td></tr>
+</table>
+</div>
+
+<div class="footer">
+导数应用的核心原则：求导是基础，单调性是核心，极值最值是重点，渐近线拐点需细心。
+</div>
+
+</body>
+</html>

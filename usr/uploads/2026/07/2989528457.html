@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>专升本高等数学 · 概率论方法全面总结</title>
+
+<!-- MathJax 配置 -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    tags: 'none'
+  },
+  svg: { fontCache: 'global' },
+  startup: {
+    pageReady: () => {
+      return MathJax.startup.defaultPageReady().then(() => {
+        window.__mathjaxReady = true;
+      });
+    }
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'SimSun', serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+  background: #fff;
+  padding: 40px 50px;
+  max-width: 210mm;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #003366;
+  text-align: center;
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #006699;
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.tagline {
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 4px;
+}
+
+.part-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #003366;
+  border-bottom: 2px solid #003366;
+  padding-bottom: 4px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  page-break-before: always;
+}
+.part-title:first-of-type { page-break-before: avoid; }
+
+.section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #006699;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-left: 4px solid #006699;
+  padding-left: 10px;
+}
+
+.method-box {
+  background: #f0f7ff;
+  border: 2px solid #006699;
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+.method-box .method-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 10px;
+}
+.method-box .core-idea {
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 6px;
+}
+.method-box p, .method-box li {
+  margin-bottom: 6px;
+}
+.method-box ul, .method-box ol {
+  margin-left: 2em;
+  margin-bottom: 8px;
+}
+.method-box ul li, .method-box ol li {
+  margin-bottom: 4px;
+}
+
+.example-box {
+  background: #fff5f5;
+  border: 1.5px solid #cc3300;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.example-box .example-title {
+  font-weight: 700;
+  color: #cc3300;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.example-box p { margin-bottom: 6px; }
+
+.tip-box {
+  background: #fffbe6;
+  border: 1.5px solid #996600;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.tip-box .tip-title {
+  font-weight: 700;
+  color: #996600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.key-box {
+  background: #f0fff0;
+  border: 1.5px solid #007844;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.key-box .key-title {
+  font-weight: 700;
+  color: #007844;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+table th {
+  background: #006699;
+  color: white;
+  font-weight: 700;
+  padding: 8px 12px;
+  text-align: left;
+}
+table td {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+}
+table tr:nth-child(even) td { background: #f5f5f5; }
+
+.speed-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+.speed-table th {
+  background: #006699;
+  color: white;
+  font-weight: 700;
+  padding: 10px 12px;
+  text-align: center;
+}
+.speed-table td {
+  padding: 10px 12px;
+  border: 1px solid #aaa;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.formula-block {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.note-text {
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+}
+
+.bold { font-weight: 700; }
+.underline { text-decoration: underline; }
+.highlight { color: #cc3300; font-weight: 700; }
+
+.footer {
+  text-align: center;
+  font-size: 16px;
+  color: #006699;
+  font-weight: 700;
+  margin-top: 60px;
+  padding: 20px;
+  border-top: 2px solid #003366;
+}
+
+@media print {
+  body { padding: 20px 30px; }
+  .part-title { page-break-before: always; }
+  .method-box, .example-box { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<h1>专升本高等数学</h1>
+<div class="subtitle">概率论方法全面总结</div>
+<div class="tagline">由浅入深 · 逐步扩展 · 逻辑通顺 · 条理清晰</div>
+
+<div class="tip-box">
+<div class="tip-title">📖 使用说明</div>
+<p>本文档系统梳理专升本概率论的全部核心方法，按照从基础到进阶的逻辑编排。每个方法配有典型习题与详细解析，建议按顺序学习，循序渐进。</p>
+<p><b>符号约定：</b> $P(A)$ 表示事件 $A$ 的概率，$\overline{A}$ 表示 $A$ 的对立事件，$A \cup B$ 表示并事件，$A \cap B$（简记 $AB$）表示交事件，$E(X)$ 表示期望，$D(X)$ 表示方差，$\sim$ 表示"服从某分布"。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第一篇 基础篇——随机事件与概率</div>
+
+<div class="section-title">一、古典概型</div>
+
+<div class="method-box">
+<div class="method-name">方法一：古典概型</div>
+<div class="core-idea">核心思想：若试验满足有限性（样本点有限）与等可能性（每个样本点等概率），则用古典概型公式直接计算概率。</div>
+
+<p><b>计算公式：</b></p>
+<div class="formula-block">$$P(A) = \frac{\text{事件 } A \text{ 包含的样本点数}}{\text{样本空间 } \Omega \text{ 的样本点总数}} = \frac{k}{n}$$</div>
+
+<p><b>排列组合工具：</b></p>
+<ul>
+<li>排列：$A_n^k = \dfrac{n!}{(n-k)!}$（有序选取 $k$ 个）</li>
+<li>组合：$C_n^k = \binom{n}{k} = \dfrac{n!}{k!(n-k)!}$（无序选取 $k$ 个）</li>
+<li>可重排列：$n^k$（可重复选取 $k$ 个，有序）</li>
+<li>全排列：$n!$</li>
+</ul>
+
+<p><b>解题步骤：</b></p>
+<ol>
+<li>明确试验的样本空间 $\Omega$，确认等可能性。</li>
+<li>计算 $n = |\Omega|$（总样本点数）。</li>
+<li>计算 $k = |A|$（事件 $A$ 的样本点数）。</li>
+<li>代入 $P(A) = k / n$。</li>
+</ol>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<ul>
+<li><b>等可能性是前提</b>：若不等可能，古典概型公式不适用。</li>
+<li><b>排列与组合的选择</b>：有序用排列，无序用组合。混淆会导致重复或遗漏。</li>
+<li><b>分母分子要统一</b>：同一题中，计算 $n$ 和 $k$ 的"模型"必须一致（要么都排列，要么都组合）。</li>
+</ul>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>袋中有 5 个白球、3 个红球，从中任取 3 个，求恰好取到 2 个白球 1 个红球的概率。</p>
+<p><b>解：</b> 样本空间：从 8 个球中任取 3 个，$n = C_8^3 = 56$。</p>
+<p>事件 $A$：2 白 1 红，$k = C_5^2 \times C_3^1 = 10 \times 3 = 30$。</p>
+<div class="formula-block">$$P(A) = \frac{30}{56} = \frac{15}{28}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>将 3 封信随机投入 4 个信箱，求恰有 2 封信投入同一信箱的概率。</p>
+<p><b>解：</b> 每封信独立选信箱，样本空间 $n = 4^3 = 64$。</p>
+<p>事件 $A$：恰有 2 封在同一信箱，第 3 封在不同信箱。</p>
+<p>先选哪 2 封在一起：$C_3^2 = 3$；再选信箱：4 个；第 3 封选不同信箱：3 个。</p>
+<div class="formula-block">$$k = 3 \times 4 \times 3 = 36, \quad P(A) = \frac{36}{64} = \frac{9}{16}$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">二、加法公式与概率性质</div>
+
+<div class="method-box">
+<div class="method-name">方法二：加法公式与概率性质</div>
+<div class="core-idea">核心思想：利用概率的基本性质和加法公式，将复杂事件的概率分解为简单事件的概率。</div>
+
+<p><b>基本性质：</b></p>
+<ul>
+<li>$0 \le P(A) \le 1$，$P(\Omega) = 1$，$P(\emptyset) = 0$。</li>
+<li>若 $A \subset B$，则 $P(A) \le P(B)$。</li>
+<li>$P(\overline{A}) = 1 - P(A)$。</li>
+</ul>
+
+<p><b>加法公式：</b></p>
+<div class="formula-block">$$P(A \cup B) = P(A) + P(B) - P(AB)$$</div>
+<div class="formula-block">$$P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(AB) - P(AC) - P(BC) + P(ABC)$$</div>
+
+<p><b>常用技巧：</b></p>
+<ul>
+<li>对立事件转化：$P(A) = 1 - P(\overline{A})$，当 $P(\overline{A})$ 更易求时使用。</li>
+<li>事件分解：$A = AB \cup A\overline{B}$，故 $P(A) = P(AB) + P(A\overline{B})$。</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>已知 $P(A) = 0.4$，$P(B) = 0.3$，$P(A \cup B) = 0.6$，求 $P(A\overline{B})$。</p>
+<p><b>解：</b> 先求 $P(AB)$：</p>
+<div class="formula-block">$$P(AB) = P(A) + P(B) - P(A \cup B) = 0.4 + 0.3 - 0.6 = 0.1$$</div>
+<p>再求 $P(A\overline{B})$：</p>
+<div class="formula-block">$$P(A\overline{B}) = P(A) - P(AB) = 0.4 - 0.1 = 0.3$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>甲乙丙三人独立破译密码，成功率分别为 $0.5, 0.6, 0.7$，求密码被破译的概率。</p>
+<p><b>解：</b> 设 $A, B, C$ 分别为甲、乙、丙成功。密码被破译 $= A \cup B \cup C$。</p>
+<p>用对立事件：$\overline{A \cup B \cup C} = \overline{A}\,\overline{B}\,\overline{C}$。</p>
+<div class="formula-block">$$P(\overline{A}) = 0.5, \quad P(\overline{B}) = 0.4, \quad P(\overline{C}) = 0.3$$</div>
+<p>由独立性：</p>
+<div class="formula-block">$$P(\overline{A}\,\overline{B}\,\overline{C}) = 0.5 \times 0.4 \times 0.3 = 0.06$$</div>
+<div class="formula-block">$$P(A \cup B \cup C) = 1 - 0.06 = 0.94$$</div>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第二篇 条件概率篇——条件概率与三大公式</div>
+
+<div class="section-title">三、条件概率与乘法公式</div>
+
+<div class="method-box">
+<div class="method-name">方法三：条件概率与乘法公式</div>
+<div class="core-idea">核心思想：在已知某事件发生的前提下，重新评估另一事件的概率。</div>
+
+<p><b>条件概率定义：</b> 设 $P(B) \gt 0$，</p>
+<div class="formula-block">$$P(A|B) = \frac{P(AB)}{P(B)}$$</div>
+
+<p><b>乘法公式：</b></p>
+<div class="formula-block">$$P(AB) = P(B) \cdot P(A|B) = P(A) \cdot P(B|A)$$</div>
+<p>推广到三个事件：</p>
+<div class="formula-block">$$P(ABC) = P(A) \cdot P(B|A) \cdot P(C|AB)$$</div>
+
+<p><b>条件概率的性质：</b></p>
+<ul>
+<li>$P(\cdot|B)$ 满足概率的公理（非负性、规范性、可列可加性）。</li>
+<li>$P(A|B) + P(\overline{A}|B) = 1$。</li>
+<li>条件概率 $\ne$ 无条件概率，但若 $A, B$ 独立则 $P(A|B) = P(A)$。</li>
+</ul>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>$P(A|B)$ 和 $P(B|A)$ 是不同的！$P(A|B)$ 是"已知 $B$ 发生，$A$ 的概率"；$P(B|A)$ 是"已知 $A$ 发生，$B$ 的概率"。混淆是考试中最常见的错误之一。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>袋中有 3 红 2 白共 5 球，无放回地取两次，每次取 1 球。已知第一次取到红球，求第二次也取到红球的概率。</p>
+<p><b>解：</b> 设 $A$ = 第一次红，$B$ = 第二次红。</p>
+<p>已知 $A$ 发生后，袋中剩 2 红 2 白，共 4 球：</p>
+<div class="formula-block">$$P(B|A) = \frac{2}{4} = \frac{1}{2}$$</div>
+<p><b>另法（用定义）：</b> $P(AB) = \dfrac{C_3^2}{C_5^2} = \dfrac{3}{10}$，$P(A) = \dfrac{3}{5}$，故 $P(B|A) = \dfrac{3/10}{3/5} = \dfrac{1}{2}$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>一批零件合格率 0.9，合格品中一级品率 0.8，求任取一件是一级品的概率。</p>
+<p><b>解：</b> 设 $A$ = 合格，$B$ = 一级品。</p>
+<p>$P(A) = 0.9$，$P(B|A) = 0.8$。一级品必为合格品，故 $B \subset A$，$AB = B$。</p>
+<div class="formula-block">$$P(B) = P(AB) = P(A) \cdot P(B|A) = 0.9 \times 0.8 = 0.72$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">四、全概率公式</div>
+
+<div class="method-box">
+<div class="method-name">方法四：全概率公式</div>
+<div class="core-idea">核心思想：将复杂事件分解为若干互斥的简单情形之和，分别计算再汇总。</div>
+
+<p><b>全概率公式：</b> 设 $B_1, B_2, \ldots, B_n$ 为样本空间的一个划分（互斥且并等于 $\Omega$，$P(B_i) \gt 0$），则对任意事件 $A$：</p>
+<div class="formula-block">$$P(A) = \sum_{i=1}^{n} P(B_i) \cdot P(A|B_i)$$</div>
+
+<p><b>适用场景：</b></p>
+<ul>
+<li>问题涉及"分阶段"或"分情况"（如：从不同箱中取球）。</li>
+<li>直接求 $P(A)$ 困难，但分情形后各 $P(A|B_i)$ 易求。</li>
+<li>已知各"原因"的概率 $P(B_i)$ 和各原因下"结果"的条件概率 $P(A|B_i)$。</li>
+</ul>
+
+<p><b>解题步骤：</b></p>
+<ol>
+<li>找出样本空间的一个划分 $B_1, \ldots, B_n$（"原因"或"阶段"）。</li>
+<li>计算各 $P(B_i)$（先验概率）。</li>
+<li>计算各 $P(A|B_i)$（条件概率）。</li>
+<li>代入全概率公式求和。</li>
+</ol>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>甲箱有 3 红 2 白，乙箱有 2 红 5 白。先掷一枚均匀骰子，若出现 1 或 2 则从甲箱取球，否则从乙箱取球。求取到红球的概率。</p>
+<p><b>解：</b> 设 $B_1$ = 选甲箱，$B_2$ = 选乙箱，$A$ = 取到红球。</p>
+<p>$P(B_1) = \dfrac{2}{6} = \dfrac{1}{3}$，$P(B_2) = \dfrac{4}{6} = \dfrac{2}{3}$。</p>
+<p>$P(A|B_1) = \dfrac{3}{5}$，$P(A|B_2) = \dfrac{2}{7}$。</p>
+<div class="formula-block">$$P(A) = \frac{1}{3} \times \frac{3}{5} + \frac{2}{3} \times \frac{2}{7} = \frac{1}{5} + \frac{4}{21} = \frac{41}{105}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>某工厂三条流水线生产同种产品，产量分别占总量的 20%, 30%, 50%，次品率分别为 2%, 1%, 3%。求产品的总次品率。</p>
+<p><b>解：</b> 设 $B_i$ = 第 $i$ 条线生产（$i=1,2,3$），$A$ = 次品。</p>
+<p>$P(B_1) = 0.2$，$P(B_2) = 0.3$，$P(B_3) = 0.5$。</p>
+<p>$P(A|B_1) = 0.02$，$P(A|B_2) = 0.01$，$P(A|B_3) = 0.03$。</p>
+<div class="formula-block">$$P(A) = 0.2 \times 0.02 + 0.3 \times 0.01 + 0.5 \times 0.03 = 0.004 + 0.003 + 0.015 = 0.022$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">五、贝叶斯公式</div>
+
+<div class="method-box">
+<div class="method-name">方法五：贝叶斯公式</div>
+<div class="core-idea">核心思想：已知"结果"发生了，反推各"原因"的概率——由果溯因。</div>
+
+<p><b>贝叶斯公式：</b> 设 $B_1, \ldots, B_n$ 为 $\Omega$ 的划分，$P(A) \gt 0$，则：</p>
+<div class="formula-block">$$P(B_k|A) = \frac{P(B_k) \cdot P(A|B_k)}{\sum_{i=1}^{n} P(B_i) \cdot P(A|B_i)} = \frac{P(B_k) \cdot P(A|B_k)}{P(A)}$$</div>
+
+<p><b>理解要点：</b></p>
+<ul>
+<li>$P(B_k)$ 是<b>先验概率</b>（试验前的知识）。</li>
+<li>$P(B_k|A)$ 是<b>后验概率</b>（观察到结果 $A$ 后的修正）。</li>
+<li>分母就是全概率公式求出的 $P(A)$。</li>
+</ul>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>贝叶斯公式的分子是全概率公式<b>求和中的第 $k$ 项</b>，分母是<b>整个求和</b>。考试中常犯的错误是忘记除以分母（即忘了除以 $P(A)$）。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>（接全概率公式习题2）已知取出的是次品，求它由第一条流水线生产的概率。</p>
+<p><b>解：</b> 由上题，$P(A) = 0.022$。</p>
+<div class="formula-block">$$P(B_1|A) = \frac{P(B_1) \cdot P(A|B_1)}{P(A)} = \frac{0.2 \times 0.02}{0.022} = \frac{0.004}{0.022} = \frac{2}{11} \approx 0.182$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>某疾病发病率为 0.001。一种检测方法对患病者阳性率 0.99，对健康者假阳性率 0.05。某人检测为阳性，求他确实患病的概率。</p>
+<p><b>解：</b> 设 $D$ = 患病，$A$ = 阳性。</p>
+<p>$P(D) = 0.001$，$P(\overline{D}) = 0.999$，$P(A|D) = 0.99$，$P(A|\overline{D}) = 0.05$。</p>
+<div class="formula-block">$$P(A) = 0.001 \times 0.99 + 0.999 \times 0.05 = 0.00099 + 0.04995 = 0.05094$$</div>
+<div class="formula-block">$$P(D|A) = \frac{0.00099}{0.05094} \approx 0.0194$$</div>
+<p><b>说明：</b> 虽然检测准确率高达 99%，但由于发病率极低，阳性结果中真正患病者仅约 1.94%！这就是<b>基础概率谬误</b>。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第三篇 独立性篇——事件独立性与伯努利概型</div>
+
+<div class="section-title">六、事件独立性</div>
+
+<div class="method-box">
+<div class="method-name">方法六：事件独立性</div>
+<div class="core-idea">核心思想：若事件 $A$ 的发生与否不影响 $B$ 的概率，则称 $A$ 与 $B$ 独立。</div>
+
+<p><b>定义：</b> 若 $P(AB) = P(A) \cdot P(B)$，则 $A$ 与 $B$ 独立。</p>
+<p><b>等价条件：</b> 若 $P(B) \gt 0$，则 $A$ 与 $B$ 独立 $\Leftrightarrow$ $P(A|B) = P(A)$。</p>
+<p><b>多个事件的独立性：</b> $A_1, A_2, \ldots, A_n$ 相互独立，要求<b>任意</b> $k$ 个（$2 \le k \le n$）的交概率等于各自概率之积。</p>
+
+<p><b>重要性质：</b></p>
+<ul>
+<li>若 $A, B$ 独立，则 $A$ 与 $\overline{B}$、$\overline{A}$ 与 $B$、$\overline{A}$ 与 $\overline{B}$ 也独立。</li>
+<li>独立 $\ne$ 互斥！互斥（$AB = \emptyset$）意味着一个发生另一个不可能发生，反而是<b>有影响</b>的。</li>
+<li>$P(A) = 0$ 或 $P(A) = 1$ 时，$A$ 与任何事件独立。</li>
+</ul>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p><b>独立与互斥的区别</b>：互斥是 $AB = \emptyset$（不能同时发生），独立是 $P(AB) = P(A)P(B)$（互不影响）。若 $P(A) \gt 0$ 且 $P(B) \gt 0$，则互斥必不独立，独立必不互斥。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>甲乙两人独立射击目标，命中率分别为 0.8 和 0.6。求目标被命中的概率。</p>
+<p><b>解：</b> 设 $A, B$ 分别为甲、乙命中。$P(A) = 0.8$，$P(B) = 0.6$，独立。</p>
+<div class="formula-block">$$P(A \cup B) = 1 - P(\overline{A})P(\overline{B}) = 1 - 0.2 \times 0.4 = 1 - 0.08 = 0.92$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>某系统由三个元件并联组成，各元件正常工作的概率均为 $p$，求系统正常工作的概率。</p>
+<p><b>解：</b> 并联系统只要一个元件正常即可。设 $A_i$ = 第 $i$ 个元件正常（$i=1,2,3$），相互独立。</p>
+<div class="formula-block">$$P(\text{系统正常}) = 1 - P(\overline{A_1}\,\overline{A_2}\,\overline{A_3}) = 1 - (1-p)^3$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">七、伯努利概型</div>
+
+<div class="method-box">
+<div class="method-name">方法七：伯努利概型与二项概率</div>
+<div class="core-idea">核心思想：将试验独立重复 $n$ 次，每次只有"成功"与"失败"两个结果，求恰好成功 $k$ 次的概率。</div>
+
+<p><b>$n$ 重伯努利试验的条件：</b></p>
+<ol>
+<li>每次试验只有两个结果 $A$ 和 $\overline{A}$。</li>
+<li>各次试验<b>相互独立</b>。</li>
+<li>每次试验 $P(A) = p$ 保持不变。</li>
+</ol>
+
+<p><b>二项概率公式：</b> 在 $n$ 重伯努利试验中，$A$ 恰好发生 $k$ 次的概率：</p>
+<div class="formula-block">$$P_n(k) = C_n^k \, p^k (1-p)^{n-k}, \quad k = 0, 1, \ldots, n$$</div>
+
+<p><b>关键识别：</b> 题目出现"独立重复""每次概率相同""恰好 $\ldots$ 次"等关键词时，考虑伯努利概型。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>某射手命中率为 0.7，独立射击 4 次，求恰好命中 3 次的概率。</p>
+<p><b>解：</b> $n = 4$，$p = 0.7$，$k = 3$。</p>
+<div class="formula-block">$$P_4(3) = C_4^3 \times 0.7^3 \times 0.3^1 = 4 \times 0.343 \times 0.3 = 0.4116$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>某灯泡合格率为 0.9，从中任取 5 个，求至少有 1 个不合格的概率。</p>
+<p><b>解：</b> $n = 5$，"不合格"概率 $p = 0.1$。</p>
+<div class="formula-block">$$P(\text{至少1个不合格}) = 1 - P_5(0) = 1 - C_5^0 \times 0.1^0 \times 0.9^5 = 1 - 0.59049 = 0.40951$$</div>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第四篇 离散型篇——离散型随机变量及其分布</div>
+
+<div class="section-title">八、分布律与分布函数</div>
+
+<div class="method-box">
+<div class="method-name">方法八：离散型随机变量的分布律与分布函数</div>
+<div class="core-idea">核心思想：用表格或函数描述离散型随机变量取各个值的概率。</div>
+
+<p><b>分布律（概率分布列）：</b> 随机变量 $X$ 取值 $x_1, x_2, \ldots$，对应概率 $p_1, p_2, \ldots$，满足：</p>
+<ul>
+<li>$p_k \ge 0$</li>
+<li>$\sum_k p_k = 1$</li>
+</ul>
+
+<p><b>分布函数：</b> $F(x) = P(X \le x) = \sum_{x_k \le x} p_k$。</p>
+
+<p><b>分布函数的性质：</b></p>
+<ul>
+<li>单调不减：$x_1 \lt x_2 \Rightarrow F(x_1) \le F(x_2)$。</li>
+<li>$F(-\infty) = 0$，$F(+\infty) = 1$。</li>
+<li>右连续。</li>
+<li>$P(a \lt X \le b) = F(b) - F(a)$。</li>
+</ul>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>离散型随机变量的分布函数是<b>阶梯函数</b>，在每个取值点处右连续但左不连续（有跳跃）。$P(X = x_k) = F(x_k) - F(x_k^-)$，即跳跃高度。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>设 $X$ 的分布律为 $P(X = k) = \dfrac{c}{k}$，$k = 1, 2, 3$，求常数 $c$ 及 $P(X \le 2)$。</p>
+<p><b>解：</b> 由 $\sum p_k = 1$：</p>
+<div class="formula-block">$$c\left(\frac{1}{1} + \frac{1}{2} + \frac{1}{3}\right) = 1 \Rightarrow c \cdot \frac{11}{6} = 1 \Rightarrow c = \frac{6}{11}$$</div>
+<div class="formula-block">$$P(X \le 2) = P(X=1) + P(X=2) = \frac{6}{11} + \frac{3}{11} = \frac{9}{11}$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $X$ 的分布函数为 $F(x) = \begin{cases} 0, & x \lt 0 \\ 0.3, & 0 \le x \lt 1 \\ 0.7, & 1 \le x \lt 2 \\ 1, & x \ge 2 \end{cases}$，求 $X$ 的分布律。</p>
+<p><b>解：</b> $X$ 只在 $x = 0, 1, 2$ 处有概率（跳跃点）。</p>
+<div class="formula-block">$$P(X=0) = F(0) - F(0^-) = 0.3 - 0 = 0.3$$</div>
+<div class="formula-block">$$P(X=1) = F(1) - F(1^-) = 0.7 - 0.3 = 0.4$$</div>
+<div class="formula-block">$$P(X=2) = F(2) - F(2^-) = 1 - 0.7 = 0.3$$</div>
+<table>
+<tr><th>$X$</th><th>0</th><th>1</th><th>2</th></tr>
+<tr><td>$P$</td><td>0.3</td><td>0.4</td><td>0.3</td></tr>
+</table>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">九、常见离散型分布</div>
+
+<div class="method-box">
+<div class="method-name">方法九：常见离散型分布</div>
+<div class="core-idea">核心思想：掌握四种常见离散分布的分布律、期望和方差，考试中直接套用。</div>
+
+<table class="speed-table">
+<tr><th>分布名称</th><th>分布律</th><th>期望 $E(X)$</th><th>方差 $D(X)$</th></tr>
+<tr><td>0-1分布</td><td>$P(X=1)=p,\; P(X=0)=1-p$</td><td>$p$</td><td>$p(1-p)$</td></tr>
+<tr><td>二项分布 $B(n,p)$</td><td>$P(X=k)=C_n^k p^k(1-p)^{n-k}$</td><td>$np$</td><td>$np(1-p)$</td></tr>
+<tr><td>泊松分布 $P(\lambda)$</td><td>$P(X=k)=\dfrac{\lambda^k e^{-\lambda}}{k!}$</td><td>$\lambda$</td><td>$\lambda$</td></tr>
+<tr><td>几何分布</td><td>$P(X=k)=(1-p)^{k-1}p,\; k\ge1$</td><td>$\dfrac{1}{p}$</td><td>$\dfrac{1-p}{p^2}$</td></tr>
+</table>
+
+<p><b>泊松分布的应用场景：</b> 单位时间内稀有事件发生次数（如电话呼入数、设备故障数等）。</p>
+<p><b>泊松近似定理：</b> 当 $n$ 很大、$p$ 很小时，$B(n,p) \approx P(\lambda)$，其中 $\lambda = np$。</p>
+<p><b>超几何分布：</b> $N$ 件中有 $M$ 件次品，无放回取 $n$ 件，次品数 $X$ 的分布：</p>
+<div class="formula-block">$$P(X=k) = \frac{C_M^k \, C_{N-M}^{n-k}}{C_N^n}$$</div>
+<p>当 $N$ 很大时，超几何分布 $\approx$ 二项分布 $B(n, M/N)$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>某路口每周发生事故数 $X \sim P(2)$（泊松分布），求一周内恰好发生 1 次事故的概率。（$e^{-2} \approx 0.1353$）</p>
+<p><b>解：</b> $\lambda = 2$，</p>
+<div class="formula-block">$$P(X=1) = \frac{2^1 e^{-2}}{1!} = 2e^{-2} \approx 2 \times 0.1353 = 0.2706$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>某批次产品合格率 0.95，从中取 100 件，用泊松分布近似求至少有 3 件不合格的概率。</p>
+<p><b>解：</b> $X \sim B(100, 0.05)$，$n$ 大 $p$ 小，$\lambda = np = 5$，近似 $X \sim P(5)$。</p>
+<div class="formula-block">$$P(X \ge 3) = 1 - P(X=0) - P(X=1) - P(X=2)$$</div>
+<div class="formula-block">$$= 1 - e^{-5}\left(1 + 5 + \frac{25}{2}\right) = 1 - e^{-5} \times 18.5 \approx 1 - 0.1247 = 0.8753$$</div>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第五篇 连续型篇——连续型随机变量及其分布</div>
+
+<div class="section-title">十、概率密度函数</div>
+
+<div class="method-box">
+<div class="method-name">方法十：连续型随机变量与概率密度函数</div>
+<div class="core-idea">核心思想：连续型随机变量用概率密度函数 $f(x)$ 描述取值规律。</div>
+
+<p><b>概率密度函数 $f(x)$ 的性质：</b></p>
+<ul>
+<li>$f(x) \ge 0$。</li>
+<li>$\displaystyle\int_{-\infty}^{+\infty} f(x)\,dx = 1$。</li>
+<li>$P(a \le X \le b) = \displaystyle\int_a^b f(x)\,dx$。</li>
+<li>$P(X = x_0) = 0$（连续型随机变量取单点概率为零）。</li>
+</ul>
+
+<p><b>分布函数与密度的关系：</b></p>
+<div class="formula-block">$$F(x) = \int_{-\infty}^{x} f(t)\,dt, \quad f(x) = F'(x) \; (\text{连续点处})$$</div>
+
+<p><b>求密度中的未知常数：</b> 利用 $\displaystyle\int_{-\infty}^{+\infty} f(x)\,dx = 1$ 解出。</p>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>$P(a \le X \le b) = P(a \lt X \le b) = P(a \le X \lt b) = P(a \lt X \lt b) = \int_a^b f(x)\,dx$，因为单点概率为零。这与离散型不同！</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>设 $X$ 的密度为 $f(x) = \begin{cases} cx^2, & 0 \le x \le 1 \\ 0, & \text{其他} \end{cases}$，求 $c$ 及 $P(X \gt 0.5)$。</p>
+<p><b>解：</b> 由 $\int_{-\infty}^{+\infty} f(x)\,dx = 1$：</p>
+<div class="formula-block">$$\int_0^1 cx^2\,dx = \frac{c}{3} = 1 \Rightarrow c = 3$$</div>
+<div class="formula-block">$$P(X \gt 0.5) = \int_{0.5}^{1} 3x^2\,dx = \left[x^3\right]_{0.5}^{1} = 1 - 0.125 = 0.875$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $X$ 的分布函数为 $F(x) = \begin{cases} 0, & x \lt 0 \\ x^2, & 0 \le x \lt 1 \\ 1, & x \ge 1 \end{cases}$，求密度函数 $f(x)$ 及 $P(0.3 \lt X \lt 0.7)$。</p>
+<p><b>解：</b> $f(x) = F'(x) = \begin{cases} 2x, & 0 \le x \le 1 \\ 0, & \text{其他} \end{cases}$</p>
+<div class="formula-block">$$P(0.3 \lt X \lt 0.7) = F(0.7) - F(0.3) = 0.49 - 0.09 = 0.40$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十一、均匀分布与指数分布</div>
+
+<div class="method-box">
+<div class="method-name">方法十一：均匀分布与指数分布</div>
+<div class="core-idea">核心思想：掌握两种常用连续分布的密度函数、分布函数及期望方差。</div>
+
+<p><b>（1）均匀分布 $X \sim U(a, b)$</b></p>
+<p>密度函数：</p>
+<div class="formula-block">$$f(x) = \begin{cases} \dfrac{1}{b-a}, & a \le x \le b \\ 0, & \text{其他} \end{cases}$$</div>
+<p>分布函数：</p>
+<div class="formula-block">$$F(x) = \begin{cases} 0, & x \lt a \\ \dfrac{x-a}{b-a}, & a \le x \lt b \\ 1, & x \ge b \end{cases}$$</div>
+<p>$E(X) = \dfrac{a+b}{2}$，$D(X) = \dfrac{(b-a)^2}{12}$。</p>
+
+<p><b>（2）指数分布 $X \sim E(\lambda)$（$\lambda \gt 0$）</b></p>
+<p>密度函数：</p>
+<div class="formula-block">$$f(x) = \begin{cases} \lambda e^{-\lambda x}, & x \gt 0 \\ 0, & x \le 0 \end{cases}$$</div>
+<p>分布函数：</p>
+<div class="formula-block">$$F(x) = \begin{cases} 1 - e^{-\lambda x}, & x \gt 0 \\ 0, & x \le 0 \end{cases}$$</div>
+<p>$E(X) = \dfrac{1}{\lambda}$，$D(X) = \dfrac{1}{\lambda^2}$。</p>
+
+<div class="key-box">
+<div class="key-title">✅ 指数分布的无记忆性</div>
+<div class="formula-block">$$P(X \gt s + t \mid X \gt s) = P(X \gt t)$$</div>
+<p>指数分布是唯一具有无记忆性的连续型分布。即：已使用了 $s$ 时间未坏的元件，继续使用 $t$ 时间的概率与新元件相同。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>公共汽车站每 10 分钟一班，乘客到站时刻均匀分布。求乘客等车不超过 3 分钟的概率。</p>
+<p><b>解：</b> 设等车时间 $X \sim U(0, 10)$，$f(x) = \dfrac{1}{10}$，$0 \le x \le 10$。</p>
+<div class="formula-block">$$P(X \le 3) = \frac{3 - 0}{10 - 0} = \frac{3}{10} = 0.3$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>某元件寿命 $X \sim E(0.01)$（单位：小时），求元件寿命超过 100 小时的概率。</p>
+<p><b>解：</b> $\lambda = 0.01$，$F(x) = 1 - e^{-0.01x}$。</p>
+<div class="formula-block">$$P(X \gt 100) = 1 - F(100) = e^{-0.01 \times 100} = e^{-1} \approx 0.3679$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十二、正态分布</div>
+
+<div class="method-box">
+<div class="method-name">方法十二：正态分布</div>
+<div class="core-idea">核心思想：正态分布是概率论中最重要的分布，专升本考试重点考查标准化与查表计算。</div>
+
+<p><b>正态分布 $X \sim N(\mu, \sigma^2)$ 的密度函数：</b></p>
+<div class="formula-block">$$f(x) = \frac{1}{\sqrt{2\pi}\,\sigma} \, e^{-\frac{(x-\mu)^2}{2\sigma^2}}, \quad -\infty \lt x \lt +\infty$$</div>
+
+<p><b>性质：</b></p>
+<ul>
+<li>密度曲线关于 $x = \mu$ 对称。</li>
+<li>$E(X) = \mu$，$D(X) = \sigma^2$。</li>
+<li>$\mu$ 决定位置，$\sigma$ 决定形状（$\sigma$ 越大越扁平）。</li>
+</ul>
+
+<p><b>标准化：</b> 令 $Z = \dfrac{X - \mu}{\sigma} \sim N(0, 1)$，则：</p>
+<div class="formula-block">$$P(a \lt X \lt b) = P\left(\frac{a - \mu}{\sigma} \lt Z \lt \frac{b - \mu}{\sigma}\right) = \Phi\left(\frac{b-\mu}{\sigma}\right) - \Phi\left(\frac{a-\mu}{\sigma}\right)$$</div>
+<p>其中 $\Phi(x)$ 为标准正态分布函数。</p>
+
+<p><b>$3\sigma$ 法则：</b></p>
+<ul>
+<li>$P(\mu - \sigma \le X \le \mu + \sigma) \approx 0.6827$</li>
+<li>$P(\mu - 2\sigma \le X \le \mu + 2\sigma) \approx 0.9545$</li>
+<li>$P(\mu - 3\sigma \le X \le \mu + 3\sigma) \approx 0.9973$</li>
+</ul>
+
+<div class="key-box">
+<div class="key-title">✅ 标准正态分布查表技巧</div>
+<p>$\Phi(-x) = 1 - \Phi(x)$（对称性）。$P(X \gt a) = 1 - \Phi\!\left(\dfrac{a - \mu}{\sigma}\right)$。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>设 $X \sim N(2, 9)$，求 $P(X \gt 5)$。（$\Phi(1) = 0.8413$）</p>
+<p><b>解：</b> $\mu = 2$，$\sigma = 3$。标准化：</p>
+<div class="formula-block">$$P(X \gt 5) = P\left(Z \gt \frac{5 - 2}{3}\right) = P(Z \gt 1) = 1 - \Phi(1) = 1 - 0.8413 = 0.1587$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $X \sim N(\mu, 4)$，且 $P(X \le 2) = 0.5$，求 $\mu$ 及 $P(X \le 0)$。（$\Phi(-1) = 0.1587$）</p>
+<p><b>解：</b> 由 $P(X \le 2) = 0.5$，正态分布中位数为 $\mu$，故 $\mu = 2$。</p>
+<p>$\sigma = 2$，标准化：</p>
+<div class="formula-block">$$P(X \le 0) = P\left(Z \le \frac{0-2}{2}\right) = P(Z \le -1) = \Phi(-1) = 0.1587$$</div>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第六篇 数字特征篇——期望、方差与协方差</div>
+
+<div class="section-title">十三、期望的计算</div>
+
+<div class="method-box">
+<div class="method-name">方法十三：数学期望的计算</div>
+<div class="core-idea">核心思想：期望是随机变量的"平均值"，是概率论的核心数字特征。</div>
+
+<p><b>（1）离散型：</b> $E(X) = \displaystyle\sum_k x_k \, p_k$</p>
+<p><b>（2）连续型：</b> $E(X) = \displaystyle\int_{-\infty}^{+\infty} x \, f(x)\,dx$</p>
+
+<p><b>期望的性质：</b></p>
+<ul>
+<li>$E(C) = C$（$C$ 为常数）。</li>
+<li>$E(aX + b) = aE(X) + b$。</li>
+<li>$E(X + Y) = E(X) + E(Y)$（无条件成立）。</li>
+<li>若 $X, Y$ 独立，$E(XY) = E(X) \cdot E(Y)$。</li>
+</ul>
+
+<p><b>随机变量函数的期望：</b></p>
+<ul>
+<li>离散型：$E[g(X)] = \displaystyle\sum_k g(x_k) \, p_k$</li>
+<li>连续型：$E[g(X)] = \displaystyle\int_{-\infty}^{+\infty} g(x) \, f(x)\,dx$</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>设 $X$ 的分布律为 $P(X=-1)=0.2$，$P(X=0)=0.5$，$P(X=2)=0.3$，求 $E(X)$ 和 $E(X^2)$。</p>
+<p><b>解：</b></p>
+<div class="formula-block">$$E(X) = (-1) \times 0.2 + 0 \times 0.5 + 2 \times 0.3 = -0.2 + 0.6 = 0.4$$</div>
+<div class="formula-block">$$E(X^2) = (-1)^2 \times 0.2 + 0^2 \times 0.5 + 2^2 \times 0.3 = 0.2 + 1.2 = 1.4$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $X \sim U(0, 2)$，求 $E(X^2)$。</p>
+<p><b>解：</b> $f(x) = \dfrac{1}{2}$，$0 \le x \le 2$。</p>
+<div class="formula-block">$$E(X^2) = \int_0^2 x^2 \cdot \frac{1}{2}\,dx = \frac{1}{2} \cdot \frac{x^3}{3}\bigg|_0^2 = \frac{1}{2} \times \frac{8}{3} = \frac{4}{3}$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十四、方差与标准差</div>
+
+<div class="method-box">
+<div class="method-name">方法十四：方差与标准差</div>
+<div class="core-idea">核心思想：方差度量随机变量偏离期望的程度，反映"波动大小"。</div>
+
+<p><b>定义：</b> $D(X) = E\left[(X - E(X))^2\right]$</p>
+<p><b>计算公式（重要）：</b></p>
+<div class="formula-block">$$D(X) = E(X^2) - [E(X)]^2$$</div>
+
+<p><b>方差的性质：</b></p>
+<ul>
+<li>$D(C) = 0$（$C$ 为常数）。</li>
+<li>$D(aX + b) = a^2 D(X)$。</li>
+<li>若 $X, Y$ 独立，$D(X \pm Y) = D(X) + D(Y)$。</li>
+<li>$D(X) \ge 0$，$D(X) = 0 \Leftrightarrow X = E(X)$（a.s.）。</li>
+</ul>
+
+<p><b>标准差：</b> $\sigma(X) = \sqrt{D(X)}$，与 $X$ 同量纲。</p>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>$D(X - Y) = D(X) + D(Y) - 2\,\text{Cov}(X,Y)$。<b>只有当 $X, Y$ 独立时</b>，$D(X - Y) = D(X) + D(Y)$。不独立时差的前面是减号，不要写成 $D(X) - D(Y)$！</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>（接期望习题1）已知 $E(X) = 0.4$，$E(X^2) = 1.4$，求 $D(X)$。</p>
+<p><b>解：</b></p>
+<div class="formula-block">$$D(X) = E(X^2) - [E(X)]^2 = 1.4 - 0.16 = 1.24$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $X \sim U(a, b)$，用期望和 $E(X^2)$ 推导 $D(X)$。</p>
+<p><b>解：</b> $f(x) = \dfrac{1}{b-a}$，$a \le x \le b$。</p>
+<div class="formula-block">$$E(X) = \frac{a+b}{2}, \quad E(X^2) = \int_a^b \frac{x^2}{b-a}\,dx = \frac{a^2 + ab + b^2}{3}$$</div>
+<div class="formula-block">$$D(X) = \frac{a^2 + ab + b^2}{3} - \left(\frac{a+b}{2}\right)^2 = \frac{4(a^2+ab+b^2) - 3(a^2+2ab+b^2)}{12} = \frac{(b-a)^2}{12}$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十五、协方差与相关系数</div>
+
+<div class="method-box">
+<div class="method-name">方法十五：协方差与相关系数</div>
+<div class="core-idea">核心思想：描述两个随机变量之间的线性关联程度。</div>
+
+<p><b>协方差：</b></p>
+<div class="formula-block">$$\text{Cov}(X, Y) = E\left[(X - E(X))(Y - E(Y))\right] = E(XY) - E(X) \cdot E(Y)$$</div>
+
+<p><b>相关系数：</b></p>
+<div class="formula-block">$$\rho_{XY} = \frac{\text{Cov}(X, Y)}{\sqrt{D(X)}\,\sqrt{D(Y)}}$$</div>
+
+<p><b>性质：</b></p>
+<ul>
+<li>$|\rho_{XY}| \le 1$。</li>
+<li>$|\rho_{XY}| = 1 \Leftrightarrow$ 存在 $a, b$ 使 $Y = aX + b$（线性关系，a.s.）。</li>
+<li>$\rho_{XY} = 0$ 称 $X, Y$ <b>不相关</b>（无线性关系，但可能有非线性关系）。</li>
+<li>$X, Y$ 独立 $\Rightarrow$ $X, Y$ 不相关，但反之<b>不一定</b>成立。</li>
+<li>$\text{Cov}(X, X) = D(X)$。</li>
+<li>$\text{Cov}(aX + b, cY + d) = ac \cdot \text{Cov}(X, Y)$。</li>
+</ul>
+
+<div class="key-box">
+<div class="key-title">✅ 独立与不相关的关系</div>
+<p><b>独立 $\Rightarrow$ 不相关</b>，但<b>不相关 $\not\Rightarrow$ 独立</b>。特例：$(X, Y)$ 服从二维正态分布时，独立 $\Leftrightarrow$ 不相关。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>设 $X, Y$ 的联合分布律为：$P(X=0,Y=0)=0.3$，$P(X=0,Y=1)=0.2$，$P(X=1,Y=0)=0.1$，$P(X=1,Y=1)=0.4$。求 $\text{Cov}(X, Y)$ 和 $\rho_{XY}$。</p>
+<p><b>解：</b> 边缘分布：$P(X=0)=0.5$，$P(X=1)=0.5$，$P(Y=0)=0.4$，$P(Y=1)=0.6$。</p>
+<div class="formula-block">$$E(X) = 0.5, \quad E(Y) = 0.6$$</div>
+<div class="formula-block">$$E(XY) = 0 \times 0 \times 0.3 + 0 \times 1 \times 0.2 + 1 \times 0 \times 0.1 + 1 \times 1 \times 0.4 = 0.4$$</div>
+<div class="formula-block">$$\text{Cov}(X,Y) = E(XY) - E(X)E(Y) = 0.4 - 0.5 \times 0.6 = 0.1$$</div>
+<div class="formula-block">$$D(X) = 0.25, \quad D(Y) = 0.24$$</div>
+<div class="formula-block">$$\rho_{XY} = \frac{0.1}{\sqrt{0.25 \times 0.24}} = \frac{0.1}{\sqrt{0.06}} \approx 0.408$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $X \sim N(0,1)$，$Y = X^2$，判断 $X$ 与 $Y$ 是否不相关，是否独立。</p>
+<p><b>解：</b></p>
+<p>$E(X) = 0$，$E(XY) = E(X^3) = 0$（奇函数，对称分布）。</p>
+<div class="formula-block">$$\text{Cov}(X,Y) = E(XY) - E(X) \cdot E(Y) = 0 - 0 = 0$$</div>
+<p>故 $X$ 与 $Y$ <b>不相关</b>。</p>
+<p>但 $Y = X^2$ 完全由 $X$ 决定，不独立。这说明<b>不相关不等于独立</b>。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第七篇 极限定理篇——大数定律与中心极限定理</div>
+
+<div class="section-title">十六、切比雪夫不等式</div>
+
+<div class="method-box">
+<div class="method-name">方法十六：切比雪夫不等式</div>
+<div class="core-idea">核心思想：利用期望和方差，对随机变量偏离期望的概率给出上界估计。</div>
+
+<p><b>切比雪夫不等式：</b> 设 $E(X) = \mu$，$D(X) = \sigma^2$，对任意 $\varepsilon \gt 0$：</p>
+<div class="formula-block">$$P(|X - \mu| \ge \varepsilon) \le \frac{\sigma^2}{\varepsilon^2}$$</div>
+<p>等价形式：</p>
+<div class="formula-block">$$P(|X - \mu| \lt \varepsilon) \ge 1 - \frac{\sigma^2}{\varepsilon^2}$$</div>
+
+<p><b>用途：</b></p>
+<ul>
+<li>在不知道分布的情况下，用期望和方差估计概率。</li>
+<li>证明大数定律的理论工具。</li>
+<li>估计概率的<b>上界</b>或<b>下界</b>（注意是估计，不是精确值）。</li>
+</ul>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>切比雪夫不等式给出的是<b>上界估计</b>，通常比较粗糙。$\varepsilon$ 越大，界越紧。当 $\varepsilon \le \sigma$ 时，$\sigma^2/\varepsilon^2 \ge 1$，上界无意义（概率不超过 1 是平凡的）。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>设 $X$ 的期望为 4，方差为 2，用切比雪夫不等式估计 $P(|X - 4| \ge 4)$ 的上界。</p>
+<p><b>解：</b> $\mu = 4$，$\sigma^2 = 2$，$\varepsilon = 4$。</p>
+<div class="formula-block">$$P(|X - 4| \ge 4) \le \frac{2}{16} = \frac{1}{8} = 0.125$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>设 $X_1, X_2, \ldots, X_{100}$ 相互独立，$E(X_i) = 0$，$D(X_i) = 4$，估计 $P\left(\left|\sum_{i=1}^{100} X_i\right| \ge 40\right)$ 的上界。</p>
+<p><b>解：</b> 令 $S = \sum_{i=1}^{100} X_i$，$E(S) = 0$，$D(S) = 100 \times 4 = 400$。</p>
+<div class="formula-block">$$P(|S| \ge 40) \le \frac{400}{40^2} = \frac{400}{1600} = \frac{1}{4} = 0.25$$</div>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十七、中心极限定理</div>
+
+<div class="method-box">
+<div class="method-name">方法十七：中心极限定理</div>
+<div class="core-idea">核心思想：大量独立同分布的随机变量之和（或均值）的分布近似正态分布，无论原始分布是什么。</div>
+
+<p><b>林德伯格-列维定理（独立同分布情形）：</b></p>
+<p>设 $X_1, X_2, \ldots$ 独立同分布，$E(X_i) = \mu$，$D(X_i) = \sigma^2 \gt 0$，则对 $n$ 充分大：</p>
+<div class="formula-block">$$\sum_{i=1}^{n} X_i \approx N(n\mu, \, n\sigma^2)$$</div>
+<p>等价地，标准化：</p>
+<div class="formula-block">$$\frac{\sum_{i=1}^{n} X_i - n\mu}{\sigma\sqrt{n}} \approx N(0, 1)$$</div>
+<p>或用样本均值：</p>
+<div class="formula-block">$$\frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \approx N(0, 1), \quad \overline{X} \approx N\!\left(\mu, \frac{\sigma^2}{n}\right)$$</div>
+
+<p><b>棣莫弗-拉普拉斯定理（二项分布的正态近似）：</b></p>
+<p>设 $X \sim B(n, p)$，当 $n$ 充分大时：</p>
+<div class="formula-block">$$X \approx N(np, \, np(1-p))$$</div>
+<p>标准化：</p>
+<div class="formula-block">$$\frac{X - np}{\sqrt{np(1-p)}} \approx N(0, 1)$$</div>
+
+<p><b>解题步骤：</b></p>
+<ol>
+<li>识别独立同分布或二项分布的条件。</li>
+<li>计算和的期望 $n\mu$ 与方差 $n\sigma^2$（或 $np$ 与 $np(1-p)$）。</li>
+<li>标准化转化为标准正态分布。</li>
+<li>查表计算概率。</li>
+</ol>
+
+<div class="tip-box">
+<div class="tip-title">⚠ 常见陷阱</div>
+<p>棣莫弗-拉普拉斯定理中，求 $P(a \le X \le b)$ 时，连续型近似需要<b>连续性修正</b>：用 $P(a - 0.5 \le X \le b + 0.5)$ 代替。专升本考试中不一定要求修正，但了解可以提高精度。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>某批螺丝每盒 100 个，每盒次品数 $X \sim B(100, 0.02)$，用中心极限定理求 $P(X \le 5)$。</p>
+<p><b>解：</b> $np = 2$，$np(1-p) = 1.96$，$\sqrt{1.96} = 1.4$。</p>
+<div class="formula-block">$$P(X \le 5) = P\left(\frac{X - 2}{1.4} \le \frac{5 - 2}{1.4}\right) \approx \Phi(2.14) \approx 0.9838$$</div>
+<p class="note-text">（若用连续性修正：$P(X \le 5) \approx \Phi(2.5) \approx 0.9938$。）</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>某设备每天运行时间 $X_i$（小时）独立同分布，$E(X_i) = 8$，$D(X_i) = 4$。用中心极限定理估计 36 天总运行时间超过 300 小时的概率。</p>
+<p><b>解：</b> 令 $S = \sum_{i=1}^{36} X_i$，$E(S) = 36 \times 8 = 288$，$D(S) = 36 \times 4 = 144$，$\sigma_S = 12$。</p>
+<div class="formula-block">$$P(S \gt 300) = P\left(Z \gt \frac{300 - 288}{12}\right) = P(Z \gt 1) = 1 - \Phi(1) \approx 0.1587$$</div>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第八篇 综合策略篇——方法选择与实战思路</div>
+
+<div class="section-title">十八、概率论解题方法选择指南</div>
+
+<div class="key-box">
+<div class="key-title">✅ 方法选择决策流程</div>
+<p>拿到一道概率论题，按以下顺序思考：</p>
+<ol>
+<li><b>第一步：识别题型</b>
+<ul>
+<li>求概率 $\to$ 判断是古典概型、条件概率还是独立性问题</li>
+<li>求分布 $\to$ 判断是离散型还是连续型</li>
+<li>求数字特征 $\to$ 套期望/方差公式</li>
+<li>求近似概率 $\to$ 中心极限定理</li>
+</ul>
+</li>
+<li><b>第二步：根据题型选方法</b>
+<ul>
+<li>古典概型 $\to$ 排列组合计数</li>
+<li>分阶段/分情况 $\to$ <b>全概率公式</b></li>
+<li>由果溯因 $\to$ <b>贝叶斯公式</b></li>
+<li>独立重复 $n$ 次 $\to$ <b>二项分布</b>/伯努利概型</li>
+<li>已知分布律/密度 $\to$ 求期望方差直接<b>套公式</b></li>
+<li>正态分布 $\to$ <b>标准化</b>后查表</li>
+<li>大量独立求和 $\to$ <b>中心极限定理</b></li>
+<li>概率估计 $\to$ <b>切比雪夫不等式</b></li>
+</ul>
+</li>
+<li><b>第三步：验证</b>
+<ul>
+<li>古典概型：确认等可能性</li>
+<li>独立性：确认 $P(AB) = P(A)P(B)$</li>
+<li>全概率/贝叶斯：确认 $B_1, \ldots, B_n$ 是<b>划分</b>（互斥且完备）</li>
+<li>中心极限定理：确认 $n$ 足够大</li>
+</ul>
+</li>
+<li><b>第四步：灵活组合</b>
+<ul>
+<li>一道题可能需要多种方法组合（如先用全概率公式求概率，再判断分布类型）</li>
+<li>期望方差公式可以逆向使用：$D(X) = E(X^2) - [E(X)]^2$，已知方差可反求 $E(X^2)$</li>
+</ul>
+</li>
+</ol>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">十九、综合习题</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 1</div>
+<p>设有三箱产品，第一箱 50 件中 10 件次品，第二箱 40 件中 10 件次品，第三箱 30 件中 5 件次品。任选一箱，从中任取一件，求取到次品的概率。若已知取到次品，求它来自第三箱的概率。</p>
+<p><b>解：</b></p>
+<p>（1）设 $B_i$ = 选第 $i$ 箱（$i=1,2,3$），$A$ = 取到次品。</p>
+<div class="formula-block">$$P(B_1) = P(B_2) = P(B_3) = \frac{1}{3}$$</div>
+<p>$P(A|B_1) = \dfrac{10}{50} = 0.2$，$P(A|B_2) = \dfrac{10}{40} = 0.25$，$P(A|B_3) = \dfrac{5}{30} = \dfrac{1}{6}$</p>
+<p>全概率公式：</p>
+<div class="formula-block">$$P(A) = \frac{1}{3}\left(0.2 + 0.25 + \frac{1}{6}\right) = \frac{1}{3} \times \frac{37}{60} = \frac{37}{180}$$</div>
+<p>（2）贝叶斯公式：</p>
+<div class="formula-block">$$P(B_3|A) = \frac{P(B_3) \cdot P(A|B_3)}{P(A)} = \frac{\frac{1}{3} \times \frac{1}{6}}{\frac{37}{180}} = \frac{\frac{1}{18}}{\frac{37}{180}} = \frac{10}{37} \approx 0.270$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 2</div>
+<p>设 $X \sim f(x) = \begin{cases} 2e^{-2x}, & x \gt 0 \\ 0, & x \le 0 \end{cases}$，求 $E(X)$、$D(X)$ 和 $P(X \gt 1 \mid X \gt 0.5)$。</p>
+<p><b>解：</b></p>
+<p>$X \sim E(\lambda = 2)$（指数分布）。</p>
+<div class="formula-block">$$E(X) = \frac{1}{\lambda} = \frac{1}{2}, \quad D(X) = \frac{1}{\lambda^2} = \frac{1}{4}$$</div>
+<p>由<b>无记忆性</b>：</p>
+<div class="formula-block">$$P(X \gt 1 \mid X \gt 0.5) = P(X \gt 0.5) = e^{-2 \times 0.5} = e^{-1} \approx 0.3679$$</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 3</div>
+<p>某次考试有 100 道独立选择题，每题 4 选 1。学生完全不会，纯随机作答。用中心极限定理估计总分不低于 30 分（每题 1 分）的概率。</p>
+<p><b>解：</b> 设答对题数 $X \sim B(100, 0.25)$。</p>
+<p>$np = 25$，$np(1-p) = 18.75$，$\sigma = \sqrt{18.75} \approx 4.33$。</p>
+<div class="formula-block">$$P(X \ge 30) = P\left(Z \ge \frac{30 - 25}{4.33}\right) \approx P(Z \ge 1.15) = 1 - \Phi(1.15) \approx 0.1251$$</div>
+<p class="note-text">（若用连续性修正：$P(X \ge 30) \approx P\left(Z \ge \frac{29.5 - 25}{4.33}\right) = P(Z \ge 1.04) \approx 0.1492$。）</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<div class="section-title">二十、专升本概率论常见题型速查表</div>
+
+<div class="key-box">
+<div class="key-title">专升本概率论常见题型与方法速查</div>
+<table class="speed-table">
+<tr><th>题型特征</th><th>首选方法</th><th>备用方法</th></tr>
+<tr><td>排列组合计数</td><td>古典概型</td><td>对立事件转化</td></tr>
+<tr><td>已知 $P(A), P(B)$ 求组合</td><td>加法公式</td><td>对立事件</td></tr>
+<tr><td>分阶段/分箱取球</td><td>全概率公式</td><td>逐一列举</td></tr>
+<tr><td>由果溯因</td><td>贝叶斯公式</td><td>全概率公式</td></tr>
+<tr><td>独立射击/系统可靠性</td><td>独立性 + 对立事件</td><td>概率公式</td></tr>
+<tr><td>独立重复 $n$ 次</td><td>二项分布/伯努利</td><td>—</td></tr>
+<tr><td>已知分布律求期望方差</td><td>$E(X)=\sum x_k p_k$</td><td>—</td></tr>
+<tr><td>已知密度求期望方差</td><td>$E(X)=\int x f(x)dx$</td><td>—</td></tr>
+<tr><td>$D(X)$ 快速计算</td><td>$E(X^2) - [E(X)]^2$</td><td>定义法</td></tr>
+<tr><td>正态分布求概率</td><td>标准化 + 查 $\Phi$ 表</td><td>$3\sigma$ 法则</td></tr>
+<tr><td>指数分布求概率</td><td>分布函数 $1 - e^{-\lambda x}$</td><td>无记忆性</td></tr>
+<tr><td>大量独立求和</td><td>中心极限定理</td><td>切比雪夫不等式</td></tr>
+<tr><td>概率上/下界估计</td><td>切比雪夫不等式</td><td>—</td></tr>
+<tr><td>协方差/相关系数</td><td>$E(XY) - E(X)E(Y)$</td><td>定义法</td></tr>
+</table>
+</div>
+
+<div class="key-box">
+<div class="key-title">✅ 概率论核心公式速记</div>
+<p><b>三大公式：</b></p>
+<ul>
+<li>乘法公式：$P(AB) = P(A) \cdot P(B|A)$</li>
+<li>全概率公式：$P(A) = \sum P(B_i) \cdot P(A|B_i)$</li>
+<li>贝叶斯公式：$P(B_k|A) = \dfrac{P(B_k) \cdot P(A|B_k)}{\sum P(B_i) \cdot P(A|B_i)}$</li>
+</ul>
+<p><b>数字特征：</b></p>
+<ul>
+<li>$E(X) = \sum x_k p_k$（离散）/ $\int x f(x) dx$（连续）</li>
+<li>$D(X) = E(X^2) - [E(X)]^2$</li>
+<li>$\text{Cov}(X,Y) = E(XY) - E(X) \cdot E(Y)$</li>
+<li>$\rho_{XY} = \dfrac{\text{Cov}(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}$</li>
+</ul>
+<p><b>重要分布参数：</b></p>
+<ul>
+<li>$B(n,p)$：$E = np$，$D = np(1-p)$</li>
+<li>$P(\lambda)$：$E = D = \lambda$</li>
+<li>$U(a,b)$：$E = \frac{a+b}{2}$，$D = \frac{(b-a)^2}{12}$</li>
+<li>$E(\lambda)$：$E = \frac{1}{\lambda}$，$D = \frac{1}{\lambda^2}$</li>
+<li>$N(\mu, \sigma^2)$：$E = \mu$，$D = \sigma^2$</li>
+</ul>
+</div>
+
+<div class="footer">
+概率论的核心框架：先识别题型，再选公式，最后验证条件。
+</div>
+
+</body>
+</html>

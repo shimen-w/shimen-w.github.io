@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>专升本高等数学 · 不定积分与定积分方法全面总结</title>
+
+<!-- MathJax 配置 -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    tags: 'none'
+  },
+  svg: { fontCache: 'global' },
+  startup: {
+    pageReady: () => {
+      return MathJax.startup.defaultPageReady().then(() => {
+        window.__mathjaxReady = true;
+      });
+    }
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', 'SimSun', serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333;
+  background: #fff;
+  padding: 40px 50px;
+  max-width: 210mm;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #003366;
+  text-align: center;
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #006699;
+  text-align: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.tagline {
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 4px;
+}
+
+.part-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #003366;
+  border-bottom: 2px solid #003366;
+  padding-bottom: 4px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  page-break-before: always;
+}
+.part-title:first-of-type { page-break-before: avoid; }
+
+.section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #006699;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  border-left: 4px solid #006699;
+  padding-left: 10px;
+}
+
+.method-box {
+  background: #f0f7ff;
+  border: 2px solid #006699;
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+.method-box .method-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 10px;
+}
+.method-box .core-idea {
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 6px;
+}
+.method-box p, .method-box li {
+  margin-bottom: 6px;
+}
+.method-box ul, .method-box ol {
+  margin-left: 2em;
+  margin-bottom: 8px;
+}
+.method-box ul li, .method-box ol li {
+  margin-bottom: 4px;
+}
+
+.example-box {
+  background: #fff5f5;
+  border: 1.5px solid #cc3300;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.example-box .example-title {
+  font-weight: 700;
+  color: #cc3300;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.example-box p { margin-bottom: 6px; }
+
+.tip-box {
+  background: #fffbe6;
+  border: 1.5px solid #996600;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.tip-box .tip-title {
+  font-weight: 700;
+  color: #996600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.key-box {
+  background: #f0fff0;
+  border: 1.5px solid #007844;
+  border-radius: 5px;
+  padding: 15px 18px;
+  margin-bottom: 15px;
+}
+.key-box .key-title {
+  font-weight: 700;
+  color: #007844;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+table th {
+  background: #006699;
+  color: white;
+  font-weight: 700;
+  padding: 8px 12px;
+  text-align: left;
+}
+table td {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+}
+table tr:nth-child(even) td { background: #f5f5f5; }
+
+.speed-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+.speed-table th {
+  background: #006699;
+  color: white;
+  font-weight: 700;
+  padding: 10px 12px;
+  text-align: center;
+}
+.speed-table td {
+  padding: 10px 12px;
+  border: 1px solid #aaa;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.formula-block {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.note-text {
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+}
+
+.bold { font-weight: 700; }
+.underline { text-decoration: underline; }
+.highlight { color: #cc3300; font-weight: 700; }
+
+.footer {
+  text-align: center;
+  font-size: 16px;
+  color: #006699;
+  font-weight: 700;
+  margin-top: 60px;
+  padding: 20px;
+  border-top: 2px solid #003366;
+}
+
+@media print {
+  body { padding: 20px 30px; }
+  .part-title { page-break-before: always; }
+  .method-box, .example-box { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<h1>专升本高等数学</h1>
+<div class="subtitle">不定积分与定积分方法全面总结</div>
+<div class="tagline">由浅入深 · 逐步扩展 · 逻辑通顺 · 条理清晰</div>
+
+<div class="tip-box">
+<div class="tip-title">📖 使用说明</div>
+<p>本文档系统梳理专升本高数中不定积分与定积分的全部核心方法，按照从基础到进阶的逻辑编排。每个方法配有典型习题与详细解析，建议按顺序学习，循序渐进。</p>
+<p><b>符号约定：</b> $\int f(x)\,dx$ 表示不定积分，$\int_a^b f(x)\,dx$ 表示定积分，$C$ 表示积分常数，$\Rightarrow$ 表示"推出"，$u,v$ 通常表示 $x$ 的函数。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第一篇 基础篇——积分的概念与基本公式</div>
+
+<div class="section-title">一、不定积分的概念与基本积分表</div>
+
+<div class="method-box">
+<div class="method-name">方法一：不定积分的概念与基本积分表</div>
+<p><b>核心概念：</b> 不定积分是求导的逆运算。若 $F'(x) = f(x)$，则</p>
+<p>$$\int f(x)\,dx = F(x) + C$$</p>
+<p>其中 $F(x)$ 称为 $f(x)$ 的一个原函数，$C$ 为任意常数。</p>
+<p><b>原函数存在定理：</b> 连续函数一定存在原函数。</p>
+<p><b>基本积分表（必须熟记）：</b></p>
+<table>
+<tr><th>积分公式</th><th>说明</th></tr>
+<tr><td>$\int k\,dx = kx + C$</td><td>常数积分</td></tr>
+<tr><td>$\int x^\mu\,dx = \dfrac{x^{\mu+1}}{\mu+1} + C \quad (\mu \neq -1)$</td><td>幂函数积分</td></tr>
+<tr><td>$\int \dfrac{1}{x}\,dx = \ln|x| + C$</td><td>注意绝对值</td></tr>
+<tr><td>$\int e^x\,dx = e^x + C$</td><td>指数函数</td></tr>
+<tr><td>$\int a^x\,dx = \dfrac{a^x}{\ln a} + C \quad (a>0, a\neq 1)$</td><td>一般指数</td></tr>
+<tr><td>$\int \sin x\,dx = -\cos x + C$</td><td>正弦</td></tr>
+<tr><td>$\int \cos x\,dx = \sin x + C$</td><td>余弦</td></tr>
+<tr><td>$\int \sec^2 x\,dx = \tan x + C$</td><td>正割平方</td></tr>
+<tr><td>$\int \csc^2 x\,dx = -\cot x + C$</td><td>余割平方</td></tr>
+<tr><td>$\int \dfrac{1}{1+x^2}\,dx = \arctan x + C$</td><td>反正切</td></tr>
+<tr><td>$\int \dfrac{1}{\sqrt{1-x^2}}\,dx = \arcsin x + C$</td><td>反正弦</td></tr>
+<tr><td>$\int \tan x\,dx = -\ln|\cos x| + C$</td><td>正切</td></tr>
+<tr><td>$\int \cot x\,dx = \ln|\sin x| + C$</td><td>余切</td></tr>
+<tr><td>$\int \sec x\,dx = \ln|\sec x + \tan x| + C$</td><td>正割</td></tr>
+<tr><td>$\int \csc x\,dx = \ln|\csc x - \cot x| + C$</td><td>余割</td></tr>
+</table>
+<p><b>不定积分的线性性质：</b></p>
+<p>$$\int [f(x) \pm g(x)]\,dx = \int f(x)\,dx \pm \int g(x)\,dx$$</p>
+<p>$$\int k\,f(x)\,dx = k\int f(x)\,dx \quad (k \neq 0)$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int \left(2x^3 - 3x^2 + 5x - 1\right)dx$。</p>
+<p><b>解：</b> 逐项积分：</p>
+<p>$$= 2\cdot\frac{x^4}{4} - 3\cdot\frac{x^3}{3} + 5\cdot\frac{x^2}{2} - x + C = \frac{x^4}{2} - x^3 + \frac{5x^2}{2} - x + C$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int \dfrac{x^2+x+1}{x}\,dx$。</p>
+<p><b>解：</b> 先拆分再逐项积分：</p>
+<p>$$\int \frac{x^2+x+1}{x}\,dx = \int \left(x + 1 + \frac{1}{x}\right)dx = \frac{x^2}{2} + x + \ln|x| + C$$</p>
+</div>
+
+<div class="section-title">二、直接积分法</div>
+
+<div class="method-box">
+<div class="method-name">方法二：直接积分法</div>
+<p><b>核心思想：</b> 通过代数变形（拆项、配方、三角恒等变换等），将被积函数化为基本积分表中已有的形式，然后直接使用公式积分。</p>
+<p><b>常用变形技巧：</b></p>
+<ul>
+<li>多项式除法：分式化为多项式 + 真分式</li>
+<li>三角恒等式：$\sin^2 x = \dfrac{1-\cos 2x}{2}$，$\cos^2 x = \dfrac{1+\cos 2x}{2}$</li>
+<li>因式分解：$\dfrac{1}{x^2-1} = \dfrac{1}{2}\left(\dfrac{1}{x-1}-\dfrac{1}{x+1}\right)$</li>
+<li>配方：$x^2+2x = (x+1)^2 - 1$</li>
+<li>分子加减项：$\dfrac{x}{x+1} = 1 - \dfrac{1}{x+1}$</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int \dfrac{1}{\sin^2 x \cos^2 x}\,dx$。</p>
+<p><b>解：</b> 利用 $1 = \sin^2 x + \cos^2 x$：</p>
+<p>$$\frac{1}{\sin^2 x \cos^2 x} = \frac{\sin^2 x + \cos^2 x}{\sin^2 x \cos^2 x} = \frac{1}{\cos^2 x} + \frac{1}{\sin^2 x} = \sec^2 x + \csc^2 x$$</p>
+<p>$$\int (\sec^2 x + \csc^2 x)\,dx = \tan x - \cot x + C$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int \dfrac{x^4}{1+x^2}\,dx$。</p>
+<p><b>解：</b> 分子降次：$x^4 = (x^4-1)+1 = (x^2-1)(x^2+1)+1$：</p>
+<p>$$\frac{x^4}{1+x^2} = x^2 - 1 + \frac{1}{x^2+1}$$</p>
+<p>$$\int \left(x^2 - 1 + \frac{1}{x^2+1}\right)dx = \frac{x^3}{3} - x + \arctan x + C$$</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第二篇 换元篇——变量替换法</div>
+
+<div class="section-title">三、第一换元法（凑微分法）</div>
+
+<div class="method-box">
+<div class="method-name">方法三：第一换元法（凑微分法）</div>
+<p><b>核心公式：</b> 若 $\int f(u)\,du = F(u) + C$，且 $u = \varphi(x)$ 可导，则：</p>
+<p>$$\int f[\varphi(x)]\varphi'(x)\,dx = \int f(u)\,du = F(u) + C = F[\varphi(x)] + C$$</p>
+<p><b>核心思想：</b> 将被积函数中某一部分的微分"凑"出来，使积分化为基本形式。</p>
+<p><b>常见凑微分模式（必须熟练）：</b></p>
+<table>
+<tr><th>被积函数特征</th><th>凑微分方式</th></tr>
+<tr><td>$f(ax+b)$</td><td>$dx = \dfrac{1}{a}d(ax+b)$</td></tr>
+<tr><td>$x^{n-1} f(x^n)$</td><td>$x^{n-1}dx = \dfrac{1}{n}d(x^n)$</td></tr>
+<tr><td>$\dfrac{f(\ln x)}{x}$</td><td>$\dfrac{dx}{x} = d(\ln x)$</td></tr>
+<tr><td>$e^x f(e^x)$</td><td>$e^x dx = d(e^x)$</td></tr>
+<tr><td>$f(\sin x)\cos x$</td><td>$\cos x\,dx = d(\sin x)$</td></tr>
+<tr><td>$f(\cos x)\sin x$</td><td>$\sin x\,dx = -d(\cos x)$</td></tr>
+<tr><td>$\dfrac{f(\arctan x)}{1+x^2}$</td><td>$\dfrac{dx}{1+x^2} = d(\arctan x)$</td></tr>
+<tr><td>$\dfrac{f(\arcsin x)}{\sqrt{1-x^2}}$</td><td>$\dfrac{dx}{\sqrt{1-x^2}} = d(\arcsin x)$</td></tr>
+<tr><td>$f(\tan x)\sec^2 x$</td><td>$\sec^2 x\,dx = d(\tan x)$</td></tr>
+<tr><td>$f(\sqrt{x})\dfrac{1}{\sqrt{x}}$</td><td>$\dfrac{dx}{\sqrt{x}} = 2d(\sqrt{x})$</td></tr>
+</table>
+<p><b>操作步骤：</b></p>
+<ol>
+<li>观察被积函数，识别"复合函数 + 其导数因子"的结构。</li>
+<li>设 $u = \varphi(x)$，凑出 $\varphi'(x)dx = du$。</li>
+<li>对 $u$ 积分得到 $F(u) + C$。</li>
+<li>回代 $u = \varphi(x)$。</li>
+</ol>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int \dfrac{e^{3x}}{1+e^{6x}}\,dx$。</p>
+<p><b>解：</b> 令 $u = e^{3x}$，则 $du = 3e^{3x}dx$，即 $e^{3x}dx = \dfrac{1}{3}du$：</p>
+<p>$$\int \frac{e^{3x}}{1+e^{6x}}\,dx = \int \frac{1}{1+u^2}\cdot\frac{du}{3} = \frac{1}{3}\arctan u + C = \frac{1}{3}\arctan(e^{3x}) + C$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int \dfrac{\ln x}{x}\,dx$。</p>
+<p><b>解：</b> 令 $u = \ln x$，则 $du = \dfrac{1}{x}dx$：</p>
+<p>$$\int \frac{\ln x}{x}\,dx = \int u\,du = \frac{u^2}{2} + C = \frac{(\ln x)^2}{2} + C$$</p>
+</div>
+
+<div class="section-title">四、第二换元法</div>
+
+<div class="method-box">
+<div class="method-name">方法四：第二换元法——三角换元与根式换元</div>
+<p><b>核心思想：</b> 当被积函数含有根号时，引入新变量 $t$ 替换 $x$，消去根号后再积分。</p>
+<p><b>三种标准三角换元：</b></p>
+<p><b>类型 A：</b> 含 $\sqrt{a^2 - x^2}$，令 $x = a\sin t$（$t \in [-\frac{\pi}{2}, \frac{\pi}{2}]$）：</p>
+<p>$$\sqrt{a^2-x^2} = a\cos t, \quad dx = a\cos t\,dt$$</p>
+<p><b>类型 B：</b> 含 $\sqrt{a^2 + x^2}$，令 $x = a\tan t$（$t \in (-\frac{\pi}{2}, \frac{\pi}{2})$）：</p>
+<p>$$\sqrt{a^2+x^2} = a\sec t, \quad dx = a\sec^2 t\,dt$$</p>
+<p><b>类型 C：</b> 含 $\sqrt{x^2 - a^2}$，令 $x = a\sec t$（$t \in (0, \frac{\pi}{2})$）：</p>
+<p>$$\sqrt{x^2-a^2} = a\tan t, \quad dx = a\sec t\tan t\,dt$$</p>
+<p><b>根式换元：</b></p>
+<ul>
+<li>含 $\sqrt[n]{ax+b}$，令 $t = \sqrt[n]{ax+b}$</li>
+<li>含 $\sqrt[n]{x}$ 和 $\sqrt[m]{x}$，令 $t = \sqrt[l]{x}$，$l$ 为 $n,m$ 的最小公倍数</li>
+</ul>
+<div class="tip-box">
+<div class="tip-title">⚠ 回代技巧</div>
+<p>三角换元后，结果的回代建议使用<b>辅助三角形</b>法：根据换元关系画直角三角形，从三角函数值直接读出边长关系，避免反三角函数的复杂转换。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int \sqrt{4-x^2}\,dx$。</p>
+<p><b>解：</b> 令 $x = 2\sin t$，则 $dx = 2\cos t\,dt$，$\sqrt{4-x^2} = 2\cos t$：</p>
+<p>$$\int \sqrt{4-x^2}\,dx = \int 2\cos t \cdot 2\cos t\,dt = 4\int \cos^2 t\,dt$$</p>
+<p>利用 $\cos^2 t = \dfrac{1+\cos 2t}{2}$：</p>
+<p>$$= 2t + 2\sin t\cos t + C$$</p>
+<p>回代：$t = \arcsin\dfrac{x}{2}$，$\sin t = \dfrac{x}{2}$，$\cos t = \dfrac{\sqrt{4-x^2}}{2}$：</p>
+<p>$$= 2\arcsin\frac{x}{2} + \frac{x\sqrt{4-x^2}}{2} + C$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int \dfrac{dx}{\sqrt{x^2+a^2}}$（$a>0$）。</p>
+<p><b>解：</b> 令 $x = a\tan t$，则 $dx = a\sec^2 t\,dt$，$\sqrt{x^2+a^2} = a\sec t$：</p>
+<p>$$\int \frac{dx}{\sqrt{x^2+a^2}} = \int \sec t\,dt = \ln|\sec t + \tan t| + C$$</p>
+<p>回代：$\tan t = \dfrac{x}{a}$，$\sec t = \dfrac{\sqrt{x^2+a^2}}{a}$：</p>
+<p>$$= \ln\left(x + \sqrt{x^2+a^2}\right) + C'$$</p>
+<p><b>重要结论：</b> $\int \dfrac{dx}{\sqrt{x^2 \pm a^2}} = \ln\left|x + \sqrt{x^2 \pm a^2}\right| + C$，可直接作为公式使用。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第三篇 分部篇——乘积的积分</div>
+
+<div class="section-title">五、分部积分法</div>
+
+<div class="method-box">
+<div class="method-name">方法五：分部积分法</div>
+<p><b>核心公式：</b></p>
+<p>$$\int u\,dv = uv - \int v\,du$$</p>
+<p><b>原理：</b> 将 $\int u\,dv$ 转化为 $\int v\,du$，适用于被积函数为<b>两类不同函数的乘积</b>。</p>
+<p><b>选 $u$ 的优先顺序（LIATE 法则）：</b></p>
+<ol>
+<li><b>L</b>ogarithmic（对数函数）：$\ln x$，$\log_a x$</li>
+<li><b>I</b>nverse trig（反三角函数）：$\arcsin x$，$\arctan x$</li>
+<li><b>A</b>lgebraic（代数/多项式）：$x^n$</li>
+<li><b>T</b>rigonometric（三角函数）：$\sin x$，$\cos x$</li>
+<li><b>E</b>xponential（指数函数）：$e^x$，$a^x$</li>
+</ol>
+<p>排在前面的选为 $u$，排在后面的与 $dx$ 一起凑成 $dv$。</p>
+<p><b>常见题型与解法：</b></p>
+<ul>
+<li>$x^n e^x$：$u=x^n$，$dv=e^x dx$，分部 $n$ 次后 $x^n$ 降为常数</li>
+<li>$x^n \sin x$ 或 $x^n \cos x$：$u=x^n$，$dv=\sin x\,dx$ 或 $\cos x\,dx$</li>
+<li>$x^n \ln x$：$u=\ln x$，$dv=x^n dx$</li>
+<li>$x^n \arctan x$：$u=\arctan x$，$dv=x^n dx$</li>
+<li>$e^x \sin x$：$u$ 可选任一，分部两次后<b>解方程</b>得结果</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int x^2 e^x\,dx$。</p>
+<p><b>解：</b> $u = x^2$，$dv = e^x dx$，$v = e^x$：</p>
+<p>$$\int x^2 e^x\,dx = x^2 e^x - 2\int x\,e^x\,dx$$</p>
+<p>对 $\int x\,e^x\,dx$ 再次分部：$u = x$，$dv = e^x dx$：</p>
+<p>$$\int x\,e^x\,dx = xe^x - e^x + C$$</p>
+<p>综合：</p>
+<p>$$\int x^2 e^x\,dx = e^x(x^2 - 2x + 2) + C$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int e^x \sin x\,dx$。</p>
+<p><b>解：</b> 取 $u = \sin x$，$dv = e^x dx$，$v = e^x$：</p>
+<p>$$I = e^x \sin x - \int e^x \cos x\,dx$$</p>
+<p>对 $\int e^x \cos x\,dx$ 再次分部：$u = \cos x$，$dv = e^x dx$：</p>
+<p>$$\int e^x \cos x\,dx = e^x \cos x + \int e^x \sin x\,dx = e^x \cos x + I$$</p>
+<p>代入回原式（设原积分为 $I$）：</p>
+<p>$$I = e^x \sin x - (e^x \cos x + I)$$</p>
+<p>$$2I = e^x(\sin x - \cos x) \quad \Rightarrow \quad I = \frac{e^x(\sin x - \cos x)}{2} + C$$</p>
+<p><b>说明：</b> 此类"循环型"分部积分是专升本常考题型，关键在于两次分部后出现原积分，解方程即可。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第四篇 特殊积分篇——有理函数与三角有理式</div>
+
+<div class="section-title">六、有理函数积分</div>
+
+<div class="method-box">
+<div class="method-name">方法六：有理函数积分——部分分式分解</div>
+<p><b>适用场景：</b> $\int \dfrac{P(x)}{Q(x)}\,dx$，其中 $P(x)$，$Q(x)$ 为多项式。</p>
+<p><b>步骤：</b></p>
+<ol>
+<li>若 $\deg P \geq \deg Q$，先用多项式除法化为多项式 + 真分式。</li>
+<li>将 $Q(x)$ 分解为一次和二次因式的乘积。</li>
+<li>将真分式分解为部分分式之和。</li>
+<li>分别积分。</li>
+</ol>
+<p><b>部分分式分解规则：</b></p>
+<ul>
+<li><b>情况 A：</b> 分母含 $(x-a)$，对应项 $\dfrac{A}{x-a}$</li>
+<li><b>情况 B：</b> 分母含 $(x-a)^k$，对应 $k$ 项：$\dfrac{A_1}{x-a} + \cdots + \dfrac{A_k}{(x-a)^k}$</li>
+<li><b>情况 C：</b> 分母含不可约二次因式 $(x^2+px+q)$，对应项 $\dfrac{Ax+B}{x^2+px+q}$</li>
+<li><b>情况 D：</b> 不可约二次因式的 $k$ 次方，对应 $k$ 项，分子均为一次式</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int \dfrac{x+3}{x^2-5x+6}\,dx$。</p>
+<p><b>解：</b> $x^2-5x+6 = (x-2)(x-3)$，设：</p>
+<p>$$\frac{x+3}{(x-2)(x-3)} = \frac{A}{x-2} + \frac{B}{x-3}$$</p>
+<p>通分：$x+3 = A(x-3) + B(x-2)$。</p>
+<p>取 $x=2$：$5 = -A$，$A=-5$。取 $x=3$：$6 = B$，$B=6$。</p>
+<p>$$\int \frac{x+3}{x^2-5x+6}\,dx = -5\ln|x-2| + 6\ln|x-3| + C$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int \dfrac{1}{x(x^2+1)}\,dx$。</p>
+<p><b>解：</b> 设 $\dfrac{1}{x(x^2+1)} = \dfrac{A}{x} + \dfrac{Bx+C}{x^2+1}$。</p>
+<p>通分：$1 = (A+B)x^2 + Cx + A$。比较系数：$A=1$，$B=-1$，$C=0$。</p>
+<p>$$\int \frac{1}{x(x^2+1)}\,dx = \int\left(\frac{1}{x} - \frac{x}{x^2+1}\right)dx = \ln|x| - \frac{1}{2}\ln(x^2+1) + C$$</p>
+</div>
+
+<div class="section-title">七、三角有理式积分</div>
+
+<div class="method-box">
+<div class="method-name">方法七：三角有理式积分——万能公式</div>
+<p><b>适用场景：</b> $\int R(\sin x, \cos x)\,dx$，其中 $R$ 为有理函数。</p>
+<p><b>万能代换（半角代换）：</b> 令 $t = \tan\dfrac{x}{2}$，则：</p>
+<p>$$\sin x = \frac{2t}{1+t^2}, \quad \cos x = \frac{1-t^2}{1+t^2}, \quad dx = \frac{2}{1+t^2}\,dt$$</p>
+<p>万能代换可将任何三角有理式化为有理函数积分，但计算量往往很大。</p>
+<p><b>优先尝试的简化策略：</b></p>
+<ul>
+<li>关于 $\cos x$ 为奇函数：令 $t=\sin x$</li>
+<li>关于 $\sin x$ 为奇函数：令 $t=\cos x$</li>
+<li>$R(-\sin x, -\cos x) = R(\sin x, \cos x)$：令 $t=\tan x$</li>
+<li>含 $\sin^2 x$ 或 $\cos^2 x$：用降幂公式</li>
+<li>含 $\sin mx\cos nx$ 等：用积化和差公式</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int \dfrac{1}{\sin x + \cos x}\,dx$。</p>
+<p><b>解：</b> 利用万能代换 $t = \tan\dfrac{x}{2}$：</p>
+<p>$$\int \frac{1}{\sin x + \cos x}\,dx = \int \frac{2\,dt}{2t+1-t^2} = \int \frac{-2\,dt}{(t-1)^2-2}$$</p>
+<p>$$= \frac{-1}{\sqrt{2}}\ln\left|\frac{t-1-\sqrt{2}}{t-1+\sqrt{2}}\right| + C$$</p>
+<p>回代 $t = \tan\dfrac{x}{2}$ 即可。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int \dfrac{\cos x}{1+\sin x}\,dx$。</p>
+<p><b>解：</b> 观察到分子 $\cos x$ 恰好是 $\sin x$ 的导数，直接凑微分：</p>
+<p>$$\int \frac{\cos x}{1+\sin x}\,dx = \int \frac{d(1+\sin x)}{1+\sin x} = \ln|1+\sin x| + C$$</p>
+<p><b>说明：</b> 并非所有三角有理式都需要万能代换，能凑微分或用恒等变换简化时应优先使用。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第五篇 定积分篇——定积分的计算</div>
+
+<div class="section-title">八、牛顿-莱布尼茨公式</div>
+
+<div class="method-box">
+<div class="method-name">方法八：牛顿-莱布尼茨公式</div>
+<p><b>核心公式：</b> 若 $f(x)$ 在 $[a,b]$ 上连续，$F(x)$ 是 $f(x)$ 的一个原函数，则：</p>
+<p>$$\int_a^b f(x)\,dx = F(b) - F(a) = F(x)\Big|_a^b$$</p>
+<p><b>意义：</b> 将定积分（极限求和）的计算转化为求原函数的值，是定积分计算的基石。</p>
+<p><b>定积分的性质：</b></p>
+<ul>
+<li>$\int_a^b f(x)\,dx = -\int_b^a f(x)\,dx$</li>
+<li>$\int_a^a f(x)\,dx = 0$</li>
+<li>$\int_a^b [kf(x)+lg(x)]\,dx = k\int_a^b f(x)\,dx + l\int_a^b g(x)\,dx$</li>
+<li>$\int_a^b f(x)\,dx = \int_a^c f(x)\,dx + \int_c^b f(x)\,dx$</li>
+<li>$\int_a^b 1\,dx = b - a$</li>
+</ul>
+<div class="tip-box">
+<div class="tip-title">⚠ 注意事项</div>
+<ul>
+<li>使用牛顿-莱布尼茨公式前，必须确认 $f(x)$ 在 $[a,b]$ 上<b>连续</b>。</li>
+<li>若 $f(x)$ 在 $[a,b]$ 上有瑕点（无定义或无穷），不能直接用此公式，需按广义积分处理。</li>
+<li>求出的不定积分中的常数 $C$ 在定积分中自动消去，无需写出。</li>
+</ul>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int_0^1 (3x^2 - 2x + 1)\,dx$。</p>
+<p><b>解：</b></p>
+<p>$$\int_0^1 (3x^2-2x+1)\,dx = \left[x^3 - x^2 + x\right]_0^1 = (1-1+1) - 0 = 1$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int_0^{\frac{\pi}{2}} \sin^2 \dfrac{x}{2}\,dx$。</p>
+<p><b>解：</b> 降幂：$\sin^2\dfrac{x}{2} = \dfrac{1-\cos x}{2}$：</p>
+<p>$$\int_0^{\frac{\pi}{2}} \frac{1-\cos x}{2}\,dx = \frac{1}{2}\left[x - \sin x\right]_0^{\frac{\pi}{2}} = \frac{\pi-2}{4}$$</p>
+</div>
+
+<div class="section-title">九、定积分的换元法</div>
+
+<div class="method-box">
+<div class="method-name">方法九：定积分的换元法</div>
+<p><b>核心公式：</b> 设 $f(x)$ 在 $[a,b]$ 上连续，$x = \varphi(t)$ 满足 $\varphi(\alpha) = a$，$\varphi(\beta) = b$，且 $\varphi(t)$ 单调连续可导，则：</p>
+<p>$$\int_a^b f(x)\,dx = \int_\alpha^\beta f[\varphi(t)]\varphi'(t)\,dt$$</p>
+<p><b>与不定积分换元的区别：</b></p>
+<ul>
+<li><b>换元必换限</b>：$x$ 的积分限 $[a,b]$ 对应变为 $t$ 的积分限 $[\alpha, \beta]$。</li>
+<li><b>无需回代</b>：求出 $t$ 的原函数后直接代入 $t$ 的上下限。</li>
+<li>若使用凑微分法（不引入新变量），则<b>不换限</b>。</li>
+</ul>
+<div class="key-box">
+<div class="key-title">✅ 换元法的关键原则</div>
+<ul>
+<li>引入新变量 $t$ → <b>必须</b>换积分限</li>
+<li>不引入新变量（凑微分）→ <b>不换</b>积分限</li>
+<li>变换函数 $\varphi(t)$ 必须单调，保证一一对应</li>
+</ul>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int_0^4 \dfrac{dx}{1+\sqrt{x}}$。</p>
+<p><b>解：</b> 令 $t = \sqrt{x}$，则 $x = t^2$，$dx = 2t\,dt$。换限：$x=0 \Rightarrow t=0$；$x=4 \Rightarrow t=2$。</p>
+<p>$$\int_0^4 \frac{dx}{1+\sqrt{x}} = \int_0^2 \frac{2t}{1+t}\,dt = 2\int_0^2\left(1-\frac{1}{1+t}\right)dt = 2\left[t - \ln(1+t)\right]_0^2 = 2(2 - \ln 3)$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int_0^{\ln 2} \sqrt{e^x - 1}\,dx$。</p>
+<p><b>解：</b> 令 $t = \sqrt{e^x-1}$，则 $x = \ln(1+t^2)$，$dx = \dfrac{2t}{1+t^2}\,dt$。换限：$x=0 \Rightarrow t=0$；$x=\ln 2 \Rightarrow t=1$。</p>
+<p>$$\int_0^{\ln 2}\sqrt{e^x-1}\,dx = \int_0^1 \frac{2t^2}{1+t^2}\,dt = 2\int_0^1\left(1-\frac{1}{1+t^2}\right)dt$$</p>
+<p>$$= 2\left[t - \arctan t\right]_0^1 = 2 - \frac{\pi}{2}$$</p>
+</div>
+
+<div class="section-title">十、定积分的分部积分法</div>
+
+<div class="method-box">
+<div class="method-name">方法十：定积分的分部积分法</div>
+<p><b>核心公式：</b></p>
+<p>$$\int_a^b u\,dv = \left[uv\right]_a^b - \int_a^b v\,du$$</p>
+<p><b>选 $u$ 的原则</b> 与不定积分的 LIATE 法则完全相同。</p>
+<p><b>华里士公式（Wallis 公式）——重要结论：</b></p>
+<p>$$\int_0^{\frac{\pi}{2}} \sin^n x\,dx = \int_0^{\frac{\pi}{2}} \cos^n x\,dx = \begin{cases} \dfrac{(n-1)!!}{n!!} & n \text{ 为奇数} \\[6pt] \dfrac{(n-1)!!}{n!!} \cdot \dfrac{\pi}{2} & n \text{ 为偶数} \end{cases}$$</p>
+<p><b>常用具体值：</b></p>
+<ul>
+<li>$\int_0^{\pi/2}\sin^2 x\,dx = \dfrac{\pi}{4}$</li>
+<li>$\int_0^{\pi/2}\sin^3 x\,dx = \dfrac{2}{3}$</li>
+<li>$\int_0^{\pi/2}\sin^4 x\,dx = \dfrac{3\pi}{16}$</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int_0^1 x e^x\,dx$。</p>
+<p><b>解：</b> $u = x$，$dv = e^x dx$，$v = e^x$：</p>
+<p>$$\int_0^1 x e^x\,dx = \left[x e^x\right]_0^1 - \int_0^1 e^x\,dx = e - (e-1) = 1$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int_0^{\frac{\pi}{2}} x \cos x\,dx$。</p>
+<p><b>解：</b> $u = x$，$dv = \cos x\,dx$，$v = \sin x$：</p>
+<p>$$\int_0^{\frac{\pi}{2}} x\cos x\,dx = \left[x\sin x\right]_0^{\frac{\pi}{2}} - \int_0^{\frac{\pi}{2}}\sin x\,dx = \frac{\pi}{2} - 1$$</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第六篇 技巧篇——定积分的对称性与特殊技巧</div>
+
+<div class="section-title">十一、对称区间上的积分</div>
+
+<div class="method-box">
+<div class="method-name">方法十一：对称区间上的积分——奇偶函数法</div>
+<p><b>核心公式：</b> 设 $f(x)$ 在 $[-a, a]$ 上可积：</p>
+<p><b>若 $f(x)$ 为偶函数</b>（$f(-x)=f(x)$）：</p>
+<p>$$\int_{-a}^a f(x)\,dx = 2\int_0^a f(x)\,dx$$</p>
+<p><b>若 $f(x)$ 为奇函数</b>（$f(-x)=-f(x)$）：</p>
+<p>$$\int_{-a}^a f(x)\,dx = 0$$</p>
+<p><b>使用要点：</b></p>
+<ul>
+<li>首先检查积分区间是否对称，若不对称可考虑拆分或换元使其对称。</li>
+<li>判断被积函数的奇偶性，有时需将复杂函数拆分。</li>
+<li>非奇非偶函数：可用 $\int_{-a}^a f(x)\,dx = \int_0^a [f(x)+f(-x)]\,dx$ 简化。</li>
+</ul>
+<div class="key-box">
+<div class="key-title">✅ 常用奇偶函数</div>
+<p><b>奇函数：</b> $x$，$x^3$，$\sin x$，$\tan x$，$\arcsin x$，$\arctan x$，$\ln\left(\dfrac{1+x}{1-x}\right)$</p>
+<p><b>偶函数：</b> $x^2$，$\cos x$，$|x|$，$e^{|x|}$，$\ln(1+x^2)$</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int_{-1}^1 \left(x^3\cos x + x^2\sin x\right)dx$。</p>
+<p><b>解：</b> $x^3\cos x$ 是奇函数（奇×偶=奇），$x^2\sin x$ 是奇函数（偶×奇=奇）。</p>
+<p>$$\int_{-1}^1 x^3\cos x\,dx = 0, \quad \int_{-1}^1 x^2\sin x\,dx = 0$$</p>
+<p>故原式 $= 0$。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int_{-2}^2 \left(x^4 + x^2\arctan x\right)dx$。</p>
+<p><b>解：</b> $x^4$ 是偶函数，$x^2\arctan x$ 是奇函数：</p>
+<p>$$= 2\int_0^2 x^4\,dx + 0 = 2\left[\frac{x^5}{5}\right]_0^2 = \frac{64}{5}$$</p>
+</div>
+
+<div class="section-title">十二、周期函数的积分与区间再现</div>
+
+<div class="method-box">
+<div class="method-name">方法十二：周期函数的积分与区间再现公式</div>
+<p><b>周期函数积分性质：</b> 若 $f(x)$ 以 $T$ 为周期，则对任意 $a$：</p>
+<p>$$\int_a^{a+T} f(x)\,dx = \int_0^T f(x)\,dx$$</p>
+<p><b>区间再现公式：</b></p>
+<p>$$\int_0^a f(x)\,dx = \int_0^a f(a-x)\,dx$$</p>
+<p><b>证明：</b> 令 $x = a - t$，$dx = -dt$：</p>
+<p>$$\int_0^a f(x)\,dx = \int_a^0 f(a-t)(-dt) = \int_0^a f(a-t)\,dt = \int_0^a f(a-x)\,dx$$</p>
+<p><b>区间再现公式的应用场景：</b></p>
+<ul>
+<li>当 $f(x) + f(a-x)$ 比 $f(x)$ 更容易积分时</li>
+<li>特别适用于 $[0, \pi/2]$ 区间上含 $\sin$ 和 $\cos$ 的积分</li>
+<li>经典推论：$\int_0^{\pi/2} \sin^n x\,dx = \int_0^{\pi/2} \cos^n x\,dx$</li>
+</ul>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\int_0^\pi x \sin x\,dx$。</p>
+<p><b>解：</b> 利用区间再现公式（$a=\pi$）：</p>
+<p>$$I = \int_0^\pi x\sin x\,dx = \int_0^\pi (\pi-x)\sin x\,dx = \pi\int_0^\pi \sin x\,dx - I$$</p>
+<p>$$2I = \pi \cdot 2 \quad \Rightarrow \quad I = \pi$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int_0^{\frac{\pi}{2}} \dfrac{\sin x}{\sin x + \cos x}\,dx$。</p>
+<p><b>解：</b> 利用区间再现公式（$a=\pi/2$）：</p>
+<p>$$I = \int_0^{\frac{\pi}{2}} \frac{\sin x}{\sin x + \cos x}\,dx = \int_0^{\frac{\pi}{2}} \frac{\cos x}{\cos x + \sin x}\,dx$$</p>
+<p>两式相加：</p>
+<p>$$2I = \int_0^{\frac{\pi}{2}} 1\,dx = \frac{\pi}{2} \quad \Rightarrow \quad I = \frac{\pi}{4}$$</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第七篇 变限积分篇——变限积分的性质与应用</div>
+
+<div class="section-title">十三、变限积分求导</div>
+
+<div class="method-box">
+<div class="method-name">方法十三：变限积分求导</div>
+<p><b>基本公式：</b> 若 $f(x)$ 连续，$\varphi(x)$，$\psi(x)$ 可导，则：</p>
+<p>$$\frac{d}{dx}\int_{\varphi(x)}^{\psi(x)} f(t)\,dt = f[\psi(x)]\psi'(x) - f[\varphi(x)]\varphi'(x)$$</p>
+<p><b>特例：</b></p>
+<ul>
+<li>$\dfrac{d}{dx}\int_a^x f(t)\,dt = f(x)$</li>
+<li>$\dfrac{d}{dx}\int_x^a f(t)\,dt = -f(x)$</li>
+<li>$\dfrac{d}{dx}\int_a^{x^2} f(t)\,dt = 2x\,f(x^2)$</li>
+<li>$\dfrac{d}{dx}\int_{x^2}^{x^3} f(t)\,dt = 3x^2 f(x^3) - 2x\,f(x^2)$</li>
+</ul>
+<p><b>关键认知：</b> $\int_a^x f(t)\,dt$ 是 $f(x)$ 的一个原函数，其导数就是 $f(x)$。</p>
+<p><b>复合形式求导：</b> 若被积函数也含 $x$，需将 $x$ 提到积分号外再求导：</p>
+<p>$$\frac{d}{dx}\int_a^x x\,f(t)\,dt = \frac{d}{dx}\left[x\int_a^x f(t)\,dt\right] = \int_a^x f(t)\,dt + x\,f(x)$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>求 $\dfrac{d}{dx}\int_0^{x^2} e^{-t^2}\,dt$。</p>
+<p><b>解：</b> 上限为 $x^2$，由变限积分求导公式：</p>
+<p>$$\frac{d}{dx}\int_0^{x^2} e^{-t^2}\,dt = e^{-(x^2)^2}\cdot 2x = 2x\,e^{-x^4}$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求极限 $\lim_{x \to 0} \dfrac{\int_0^x \sin t^2\,dt}{x^3}$。</p>
+<p><b>解：</b> $0/0$ 型，洛必达法则：</p>
+<p>$$\lim_{x \to 0} \frac{\int_0^x \sin t^2\,dt}{x^3} = \lim_{x \to 0} \frac{\sin(x^2)}{3x^2} = \frac{1}{3}$$</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第八篇 进阶篇——广义积分</div>
+
+<div class="section-title">十四、无穷限广义积分</div>
+
+<div class="method-box">
+<div class="method-name">方法十四：无穷限广义积分</div>
+<p><b>定义：</b></p>
+<p>$$\int_a^{+\infty} f(x)\,dx = \lim_{b \to +\infty} \int_a^b f(x)\,dx$$</p>
+<p>若极限存在，称广义积分<b>收敛</b>；否则称<b>发散</b>。</p>
+<p><b>计算方法：</b> 先求不定积分得原函数 $F(x)$，再取极限：</p>
+<p>$$\int_a^{+\infty} f(x)\,dx = F(+\infty) - F(a)$$</p>
+<p>其中 $F(+\infty) = \lim_{x \to +\infty} F(x)$。</p>
+<p><b>$p$-积分收敛性：</b> $\int_1^{+\infty}\dfrac{dx}{x^p}$ 当 $p > 1$ 时收敛，$p \leq 1$ 时发散。</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>判断 $\int_1^{+\infty} \dfrac{1}{x^2}\,dx$ 的收敛性并求值。</p>
+<p><b>解：</b> $p=2 > 1$，收敛。</p>
+<p>$$\int_1^{+\infty}\frac{1}{x^2}\,dx = \left[-\frac{1}{x}\right]_1^{+\infty} = 0 + 1 = 1$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>求 $\int_0^{+\infty} x e^{-x}\,dx$。</p>
+<p><b>解：</b> 分部积分：</p>
+<p>$$\int_0^{+\infty} x e^{-x}\,dx = \left[-xe^{-x}\right]_0^{+\infty} + \int_0^{+\infty} e^{-x}\,dx = 0 + 1 = 1$$</p>
+</div>
+
+<div class="section-title">十五、无界函数广义积分</div>
+
+<div class="method-box">
+<div class="method-name">方法十五：无界函数广义积分（瑕积分）</div>
+<p><b>定义：</b> 若 $f(x)$ 在 $a$ 的某邻域内无界（$a$ 为<b>瑕点</b>），则：</p>
+<p>$$\int_a^b f(x)\,dx = \lim_{\varepsilon \to 0^+}\int_{a+\varepsilon}^b f(x)\,dx$$</p>
+<p><b>常见瑕点：</b> 函数在该点趋于无穷，如 $\dfrac{1}{\sqrt{x}}$ 在 $x=0$ 处，$\dfrac{1}{1-x}$ 在 $x=1$ 处。</p>
+<p><b>无界函数 $p$-积分：</b> $\int_0^1 \dfrac{dx}{x^p}$ 当 $p < 1$ 时收敛，$p \geq 1$ 时发散。</p>
+<div class="tip-box">
+<div class="tip-title">⚠ 与无穷积分的 $p$-判别法方向相反！</div>
+<ul>
+<li>无穷积分 $\int_1^{+\infty}\dfrac{dx}{x^p}$：$p > 1$ 收敛</li>
+<li>瑕积分 $\int_0^1\dfrac{dx}{x^p}$：$p < 1$ 收敛</li>
+</ul>
+<p>这是专升本考试中常见的<b>易混淆点</b>。</p>
+</div>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 1</div>
+<p>判断 $\int_0^1 \dfrac{dx}{\sqrt{x}}$ 的收敛性并求值。</p>
+<p><b>解：</b> $x=0$ 为瑕点，$p = 1/2 < 1$，收敛。</p>
+<p>$$\int_0^1 \frac{dx}{\sqrt{x}} = \lim_{\varepsilon\to 0^+}\left[2\sqrt{x}\right]_\varepsilon^1 = 2$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">习题 2</div>
+<p>判断 $\int_0^1 \dfrac{dx}{x}\,dx$ 的收敛性。</p>
+<p><b>解：</b> $x=0$ 为瑕点，$p = 1$，发散。</p>
+<p>$$\int_0^1 \frac{dx}{x} = \lim_{\varepsilon\to 0^+}\left[\ln x\right]_\varepsilon^1 = +\infty$$</p>
+<p>故积分发散。</p>
+</div>
+
+<!-- ================================================================== -->
+<div class="part-title">第九篇 综合策略篇——方法选择与实战思路</div>
+
+<div class="section-title">十六、积分方法选择指南</div>
+
+<div class="key-box">
+<div class="key-title">✅ 不定积分方法选择决策流程</div>
+<p>拿到一道不定积分题，按以下顺序思考：</p>
+<ol>
+<li><b>第一步：能否直接积分</b>——变形后能否套用基本积分公式？能则直接积。</li>
+<li><b>第二步：能否凑微分</b>——被积函数是否含"复合函数 + 其导数因子"？</li>
+<li><b>第三步：含根号？</b>
+<ul>
+<li>$\sqrt{a^2-x^2}$ → $x = a\sin t$</li>
+<li>$\sqrt{a^2+x^2}$ → $x = a\tan t$</li>
+<li>$\sqrt{x^2-a^2}$ → $x = a\sec t$</li>
+<li>$\sqrt[n]{ax+b}$ → $t = \sqrt[n]{ax+b}$</li>
+</ul>
+</li>
+<li><b>第四步：乘积型？</b>——两类不同函数相乘，用分部积分（LIATE 法则选 $u$）。</li>
+<li><b>第五步：有理函数？</b>——部分分式分解后逐项积分。</li>
+<li><b>第六步：三角有理式？</b>——先试简化策略，最后万能代换。</li>
+</ol>
+</div>
+
+<div class="key-box">
+<div class="key-title">✅ 定积分方法选择决策流程</div>
+<ol>
+<li><b>第一步：检查积分区间对称性</b>——对称区间优先用奇偶性。</li>
+<li><b>第二步：检查是否含特殊结构</b>
+<ul>
+<li>$[0, a]$ 上含 $f(x)+f(a-x)$ → 区间再现公式</li>
+<li>含 $\sin^n x$ 或 $\cos^n x$ 在 $[0, \pi/2]$ → 华里士公式</li>
+<li>含变限积分 → 求导公式 + 洛必达</li>
+</ul>
+</li>
+<li><b>第三步：直接用不定积分方法 + 牛顿-莱布尼茨</b>——换元时注意<b>换元必换限</b>。</li>
+<li><b>第四步：判断是否广义积分</b>——有瑕点或无穷限时，必须用极限定义。</li>
+</ol>
+</div>
+
+<div class="section-title">十七、综合习题</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 1</div>
+<p>求 $\int \dfrac{x\arctan x}{\sqrt{1+x^2}}\,dx$。</p>
+<p><b>解：</b> 注意到 $\dfrac{x}{\sqrt{1+x^2}}dx = d(\sqrt{1+x^2})$，故：</p>
+<p>$$\int \frac{x\arctan x}{\sqrt{1+x^2}}\,dx = \int \arctan x\,d(\sqrt{1+x^2})$$</p>
+<p>分部积分：</p>
+<p>$$= \sqrt{1+x^2}\arctan x - \int \frac{dx}{\sqrt{1+x^2}} = \sqrt{1+x^2}\arctan x - \ln\left(x+\sqrt{1+x^2}\right) + C$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 2</div>
+<p>求 $\int_0^{\frac{\pi}{4}} \dfrac{x}{\cos^2 x}\,dx$。</p>
+<p><b>解：</b> 分部积分，$u = x$，$dv = \sec^2 x\,dx$，$v = \tan x$：</p>
+<p>$$\int_0^{\frac{\pi}{4}} \frac{x}{\cos^2 x}\,dx = \left[x\tan x\right]_0^{\frac{\pi}{4}} - \int_0^{\frac{\pi}{4}} \tan x\,dx$$</p>
+<p>$$= \frac{\pi}{4} - \left[-\ln|\cos x|\right]_0^{\frac{\pi}{4}} = \frac{\pi}{4} - \frac{1}{2}\ln 2$$</p>
+</div>
+
+<div class="example-box">
+<div class="example-title">综合习题 3</div>
+<p>求 $\int_{-\infty}^{+\infty} \dfrac{1}{1+x^2}\,dx$。</p>
+<p><b>解：</b></p>
+<p>$$\int_{-\infty}^{+\infty}\frac{1}{1+x^2}\,dx = \left[\arctan x\right]_{-\infty}^{+\infty} = \frac{\pi}{2} - \left(-\frac{\pi}{2}\right) = \pi$$</p>
+</div>
+
+<div class="section-title">十八、积分方法速查表</div>
+
+<div class="key-box">
+<div class="key-title">✅ 积分题型与方法速查</div>
+<table class="speed-table">
+<tr><th>题型特征</th><th>首选方法</th><th>备用方法</th></tr>
+<tr><td>多项式/基本函数</td><td>直接积分法</td><td>—</td></tr>
+<tr><td>$f[\varphi(x)]\varphi'(x)$ 型</td><td>凑微分法</td><td>换元法</td></tr>
+<tr><td>含 $\sqrt{a^2-x^2}$</td><td>$x=a\sin t$ 换元</td><td>—</td></tr>
+<tr><td>含 $\sqrt{a^2+x^2}$</td><td>$x=a\tan t$ 换元</td><td>—</td></tr>
+<tr><td>含 $\sqrt{x^2-a^2}$</td><td>$x=a\sec t$ 换元</td><td>—</td></tr>
+<tr><td>含 $\sqrt[n]{ax+b}$</td><td>$t=\sqrt[n]{ax+b}$ 换元</td><td>—</td></tr>
+<tr><td>$x^n e^x$ / $x^n\sin x$</td><td>分部积分（$u=x^n$）</td><td>—</td></tr>
+<tr><td>$x^n\ln x$ / $x^n\arctan x$</td><td>分部（$u=\ln x$ 或 $\arctan x$）</td><td>—</td></tr>
+<tr><td>$e^x\sin x$ 型</td><td>分部两次，解方程</td><td>—</td></tr>
+<tr><td>有理分式</td><td>部分分式分解</td><td>—</td></tr>
+<tr><td>三角有理式</td><td>恒等变换/凑微分</td><td>万能代换</td></tr>
+<tr><td>对称区间 $[-a,a]$</td><td>奇偶函数法</td><td>换元法</td></tr>
+<tr><td>$[0,a]$ 上含 $f(x)+f(a-x)$</td><td>区间再现公式</td><td>—</td></tr>
+<tr><td>$\int_0^{\pi/2}\sin^n x$</td><td>华里士公式</td><td>分部递推</td></tr>
+<tr><td>含变限积分 $\int_a^x f(t)dt$</td><td>变限求导公式</td><td>洛必达法则</td></tr>
+<tr><td>无穷区间 $\int_a^{+\infty}$</td><td>极限定义 + 牛-莱公式</td><td>比较判别法</td></tr>
+<tr><td>无界函数（瑕点）</td><td>极限定义 + 牛-莱公式</td><td>$p$-判别法</td></tr>
+</table>
+</div>
+
+<div class="footer">
+积分求解的核心原则：先化简，再选法，换元必换限，分部选对 $u$。
+</div>
+
+</body>
+</html>

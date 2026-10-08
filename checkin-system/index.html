@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>学习打卡 · Perseverance and Endeavor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo">Perseverance and Endeavor</a>
+    <nav class="nav-links">
+      <a href="/">返回主站</a>
+      <a href="/learning-path/">学习路径</a>
+      <a href="index.html" class="active">学习打卡</a>
+    </nav>
+    <div class="header-auth" id="headerAuth"></div>
+  </div>
+</header>
+
+<main class="container section">
+  <!-- 用户卡片 -->
+  <div class="user-dashboard">
+    <div class="user-card">
+      <div class="user-avatar" id="userAvatar">学</div>
+      <div class="user-info">
+        <h2 id="userName" style="cursor:pointer" title="点击修改昵称">同学</h2>
+        <div class="user-level" id="userLevel">🔵 进阶学员</div>
+        <div class="user-stats">
+          <span>累计 <strong id="totalHours">0</strong> 小时</span>
+          <span>|</span>
+          <span>连续打卡 <strong id="streakDays">0</strong> 天</span>
+          <span>|</span>
+          <span>总打卡 <strong id="totalDays">0</strong> 次</span>
+        </div>
+      </div>
+    </div>
+    <div class="level-progress-wrap">
+      <div class="level-progress-labels">
+        <span id="curLevelName">进阶学员</span>
+        <span id="nextLevelName">资深学员</span>
+      </div>
+      <div class="level-progress-bar">
+        <div class="level-progress-fill" id="levelProgressFill" style="width:0%"></div>
+      </div>
+      <div class="level-progress-hint" id="levelProgressHint"></div>
+    </div>
+  </div>
+
+  <!-- 打卡区域 -->
+  <section class="checkin-section">
+    <h2 class="section-title">今日打卡</h2>
+    <div class="checkin-card" id="checkinCard">
+      <div class="checkin-date" id="checkinDate"></div>
+      <div class="checkin-form" id="checkinForm">
+        <label class="input-label">今日学习时长（分钟）</label>
+        <div class="input-row">
+          <input type="number" id="studyMinutes" class="input-field" min="1" max="600" placeholder="例如：90" />
+          <button class="btn btn-primary" onclick="submitCheckin()">提交打卡</button>
+        </div>
+        <div class="quick-btns">
+          <button class="quick-btn" onclick="setMinutes(30)">30min</button>
+          <button class="quick-btn" onclick="setMinutes(60)">1h</button>
+          <button class="quick-btn" onclick="setMinutes(90)">1.5h</button>
+          <button class="quick-btn" onclick="setMinutes(120)">2h</button>
+          <button class="quick-btn" onclick="setMinutes(180)">3h</button>
+        </div>
+        <div class="checkin-note-wrap">
+          <label class="input-label">学习笔记（选填）</label>
+          <textarea id="checkinNote" class="input-field textarea" placeholder="今天学了什么？有什么收获？"></textarea>
+        </div>
+      </div>
+      <div class="checkin-done" id="checkinDone" style="display:none">
+        <div class="done-icon">✅</div>
+        <p>今天已打卡！</p>
+        <p class="done-sub">今日学习 <strong id="todayHours">0</strong> 分钟</p>
+        <p class="done-note" id="todayNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 日历热力图 -->
+  <section class="calendar-section">
+    <h2 class="section-title">打卡日历</h2>
+    <div class="calendar-nav">
+      <button class="btn btn-outline btn-sm" onclick="prevMonth()">‹ 上月</button>
+      <span id="calTitle"></span>
+      <button class="btn btn-outline btn-sm" onclick="nextMonth()">下月 ›</button>
+    </div>
+    <div id="calendarGrid" class="calendar-grid"></div>
+    <div class="calendar-legend">
+      <span class="legend-item"><span class="cal-day cal-0"></span> 未打卡</span>
+      <span class="legend-item"><span class="cal-day cal-1"></span> 1–60min</span>
+      <span class="legend-item"><span class="cal-day cal-2"></span> 60–120min</span>
+      <span class="legend-item"><span class="cal-day cal-3"></span> 120–180min</span>
+      <span class="legend-item"><span class="cal-day cal-4"></span> 180min+</span>
+    </div>
+  </section>
+
+  <!-- 打卡记录 -->
+  <section class="history-section">
+    <h2 class="section-title">我的打卡记录</h2>
+    <div id="historyList" class="history-list"></div>
+  </section>
+</main>
+
+<div id="detailModal" class="modal-overlay" onclick="closeModalOutside(event,'detailModal')">
+  <div class="modal modal-sm">
+    <button class="modal-close" onclick="closeModal('detailModal')">×</button>
+    <h2 class="modal-title" id="detailDate"></h2>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2026 Perseverance and Endeavor · <a href="/">返回主站</a></p>
+    <p class="footer-note">打卡数据只保存在当前浏览器（localStorage），换设备或清除浏览器数据会丢失。</p>
+  </div>
+</footer>
+
+<script>
+// ============ 本地打卡系统（纯浏览器存储，无需服务器） ============
+const KEY_RECORDS = 'checkin_records';
+const KEY_NAME = 'checkin_name';
+
+const LEVEL_COLORS = ['#e2e8f0','#bae6fd','#7dd3fc','#38bdf8','#0ea5e9','#0369a1'];
+const LEVELS = [
+  { name:'新手学员', lv:1, minHours:0,   maxHours:10  },
+  { name:'初级学员', lv:2, minHours:10,  maxHours:30  },
+  { name:'进阶学员', lv:3, minHours:30,  maxHours:60  },
+  { name:'资深学员', lv:4, minHours:60,  maxHours:100 },
+  { name:'精英学员', lv:5, minHours:100, maxHours:200 },
+  { name:'传奇学员', lv:6, minHours:200, maxHours:Infinity },
+];
+
+function getLevel(hours) {
+  for (let i = LEVELS.length - 1; i >= 0; i--) {
+    if (hours >= LEVELS[i].minHours) return { ...LEVELS[i], index: i };
+  }
+  return { ...LEVELS[0], index: 0 };
+}
+function lvBadge(lv) { return `<span class="lv-badge lv${lv}" style="display:inline-block"></span>`; }
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function iso(d) { return d.toISOString().slice(0,10); }
+
+// ---- 状态 ----
+let records = [];
+let name = '';
+let calYear = new Date().getFullYear();
+let calMonth = new Date().getMonth();
+
+function load() {
+  try { records = JSON.parse(localStorage.getItem(KEY_RECORDS) || '[]'); } catch(e) { records = []; }
+  name = localStorage.getItem(KEY_NAME) || '';
+}
+function save() { try { localStorage.setItem(KEY_RECORDS, JSON.stringify(records)); } catch(e){} }
+
+function totalMinutes() { return records.reduce((a,r)=>a+(r.minutes||0),0); }
+function computeStreak() {
+  if (!records.length) return 0;
+  const days = new Set(records.map(r=>r.date));
+  const today = todayStr();
+  let d = new Date(today + 'T00:00:00');
+  if (!days.has(today)) {
+    d.setDate(d.getDate() - 1);
+    if (!days.has(iso(d))) return 0;
+  }
+  let streak = 0;
+  while (days.has(iso(d))) { streak++; d.setDate(d.getDate() - 1); }
+  return streak;
+}
+
+// ---- toast / modal ----
+let toastTimer;
+function toast(msg, type) {
+  let el = document.getElementById('toast');
+  if (!el) { el = document.createElement('div'); el.id = 'toast'; el.className = 'toast'; document.body.appendChild(el); }
+  el.textContent = msg;
+  el.className = 'toast show' + (type ? ' toast-' + type : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>{ el.className = 'toast'; }, 2800);
+}
+function showModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function closeModalOutside(e,id){ if (e.target.id === id) closeModal(id); }
+
+// ---- 渲染 ----
+function renderAll() {
+  const totalMin = totalMinutes();
+  const totalHours = (totalMin/60).toFixed(1);
+  const lv = getLevel(totalMin/60);
+  const streak = computeStreak();
+  const totalDays = records.length;
+
+  document.getElementById('userAvatar').textContent = (name || '学').slice(0,1).toUpperCase();
+  document.getElementById('userName').textContent = name || '同学';
+  document.getElementById('userLevel').innerHTML = lvBadge(lv.lv) + ' ' + lv.name;
+  document.getElementById('totalHours').textContent = totalHours;
+  document.getElementById('streakDays').textContent = streak;
+  document.getElementById('totalDays').textContent = totalDays;
+
+  if (lv.index < LEVELS.length - 1) {
+    const next = LEVELS[lv.index + 1], cur = LEVELS[lv.index];
+    const pct = Math.min(100, ((totalMin/60 - cur.minHours)/(next.minHours - cur.minHours))*100);
+    const remain = (next.minHours - totalMin/60).toFixed(1);
+    document.getElementById('curLevelName').innerHTML = lvBadge(lv.lv) + ' ' + lv.name;
+    document.getElementById('nextLevelName').innerHTML = lvBadge(next.lv) + ' ' + next.name;
+    document.getElementById('levelProgressFill').style.width = pct + '%';
+    document.getElementById('levelProgressHint').textContent = `还需 ${remain}h 升级`;
+  } else {
+    document.getElementById('curLevelName').innerHTML = lvBadge(lv.lv) + ' ' + lv.name;
+    document.getElementById('nextLevelName').textContent = '已达最高等级 🏆';
+    document.getElementById('levelProgressFill').style.width = '100%';
+    document.getElementById('levelProgressHint').textContent = '你已是传奇！';
+  }
+
+  renderCheckinArea();
+  renderCalendar();
+  renderHistory();
+}
+
+function renderCheckinArea() {
+  const today = todayStr();
+  document.getElementById('checkinDate').textContent = '📅 ' + today;
+  const rec = records.find(r=>r.date===today);
+  if (rec) {
+    document.getElementById('checkinForm').style.display = 'none';
+    document.getElementById('checkinDone').style.display = '';
+    document.getElementById('todayHours').textContent = rec.minutes;
+    document.getElementById('todayNote').textContent = rec.note ? '📝 ' + rec.note : '';
+  } else {
+    document.getElementById('checkinForm').style.display = '';
+    document.getElementById('checkinDone').style.display = 'none';
+  }
+}
+
+function setMinutes(m){ document.getElementById('studyMinutes').value = m; }
+
+function submitCheckin() {
+  const minutes = parseInt(document.getElementById('studyMinutes').value);
+  const note = document.getElementById('checkinNote').value.trim();
+  if (!minutes || minutes < 1 || minutes > 600) { toast('请输入有效的学习时长（1–600分钟）','error'); return; }
+  const today = todayStr();
+  if (records.find(r=>r.date===today)) { toast('今天已经打过卡啦','error'); return; }
+  records.push({ date: today, minutes, note });
+  save();
+  document.getElementById('studyMinutes').value = '';
+  document.getElementById('checkinNote').value = '';
+  renderAll();
+  toast('打卡成功！今日学习 ' + minutes + ' 分钟 🎉','success');
+}
+
+function getHeatLevel(m) {
+  if (m <= 0) return 0;
+  if (m < 60) return 1;
+  if (m < 120) return 2;
+  if (m < 180) return 3;
+  return 4;
+}
+
+function renderCalendar() {
+  document.getElementById('calTitle').textContent = `${calYear}年${calMonth+1}月`;
+  const grid = document.getElementById('calendarGrid');
+  grid.innerHTML = '';
+  ['一','二','三','四','五','六','日'].forEach(h=>{
+    const d = document.createElement('div'); d.className = 'cal-header'; d.textContent = h; grid.appendChild(d);
+  });
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const adjusted = (firstDay + 6) % 7;
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  const today = todayStr();
+  for (let i=0;i<adjusted;i++){ const e=document.createElement('div'); e.className='cal-day cal-empty'; grid.appendChild(e); }
+  for (let d=1; d<=daysInMonth; d++){
+    const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const rec = records.find(r=>r.date===dateStr);
+    const level = rec ? getHeatLevel(rec.minutes) : 0;
+    const el = document.createElement('div');
+    el.className = `cal-day cal-${level}${dateStr===today?' cal-today':''}`;
+    el.textContent = d;
+    el.title = rec ? `${dateStr}\n学习 ${rec.minutes} 分钟` : dateStr;
+    if (rec) el.addEventListener('click', ()=>showDayDetail(dateStr, rec));
+    grid.appendChild(el);
+  }
+}
+
+function prevMonth(){ calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCalendar(); }
+function nextMonth(){ calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCalendar(); }
+
+function showDayDetail(date, rec) {
+  document.getElementById('detailDate').textContent = '📅 ' + date;
+  document.getElementById('detailContent').innerHTML = `
+    <div style="text-align:center;padding:20px 0">
+      <div style="font-size:2rem;margin-bottom:8px">⏱️</div>
+      <div style="font-size:1.3rem;font-weight:700;color:var(--primary)">${rec.minutes} 分钟</div>
+      ${rec.note ? `<div style="margin-top:12px;font-size:.9rem;color:var(--text-sub);font-style:italic">📝 ${escHtml(rec.note)}</div>` : ''}
+    </div>`;
+  showModal('detailModal');
+}
+
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  const sorted = [...records].sort((a,b)=>b.date.localeCompare(a.date));
+  if (!sorted.length) {
+    list.innerHTML = '<p style="color:var(--text-sub);font-size:.9rem">暂无打卡记录，快去打卡吧！</p>';
+    return;
+  }
+  list.innerHTML = sorted.slice(0,30).map(r=>`
+    <div class="history-item">
+      <span class="history-date">${r.date}</span>
+      <span class="history-hours">⏱ ${r.minutes}min</span>
+      <span class="history-note">${r.note ? escHtml(r.note) : '<em style="opacity:.5">无备注</em>'}</span>
+    </div>`).join('');
+}
+
+// ---- 昵称编辑 ----
+document.getElementById('userName').addEventListener('click', function(){
+  const n = prompt('输入你的昵称：', name || '');
+  if (n !== null && n.trim()) { name = n.trim().slice(0,20); localStorage.setItem(KEY_NAME, name); }
+  renderAll();
+});
+
+// ---- 初始化 ----
+load();
+renderAll();
+document.getElementById('headerAuth').innerHTML = `<span style="font-size:.9rem;color:var(--text-sub)">你好，<strong>${escHtml(name || '同学')}</strong></span>`;
+</script>
+</body>
+</html>
