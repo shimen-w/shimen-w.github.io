@@ -681,6 +681,114 @@ mjx-container[jax="SVG"] { overflow-x: auto; overflow-y: hidden; max-width: 100%
 .search-hit-snippet { color: var(--ink-soft); font-size: .88rem; margin-top: .2rem; line-height: 1.6; word-break: break-all; }
 .search-hit mark { background: #ffe9a8; color: var(--ink); padding: 0 .15rem; border-radius: 3px; }
 
+/* ------------------------------------------------------------------ homepage hero */
+
+.home-hero {
+  background: linear-gradient(135deg, var(--brand-strong) 0%, var(--brand) 55%, #4f8ed6 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 2rem 1.9rem 1.8rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 24px rgba(31, 65, 121, .2);
+}
+.home-hero .hero-title {
+  margin: 0 0 .5rem;
+  font-size: 1.7rem;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .3px;
+}
+.home-hero .hero-sub {
+  margin: 0 0 1rem;
+  font-size: .95rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, .88);
+}
+.home-hero .hero-sub b { color: #ffd98a; font-weight: 600; }
+.hero-stats {
+  display: flex;
+  align-items: baseline;
+  gap: .45rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+  font-size: .88rem;
+  color: rgba(255, 255, 255, .85);
+}
+.hero-stats b { font-size: 1.15rem; color: #fff; }
+.hero-stats .dot { opacity: .45; }
+.hero-actions { display: flex; gap: .65rem; flex-wrap: wrap; }
+.hero-btn {
+  display: inline-block;
+  padding: .6rem 1.2rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .16);
+  border: 1px solid rgba(255, 255, 255, .5);
+  color: #fff;
+  font-size: .92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .18s ease, transform .12s ease;
+}
+.hero-btn:hover { background: rgba(255, 255, 255, .3); color: #fff; text-decoration: none; transform: translateY(-1px); }
+.hero-btn-primary { background: #fff; border-color: #fff; color: var(--brand-strong); }
+.hero-btn-primary:hover { background: #f2f7fd; color: var(--brand-strong); }
+
+/* ------------------------------------------------------------------ homepage stages */
+
+.section-heading {
+  margin: 1.5rem 0 .8rem;
+  padding-bottom: .4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--brand-strong);
+  border-bottom: 2px solid var(--line);
+}
+.home-hero + .stage-section .section-heading { margin-top: 0; }
+
+.stage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(152px, 1fr));
+  gap: .7rem;
+  margin-bottom: 1.4rem;
+}
+.stage-card {
+  display: flex;
+  flex-direction: column;
+  gap: .1rem;
+  padding: .9rem .95rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(24, 41, 66, .05);
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color .15s ease, transform .12s ease, box-shadow .15s ease;
+}
+.stage-card:hover {
+  border-color: var(--brand);
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(24, 41, 66, .1);
+}
+.stage-icon { font-size: 1.35rem; line-height: 1.3; }
+.stage-name { font-size: .98rem; font-weight: 700; color: var(--brand-strong); }
+.stage-desc { font-size: .79rem; color: var(--ink-soft); line-height: 1.55; }
+.stage-count { margin-top: .15rem; font-size: .76rem; color: var(--brand); }
+
+/* ------------------------------------------------------------------ post card body */
+
+.post-summary { margin: 0 0 .7rem; color: #3d4a5a; font-size: .93rem; line-height: 1.75; }
+.post-body { margin-top: .1rem; }
+.post-badges { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .7rem; }
+.badge { display: inline-block; padding: .16rem .55rem; border-radius: 99px; font-size: .75rem; font-weight: 600; }
+.badge-lecture { background: #e8f2ff; color: var(--brand-strong); border: 1px solid #cfe0f5; }
+.badge-pdf { background: #fdf1e7; color: #9a4f00; border: 1px solid #f4dcc4; }
+.post-cta { display: inline-block; font-size: .86rem; font-weight: 600; color: var(--brand); }
+.post-cta:hover { color: var(--brand-strong); text-decoration: none; }
+.post-cta span { transition: transform .15s ease; display: inline-block; }
+.post-cta:hover span { transform: translateX(3px); }
+
 /* ------------------------------------------------------------------ responsive */
 
 @media (max-width: 991px) {
@@ -704,6 +812,12 @@ mjx-container[jax="SVG"] { overflow-x: auto; overflow-y: hidden; max-width: 100%
   #body { padding: 1.2rem 0 .5rem; }
   .post-meta li { display: block; margin-right: 0; }
   .comment-text { margin-left: 0; margin-top: .4rem; }
+  .home-hero { padding: 1.4rem 1.2rem 1.3rem; }
+  .home-hero .hero-title { font-size: 1.35rem; }
+  .hero-actions { gap: .5rem; }
+  .hero-btn { flex: 1 1 100%; text-align: center; }
+  .stage-grid { grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: .55rem; }
+  .stage-card { padding: .75rem .8rem; }
 }
 
 @media print {

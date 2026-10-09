@@ -3,22 +3,23 @@
    ===================================================== */
 
 :root {
-  --primary: #2563eb;
-  --primary-light: #dbeafe;
-  --primary-dark: #1d4ed8;
+  /* 与主站博客主题统一的主色（藏青系） */
+  --primary: #2c5aa0;
+  --primary-light: #e8f2ff;
+  --primary-dark: #1f4179;
   --text: #1e293b;
   --text-sub: #64748b;
   --border: #e2e8f0;
-  --bg: #f8fafc;
+  --bg: #f5f7fa;
   --white: #ffffff;
   --success: #16a34a;
   --error: #dc2626;
   --warning: #d97706;
   --heat0: #f1f5f9;
-  --heat1: #bfdbfe;
-  --heat2: #60a5fa;
-  --heat3: #2563eb;
-  --heat4: #1e3a8a;
+  --heat1: #cfe0f5;
+  --heat2: #7ba7dc;
+  --heat3: #2c5aa0;
+  --heat4: #1f4179;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -264,6 +265,9 @@ a:hover { text-decoration: underline; }
 /* ---- Admin badge ---- */
 .admin-badge { display: inline-block; background: #7c3aed; color: #fff; font-size: .7rem; font-weight: 700; padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
 
+/* ---- 静态版页脚补充说明 ---- */
+.footer-note { font-size: .8rem; color: var(--text-sub); opacity: .85; margin-top: 4px; }
+
 /* ---- Responsive ---- */
 @media (max-width: 600px) {
   .hero-title { font-size: 1.6rem; }
@@ -272,5 +276,3 @@ a:hover { text-decoration: underline; }
   .history-item { flex-wrap: wrap; }
   .lb-table th:nth-child(5), .lb-table td:nth-child(5) { display: none; }
 }
-
-.footer-note { font-size: .8rem; color: var(--text-sub); opacity: .8; margin-top: 4px; }
